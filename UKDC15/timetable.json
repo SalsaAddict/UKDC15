@@ -1,0 +1,92 @@
+﻿{
+    "Dates": [
+        {
+            "Date": "2015-09-10T23:00:00.000Z",
+            "Rooms": [
+                { "Name": "Jaks" },
+                { "Name": "Lounge" },
+                { "Name": "Regency" }
+            ],
+            "Times": [
+                {
+                    "Time": "17:00",
+                    "Slots": [
+                        { "Levels": 1, "Workshops": [ ] },
+                        { "Levels": 1, "Workshops": [ ] },
+                        { "Levels": 1, "Workshops": [ ] }
+                    ]
+                },
+                { "Time": "18:00", "Slots": [ { "Levels": 1, "Workshops": [ ] }, { "Levels": 1, "Workshops": [ ] }, { "Levels": 1, "Workshops": [ ] } ] },
+                { "Time": "19:00", "Slots": [ { "Levels": 1, "Workshops": [ ] }, { "Levels": 1, "Workshops": [ ] }, { "Levels": 1, "Workshops": [ ] } ] }
+            ]
+        },
+        {
+            "Date": "2015-09-11T23:00:00.000Z",
+            "Rooms": [
+                { "Name": "Jaks", "Sort": 0 },
+                { "Name": "Reds", "Sort": 1 },
+                { "Name": "Yacht Club", "Sort": 2 },
+                { "Name": "Kent", "Sort": 3 },
+                { "Name": "York", "Sort": 4 },
+                { "Name": "Lounge", "Sort": 5 },
+                { "Name": "Princes", "Sort": 6 },
+                { "Name": "Regency", "Sort": 7 }
+            ],
+            "Times": [
+                {
+                    "Slots": [
+                        { "Levels": 1, "Workshops": [ ] },
+                        { "Levels": 1, "Workshops": [ ] },
+                        { "Levels": 1, "Workshops": [ ] },
+                        { "Levels": 1, "Workshops": [ ] },
+                        { "Levels": 1, "Workshops": [ ] },
+                        { "Levels": 1, "Workshops": [ ] },
+                        { "Levels": 1, "Workshops": [ ] },
+                        { "Levels": 1, "Workshops": [ ] }
+                    ],
+                    "Time": "10:00"
+                },
+                { "Time": "11:00", "Slots": [ { "Levels": 1, "Workshops": [ ] }, { "Levels": 1, "Workshops": [ ] }, { "Levels": 1, "Workshops": [ ] }, { "Levels": 1, "Workshops": [ ] }, { "Levels": 1, "Workshops": [ ] }, { "Levels": 1, "Workshops": [ ] }, { "Levels": 1, "Workshops": [ ] }, { "Levels": 1, "Workshops": [ ] } ] },
+                { "Time": "12:00", "Slots": [ { "Levels": 1, "Workshops": [ ] }, { "Levels": 1, "Workshops": [ ] }, { "Levels": 1, "Workshops": [ ] }, { "Levels": 1, "Workshops": [ ] }, { "Levels": 1, "Workshops": [ ] }, { "Levels": 1, "Workshops": [ ] }, { "Levels": 1, "Workshops": [ ] }, { "Levels": 1, "Workshops": [ ] } ] },
+                { "Time": "14:30", "Slots": [ { "Levels": 1, "Workshops": [ ] }, { "Levels": 1, "Workshops": [ ] }, { "Levels": 1, "Workshops": [ ] }, { "Levels": 1, "Workshops": [ ] }, { "Levels": 1, "Workshops": [ ] }, { "Levels": 1, "Workshops": [ ] }, { "Levels": 1, "Workshops": [ ] }, { "Levels": 1, "Workshops": [ ] } ] },
+                { "Time": "15:30", "Slots": [ { "Levels": 1, "Workshops": [ ] }, { "Levels": 1, "Workshops": [ ] }, { "Levels": 1, "Workshops": [ ] }, { "Levels": 1, "Workshops": [ ] }, { "Levels": 1, "Workshops": [ ] }, { "Levels": 1, "Workshops": [ ] }, { "Levels": 1, "Workshops": [ ] }, { "Levels": 1, "Workshops": [ ] } ] },
+                { "Time": "16:30", "Slots": [ { "Levels": 1, "Workshops": [ ] }, { "Levels": 1, "Workshops": [ ] }, { "Levels": 1, "Workshops": [ ] }, { "Levels": 1, "Workshops": [ ] }, { "Levels": 1, "Workshops": [ ] }, { "Levels": 1, "Workshops": [ ] }, { "Levels": 1, "Workshops": [ ] }, { "Levels": 1, "Workshops": [ ] } ] },
+                { "Time": "17:30", "Slots": [ { "Levels": 1, "Workshops": [ ] }, { "Levels": 1, "Workshops": [ ] }, { "Levels": 1, "Workshops": [ ] }, { "Levels": 1, "Workshops": [ ] }, { "Levels": 1, "Workshops": [ ] }, { "Levels": 1, "Workshops": [ ] }, { "Levels": 1, "Workshops": [ ] }, { "Levels": 1, "Workshops": [ ] } ] }
+            ]
+        },
+        {
+            "Date": "2015-09-12T23:00:00.000Z",
+            "Rooms": [
+                { "Name": "Jaks", "Sort": 0 },
+                { "Name": "Reds", "Sort": 1 },
+                { "Name": "Yacht Club", "Sort": 2 },
+                { "Name": "Kent", "Sort": 3 },
+                { "Name": "York", "Sort": 4 },
+                { "Name": "Lounge", "Sort": 5 },
+                { "Name": "Princes", "Sort": 6 },
+                { "Name": "Regency", "Sort": 7 }
+            ],
+            "Times": [
+                {
+                    "Time": "10:00",
+                    "Slots": [
+                        { "Levels": 1, "Workshops": [ ] },
+                        { "Levels": 1, "Workshops": [ ] },
+                        { "Levels": 1, "Workshops": [ ] },
+                        { "Levels": 1, "Workshops": [ ] },
+                        { "Levels": 1, "Workshops": [ ] },
+                        { "Levels": 1, "Workshops": [ ] },
+                        { "Levels": 1, "Workshops": [ ] },
+                        { "Levels": 1, "Workshops": [ ] }
+                    ]
+                },
+                { "Time": "11:00", "Slots": [ { "Levels": 1, "Workshops": [ ] }, { "Levels": 1, "Workshops": [ ] }, { "Levels": 1, "Workshops": [ ] }, { "Levels": 1, "Workshops": [ ] }, { "Levels": 1, "Workshops": [ ] }, { "Levels": 1, "Workshops": [ ] }, { "Levels": 1, "Workshops": [ ] }, { "Levels": 1, "Workshops": [ ] } ] },
+                { "Time": "12:00", "Slots": [ { "Levels": 1, "Workshops": [ ] }, { "Levels": 1, "Workshops": [ ] }, { "Levels": 1, "Workshops": [ ] }, { "Levels": 1, "Workshops": [ ] }, { "Levels": 1, "Workshops": [ ] }, { "Levels": 1, "Workshops": [ ] }, { "Levels": 1, "Workshops": [ ] }, { "Levels": 1, "Workshops": [ ] } ] },
+                { "Time": "14:30", "Slots": [ { "Levels": 1, "Workshops": [ ] }, { "Levels": 1, "Workshops": [ ] }, { "Levels": 1, "Workshops": [ ] }, { "Levels": 1, "Workshops": [ ] }, { "Levels": 1, "Workshops": [ ] }, { "Levels": 1, "Workshops": [ ] }, { "Levels": 1, "Workshops": [ ] }, { "Levels": 1, "Workshops": [ ] } ] },
+                { "Time": "15:30", "Slots": [ { "Levels": 1, "Workshops": [ ] }, { "Levels": 1, "Workshops": [ ] }, { "Levels": 1, "Workshops": [ ] }, { "Levels": 1, "Workshops": [ ] }, { "Levels": 1, "Workshops": [ ] }, { "Levels": 1, "Workshops": [ ] }, { "Levels": 1, "Workshops": [ ] }, { "Levels": 1, "Workshops": [ ] } ] },
+                { "Time": "16:30", "Slots": [ { "Levels": 1, "Workshops": [ ] }, { "Levels": 1, "Workshops": [ ] }, { "Levels": 1, "Workshops": [ ] }, { "Levels": 1, "Workshops": [ ] }, { "Levels": 1, "Workshops": [ ] }, { "Levels": 1, "Workshops": [ ] }, { "Levels": 1, "Workshops": [ ] }, { "Levels": 1, "Workshops": [ ] } ] },
+                { "Time": "17:30", "Slots": [ { "Levels": 1, "Workshops": [ ] }, { "Levels": 1, "Workshops": [ ] }, { "Levels": 1, "Workshops": [ ] }, { "Levels": 1, "Workshops": [ ] }, { "Levels": 1, "Workshops": [ ] }, { "Levels": 1, "Workshops": [ ] }, { "Levels": 1, "Workshops": [ ] }, { "Levels": 1, "Workshops": [ ] } ] }
+            ]
+        }
+    ]
+}
