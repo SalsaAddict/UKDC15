@@ -37,50 +37,57 @@
         </div>
     </div>
     <br />
-    <table class="table timetable form-horizontal">
-        <thead>
-            <tr>
-                <th width="175"><span class="form-control">Time</span></th>
-                <th ng-repeat="room in date.rooms">
-                    <div class="input-group">
-                        <span class="input-group-btn">
-                            <button type="button" class="btn btn-default" ng-click="ctrl.moveRoomLeft(date, room, $event)" ng-disabled="$index === 0" title="Move Left">
-                                <i class="fa fa-chevron-circle-left" ng-class="{ 'text-primary': $index > 0 }"></i>
-                            </button>
-                        </span>
-                        <input type="text" class="form-control" ng-model="room.name" />
-                        <span class="input-group-btn">
-                            <button type="button" class="btn btn-default" ng-click="ctrl.removeRoom(date, room, $event)" title="Remove Column">
-                                <i class="fa fa-times-circle text-danger"></i>
-                            </button>
-                        </span>
-                    </div>
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr ng-repeat="time in date.times">
-                <th>
-                    <div class="input-group">
-                        <span class="input-group-btn">
-                            <button type="button" class="btn btn-default" ng-click="ctrl.moveTimeUp(date, time, $event)" ng-disabled="$index === 0" title="Move Up">
-                                <i class="fa fa-chevron-circle-up" ng-class="{ 'text-primary': $index > 0 }"></i>
-                            </button>
-                        </span>
-                        <input type="text" class="form-control" ng-model="time.time" />
-                        <span class="input-group-btn">
-                            <button type="button" class="btn btn-default" ng-click="ctrl.removeTime(date, time, $event)" title="Remove Row">
-                                <i class="fa fa-times-circle text-danger"></i>
-                            </button>
-                        </span>
-                    </div>
-                </th>
-                <td ng-repeat="slot in time.slots" ng-click="ctrl.editSlot(date, time, slot, $event)">
-                    <h4 ng-if="!slot.style">Closed</h4>
-                </td>
-            </tr>
-        </tbody>
-    </table>
+    <div class="table-responsive">
+        <table class="table timetable form-horizontal">
+            <thead>
+                <tr>
+                    <th width="175"><span class="form-control">Time</span></th>
+                    <th ng-repeat="room in date.rooms">
+                        <div class="input-group">
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-default" ng-click="ctrl.moveRoomLeft(date, room, $event)" ng-disabled="$index === 0" title="Move Left">
+                                    <i class="fa fa-chevron-circle-left" ng-class="{ 'text-primary': $index > 0 }"></i>
+                                </button>
+                            </span>
+                            <input type="text" class="form-control" ng-model="room.name" />
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-default" ng-click="ctrl.removeRoom(date, room, $event)" title="Remove Column">
+                                    <i class="fa fa-times-circle text-danger"></i>
+                                </button>
+                            </span>
+                        </div>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="time in date.times">
+                    <th>
+                        <div class="input-group">
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-default" ng-click="ctrl.moveTimeUp(date, time, $event)" ng-disabled="$index === 0" title="Move Up">
+                                    <i class="fa fa-chevron-circle-up" ng-class="{ 'text-primary': $index > 0 }"></i>
+                                </button>
+                            </span>
+                            <input type="text" class="form-control" ng-model="time.time" />
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-default" ng-click="ctrl.removeTime(date, time, $event)" title="Remove Row">
+                                    <i class="fa fa-times-circle text-danger"></i>
+                                </button>
+                            </span>
+                        </div>
+                    </th>
+                    <td ng-repeat="slot in time.slots" ng-click="ctrl.editSlot(date, time, slot, $event)">
+                        <h4 ng-if="!slot.style">Closed</h4>
+                        <div ng-repeat="workshop in slot.workshops" ng-class="{ 'col-xs-12': !slot.split, 'col-xs-6': slot.split }" style="{{ctrl.slotStyle(slot)}}">
+                            <b>{{workshop.artist || "TBC"}}</b><br />
+                            {{workshop.title || "TBC"}}<br />
+                            {{workshop.level || "TBC"}}
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </div>
 <br />
 <pre>{{timetable}}</pre>
@@ -92,7 +99,7 @@
         <div class="form-group">
             <label class="col-sm-3 control-label">Style</label>
             <div class="col-sm-9">
-                <select class="form-control" ng-model="ctrl.slot.style" ng-options="style as style.name for style in ctrl.styles track by style.name">
+                <select class="form-control" ng-model="ctrl.slot.style" ng-options="key as key for (key, value) in ctrl.styles">
                     <option value="">Closed</option>
                 </select>
             </div>
@@ -103,6 +110,25 @@
                     <label>
                         <input type="checkbox" ng-model="ctrl.slot.split" />Split Room
                     </label>
+                </div>
+            </div>
+            <div ng-repeat="workshop in ctrl.slot.workshops">
+                <div class="form-group" ng-if="ctrl.slot.split">
+                    <div class="col-sm-9 col-sm-push-3">
+                        <h4>Workshop #{{$index + 1}}</h4>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">Artist</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" ng-model="workshop.artist" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">Title</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" ng-model="workshop.title" />
+                    </div>
                 </div>
             </div>
         </div>

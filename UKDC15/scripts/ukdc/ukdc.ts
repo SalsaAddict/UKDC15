@@ -5,11 +5,11 @@
 
 module UKDC {
     "use strict";
-    export interface IStyle { name: string, rgb: string; }
-    var Styles: IStyle[] = [
-        { name: "Salsa On1", rgb: "170,255,170" },
-        { name: "Salsa On2", rgb: "68,170,255" }
-    ];
+    export interface IStyles { [name: string]: { rgb: string; } }
+    var Styles: IStyles = {
+        "Salsa On1": { rgb: "170,255,170" },
+        "Salsa On2": { rgb: "68,170,255" }
+    };
     export module Build {
         export interface IWorkshop { artist: string; title: string; level: string; }
         export interface ISlot { style: string; split: boolean; workshops: IWorkshop[]; }
@@ -125,6 +125,10 @@ module UKDC {
                     controllerAs: "ctrl"
                 });
             }
+            public slotStyle = (slot: ISlot) => {
+                if (!slot.style) { return; }
+                return "background-color: rgb(" + Styles[slot.style].rgb + ");";
+            }
         }
     }
     export module Slot {
@@ -136,8 +140,34 @@ module UKDC {
                 public date: Date,
                 public room: string,
                 public time: string,
-                public slot: Build.ISlot) { }
-            public styles: IStyle[] = Styles;
+                public slot: Build.ISlot) {
+                $scope.$watchCollection(() => { return { style: this.slot.style, split: this.slot.split }; },
+                    (newValue: any, oldValue: any) => {
+                        if (newValue !== oldValue) {
+                            if (this.slot.style) {
+                                if (this.slot.workshops.length === 0) {
+                                    this.slot.workshops.push({ artist: null, title: null, level: null });
+                                }
+                                if (this.slot.split) {
+                                    if (this.slot.workshops.length === 1) {
+                                        this.slot.workshops.push({ artist: null, title: null, level: null });
+                                    }
+                                } else {
+                                    if (this.slot.workshops.length > 1) {
+                                        this.slot.workshops.splice(1);
+                                    }
+                                }
+                                if (this.slot.workshops.length > 2) { this.slot.workshops.splice(2); }
+                            } else {
+                                this.slot.split = false;
+                                if (this.slot.workshops.length > 0) {
+                                    this.slot.workshops.splice(0);
+                                }
+                            }
+                        }
+                    });
+            }
+            public styles: IStyles = Styles;
         }
     }
 }

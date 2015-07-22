@@ -5,10 +5,10 @@
 var UKDC;
 (function (UKDC) {
     "use strict";
-    var Styles = [
-        { name: "Salsa On1", rgb: "170,255,170" },
-        { name: "Salsa On2", rgb: "68,170,255" }
-    ];
+    var Styles = {
+        "Salsa On1": { rgb: "170,255,170" },
+        "Salsa On2": { rgb: "68,170,255" }
+    };
     var Build;
     (function (Build) {
         var Controller = (function () {
@@ -119,6 +119,12 @@ var UKDC;
                         controllerAs: "ctrl"
                     });
                 };
+                this.slotStyle = function (slot) {
+                    if (!slot.style) {
+                        return;
+                    }
+                    return "background-color: rgb(" + Styles[slot.style].rgb + ");";
+                };
                 this.$scope.timetable = angular.fromJson(this.$window.localStorage.getItem("timetable")) || { dates: [] };
                 if (this.$scope.timetable.dates.length > 0) {
                     this.setCurrentDate(this.$scope.timetable.dates[0]);
@@ -133,6 +139,7 @@ var UKDC;
     (function (Slot) {
         var Controller = (function () {
             function Controller($scope, $modalInstance, date, room, time, slot) {
+                var _this = this;
                 this.$scope = $scope;
                 this.$modalInstance = $modalInstance;
                 this.date = date;
@@ -140,6 +147,34 @@ var UKDC;
                 this.time = time;
                 this.slot = slot;
                 this.styles = Styles;
+                $scope.$watchCollection(function () { return { style: _this.slot.style, split: _this.slot.split }; }, function (newValue, oldValue) {
+                    if (newValue !== oldValue) {
+                        if (_this.slot.style) {
+                            if (_this.slot.workshops.length === 0) {
+                                _this.slot.workshops.push({ artist: null, title: null, level: null });
+                            }
+                            if (_this.slot.split) {
+                                if (_this.slot.workshops.length === 1) {
+                                    _this.slot.workshops.push({ artist: null, title: null, level: null });
+                                }
+                            }
+                            else {
+                                if (_this.slot.workshops.length > 1) {
+                                    _this.slot.workshops.splice(1);
+                                }
+                            }
+                            if (_this.slot.workshops.length > 2) {
+                                _this.slot.workshops.splice(2);
+                            }
+                        }
+                        else {
+                            _this.slot.split = false;
+                            if (_this.slot.workshops.length > 0) {
+                                _this.slot.workshops.splice(0);
+                            }
+                        }
+                    }
+                });
             }
             Controller.$inject = ["$scope", "$modalInstance", "date", "room", "time", "slot"];
             return Controller;
