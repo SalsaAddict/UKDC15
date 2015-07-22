@@ -63,6 +63,14 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="content\bootstrap.darkly.css" />
+    <Content Include="content\bootstrap.darkly.min.css" />
+    <Content Include="content\bootstrap.slate.css" />
+    <Content Include="content\bootstrap.slate.min.css" />
+    <Content Include="content\ukdc.css" />
+    <Content Include="content\ukdc.min.css">
+      <DependentUpon>ukdc.css</DependentUpon>
+    </Content>
     <Content Include="scripts\angular.min.js.map" />
     <Content Include="packages.config" />
     <Content Include="scripts\angular-route.min.js.map" />
@@ -113,6 +121,10 @@
     <None Include="scripts\jquery-2.1.4.intellisense.js" />
     <Content Include="scripts\jquery-2.1.4.js" />
     <Content Include="scripts\jquery-2.1.4.min.js" />
+    <Content Include="scripts\moment-with-locales.js" />
+    <Content Include="scripts\moment-with-locales.min.js" />
+    <Content Include="scripts\moment.js" />
+    <Content Include="scripts\moment.min.js" />
     <Content Include="scripts\npm.js" />
     <Content Include="scripts\ukdc\ukdc.js" />
     <Content Include="scripts\ukdc\ukdc.min.js">
@@ -142,6 +154,8 @@
     <TypeScriptCompile Include="scripts\typings\angularjs\angular-sanitize.d.ts" />
     <TypeScriptCompile Include="scripts\typings\angularjs\angular.d.ts" />
     <TypeScriptCompile Include="scripts\typings\jquery\jquery.d.ts" />
+    <TypeScriptCompile Include="scripts\typings\moment\moment-node.d.ts" />
+    <TypeScriptCompile Include="scripts\typings\moment\moment.d.ts" />
     <TypeScriptCompile Include="scripts\ukdc\ukdc.ts" />
   </ItemGroup>
   <PropertyGroup>

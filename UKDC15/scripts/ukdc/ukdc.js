@@ -1,78 +1,151 @@
 /// <reference path="../typings/angularjs/angular.d.ts" />
 /// <reference path="../typings/angularjs/angular-route.d.ts" />
+/// <reference path="../typings/moment/moment.d.ts" />
 "use strict";
 var UKDC;
 (function (UKDC) {
     "use strict";
+    var Styles = [
+        { name: "Salsa On1", rgb: "170,255,170" },
+        { name: "Salsa On2", rgb: "68,170,255" }
+    ];
     var Build;
     (function (Build) {
         var Controller = (function () {
-            function Controller($scope, $window) {
+            function Controller($scope, $window, $modal) {
                 var _this = this;
                 this.$scope = $scope;
                 this.$window = $window;
-                this.currentDate = undefined;
-                this.save = function () {
-                    _this.$window.localStorage.setItem("Timetable", angular.toJson(_this.$scope.Timetable));
-                };
-                this.isCurrentDate = function (item) {
-                    return (_this.currentDate === item);
-                };
-                this.setCurrentDate = function (item) {
-                    _this.currentDate = item;
-                };
-                this.addDate = function () {
-                    var d = { Date: undefined, Rooms: [], Times: [] };
-                    _this.$scope.Timetable.Dates.push(d);
-                    _this.currentDate = d;
-                };
-                this.datePickerIsOpen = false;
-                this.toggleDatePicker = function ($event) {
+                this.$modal = $modal;
+                this.$currentDate = undefined;
+                this.isCurrentDate = function (date) { return _this.$currentDate === date; };
+                this.setCurrentDate = function (date) { _this.$currentDate = date; };
+                this.$datepicker = false;
+                this.datepicker = function ($event) {
                     $event.preventDefault();
                     $event.stopPropagation();
-                    _this.datePickerIsOpen = !_this.datePickerIsOpen;
+                    _this.$datepicker = true;
                 };
-                this.addRoom = function () {
-                    if (angular.isUndefined(_this.currentDate)) {
-                        return;
+                this.save = function () {
+                    _this.$window.localStorage.setItem("timetable", angular.toJson(_this.$scope.timetable));
+                };
+                this.addDate = function ($event) {
+                    $event.preventDefault();
+                    $event.stopPropagation();
+                    var date = { date: null, rooms: [], times: [] };
+                    _this.$scope.timetable.dates.push(date);
+                    _this.setCurrentDate(date);
+                };
+                this.removeDate = function (date) {
+                    var i = _this.$scope.timetable.dates.indexOf(date);
+                    if (i >= 0) {
+                        _this.$scope.timetable.dates.splice(i, 1);
                     }
-                    _this.currentDate.Rooms.push({ Name: "Room " + (_this.currentDate.Rooms.length + 1) });
-                    angular.forEach(_this.currentDate.Times, function (item) {
-                        item.Slots.push({ Style: undefined, Levels: 1, Workshops: [] });
+                };
+                this.addRoom = function (date, $event) {
+                    $event.preventDefault();
+                    $event.stopPropagation();
+                    var i = date.rooms.length + 1;
+                    date.rooms.push({ name: "Room " + String(i) });
+                    angular.forEach(date.times, function (item) {
+                        item.slots.push({ style: null, split: false, workshops: [] });
                     });
                 };
-                this.removeRoom = function (Room) {
-                    var i = _this.currentDate.Rooms.indexOf(Room);
+                this.moveRoomLeft = function (date, room, $event) {
+                    $event.preventDefault();
+                    $event.stopPropagation();
+                    var i = date.rooms.indexOf(room);
                     if (i >= 0) {
-                        _this.currentDate.Rooms.splice(i, 1);
-                        angular.forEach(_this.currentDate.Times, function (item) {
-                            item.Slots.splice(i, 1);
+                        var temp = date.rooms[i - 1];
+                        date.rooms[i - 1] = date.rooms[i];
+                        date.rooms[i] = temp;
+                        angular.forEach(date.times, function (item) {
+                            var temp = item.slots[i - 1];
+                            item.slots[i - 1] = item.slots[i];
+                            item.slots[i] = temp;
                         });
                     }
                 };
-                this.addTime = function () {
-                    if (angular.isUndefined(_this.currentDate)) {
-                        return;
+                this.removeRoom = function (date, room, $event) {
+                    $event.preventDefault();
+                    $event.stopPropagation();
+                    var i = date.rooms.indexOf(room);
+                    if (i >= 0) {
+                        date.rooms.splice(i, 1);
+                        angular.forEach(date.times, function (item) {
+                            item.slots.splice(i, 1);
+                        });
                     }
-                    var t = {
-                        Time: undefined,
-                        Slots: []
-                    };
-                    angular.forEach(_this.currentDate.Rooms, function (item) {
-                        t.Slots.push({ Style: undefined, Levels: 1, Workshops: [] });
-                    });
-                    _this.currentDate.Times.push(t);
                 };
-                this.$scope.Timetable = angular.fromJson(this.$window.localStorage.getItem("Timetable")) || { Dates: [] };
-                if (this.$scope.Timetable.Dates.length > 0) {
-                    this.currentDate = this.$scope.Timetable.Dates[0];
+                this.addTime = function (date, $event) {
+                    $event.preventDefault();
+                    $event.stopPropagation();
+                    var time = { time: null, slots: [] };
+                    angular.forEach(date.rooms, function (item) {
+                        time.slots.push({ style: null, split: false, workshops: [] });
+                    });
+                    date.times.push(time);
+                };
+                this.moveTimeUp = function (date, time, $event) {
+                    $event.preventDefault();
+                    $event.stopPropagation();
+                    var i = date.times.indexOf(time);
+                    if (i >= 0) {
+                        var temp = date.times[i - 1];
+                        date.times[i - 1] = date.times[i];
+                        date.times[i] = temp;
+                    }
+                };
+                this.removeTime = function (date, time, $event) {
+                    $event.preventDefault();
+                    $event.stopPropagation();
+                    var i = date.times.indexOf(time);
+                    if (i >= 0) {
+                        date.times.splice(i, 1);
+                    }
+                };
+                this.editSlot = function (date, time, slot, $event) {
+                    $event.preventDefault();
+                    $event.stopPropagation();
+                    var modal = _this.$modal.open({
+                        templateUrl: "templates/slot.html",
+                        resolve: {
+                            date: function () { return date.date; },
+                            room: function () { return date.rooms[time.slots.indexOf(slot)].name; },
+                            time: function () { return time.time; },
+                            slot: function () { return slot; }
+                        },
+                        controller: Slot.Controller,
+                        controllerAs: "ctrl"
+                    });
+                };
+                this.$scope.timetable = angular.fromJson(this.$window.localStorage.getItem("timetable")) || { dates: [] };
+                if (this.$scope.timetable.dates.length > 0) {
+                    this.setCurrentDate(this.$scope.timetable.dates[0]);
                 }
             }
-            Controller.$inject = ["$scope", "$window"];
+            Controller.$inject = ["$scope", "$window", "$modal"];
             return Controller;
         })();
         Build.Controller = Controller;
     })(Build = UKDC.Build || (UKDC.Build = {}));
+    var Slot;
+    (function (Slot) {
+        var Controller = (function () {
+            function Controller($scope, $modalInstance, date, room, time, slot) {
+                this.$scope = $scope;
+                this.$modalInstance = $modalInstance;
+                this.date = date;
+                this.room = room;
+                this.time = time;
+                this.slot = slot;
+                this.styles = Styles;
+            }
+            Controller.$inject = ["$scope", "$modalInstance", "date", "room", "time", "slot"];
+            return Controller;
+        })();
+        Slot.Controller = Controller;
+    })(Slot = UKDC.Slot || (UKDC.Slot = {}));
 })(UKDC || (UKDC = {}));
 var ukdc = angular.module("ukdc", ["ngRoute", "ui.bootstrap"]);
 ukdc.config(["$routeProvider", function ($routeProvider) {
@@ -82,7 +155,7 @@ ukdc.config(["$routeProvider", function ($routeProvider) {
             caseInsensitiveMatch: true,
             templateUrl: "views/build.html",
             controller: UKDC.Build.Controller,
-            controllerAs: "build"
+            controllerAs: "ctrl"
         })
             .otherwise({ redirectTo: "/home" });
     }]);

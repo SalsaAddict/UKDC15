@@ -1,0 +1,114 @@
+﻿<br />
+<div class="btn-group">
+    <button type="button" class="btn btn-default" ng-click="ctrl.save()">
+        <i class="fa fa-save"></i> Save
+    </button>
+</div>
+<br /><br />
+<ul class="nav nav-tabs">
+    <li ng-repeat="date in timetable.dates" ng-class="{ active: ctrl.isCurrentDate(date) }">
+        <a href="" ng-click="ctrl.setCurrentDate(date)">{{date.date || "New Date" | date: "dd MMM yyyy"}}</a>
+    </li>
+    <li>
+        <a href="" class="btn btn-default" ng-click="ctrl.addDate($event)">
+            <i class="fa fa-plus-circle text-primary"></i>
+            <span ng-if="timetable.dates.length === 0">Add Date</span>
+        </a>
+    </li>
+</ul>
+<br />
+<div ng-repeat="date in timetable.dates" ng-show="ctrl.isCurrentDate(date)">
+    <div class="form-inline text-center">
+        <div class="input-group">
+            <input type="text" class="form-control" ng-model="date.date" datepicker-popup="dd MMM yyyy" is-open="ctrl.$datepicker" />
+            <span class="input-group-btn">
+                <button type="button" class="btn btn-default" ng-click="ctrl.datepicker($event)">
+                    <i class="fa fa-calendar-o"></i>
+                </button>
+            </span>
+        </div>
+        <div class="btn-group">
+            <button type="button" class="btn btn-default" ng-click="ctrl.addRoom(date, $event)">
+                <i class="fa fa-plus-circle text-primary"></i> Add Room
+            </button>
+            <button type="button" class="btn btn-default" ng-click="ctrl.addTime(date, $event)">
+                <i class="fa fa-plus-circle text-primary"></i> Add Time
+            </button>
+        </div>
+    </div>
+    <br />
+    <table class="table timetable form-horizontal">
+        <thead>
+            <tr>
+                <th width="175"><span class="form-control">Time</span></th>
+                <th ng-repeat="room in date.rooms">
+                    <div class="input-group">
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-default" ng-click="ctrl.moveRoomLeft(date, room, $event)" ng-disabled="$index === 0" title="Move Left">
+                                <i class="fa fa-chevron-circle-left" ng-class="{ 'text-primary': $index > 0 }"></i>
+                            </button>
+                        </span>
+                        <input type="text" class="form-control" ng-model="room.name" />
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-default" ng-click="ctrl.removeRoom(date, room, $event)" title="Remove Column">
+                                <i class="fa fa-times-circle text-danger"></i>
+                            </button>
+                        </span>
+                    </div>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="time in date.times">
+                <th>
+                    <div class="input-group">
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-default" ng-click="ctrl.moveTimeUp(date, time, $event)" ng-disabled="$index === 0" title="Move Up">
+                                <i class="fa fa-chevron-circle-up" ng-class="{ 'text-primary': $index > 0 }"></i>
+                            </button>
+                        </span>
+                        <input type="text" class="form-control" ng-model="time.time" />
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-default" ng-click="ctrl.removeTime(date, time, $event)" title="Remove Row">
+                                <i class="fa fa-times-circle text-danger"></i>
+                            </button>
+                        </span>
+                    </div>
+                </th>
+                <td ng-repeat="slot in time.slots" ng-click="ctrl.editSlot(date, time, slot, $event)">
+                    <h4 ng-if="!slot.style">Closed</h4>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<br />
+<pre>{{timetable}}</pre>
+<script type="text/ng-template" id="templates/slot.html">
+    <div class="modal-header">
+        <h4>{{ctrl.room}}<br /><small>{{ctrl.date | date: "dd MMM yyyy"}}, {{ctrl.time}}</small></h4>
+    </div>
+    <div class="modal-body form-horizontal">
+        <div class="form-group">
+            <label class="col-sm-3 control-label">Style</label>
+            <div class="col-sm-9">
+                <select class="form-control" ng-model="ctrl.slot.style" ng-options="style as style.name for style in ctrl.styles track by style.name">
+                    <option value="">Closed</option>
+                </select>
+            </div>
+        </div>
+        <div ng-show="ctrl.slot.style">
+            <div class="form-group">
+                <div class="checkbox col-sm-9 col-sm-push-3">
+                    <label>
+                        <input type="checkbox" ng-model="ctrl.slot.split" />Split Room
+                    </label>
+                </div>
+            </div>
+        </div>
+        {{ctrl.slot}}
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default">Close</button>
+    </div>
+</script>
