@@ -38,24 +38,24 @@
     </div>
     <br />
     <div class="table-responsive">
-        <table class="table timetable form-horizontal">
+        <table class="timetable" cellpadding="0" cellspacing="0">
             <thead>
                 <tr>
                     <th width="175"><span class="form-control">Time</span></th>
-                    <th ng-repeat="room in date.rooms">
-                        <div class="input-group">
-                            <span class="input-group-btn">
-                                <button type="button" class="btn btn-default" ng-click="ctrl.moveRoomLeft(date, room, $event)" ng-disabled="$index === 0" title="Move Left">
-                                    <i class="fa fa-chevron-circle-left" ng-class="{ 'text-primary': $index > 0 }"></i>
-                                </button>
-                            </span>
-                            <input type="text" class="form-control" ng-model="room.name" />
-                            <span class="input-group-btn">
-                                <button type="button" class="btn btn-default" ng-click="ctrl.removeRoom(date, room, $event)" title="Remove Column">
-                                    <i class="fa fa-times-circle text-danger"></i>
-                                </button>
-                            </span>
-                        </div>
+                    <th ng-repeat="room in date.rooms" colspan="2" style="text-align: center">
+                            <div class="input-group">
+                                <span class="input-group-btn">
+                                    <button type="button" class="btn btn-default" ng-click="ctrl.moveRoomLeft(date, room, $event)" ng-disabled="$index === 0" title="Move Left">
+                                        <i class="fa fa-chevron-circle-left" ng-class="{ 'text-primary': $index > 0 }"></i>
+                                    </button>
+                                </span>
+                                <input type="text" class="form-control" ng-model="room.name" />
+                                <span class="input-group-btn">
+                                    <button type="button" class="btn btn-default" ng-click="ctrl.removeRoom(date, room, $event)" title="Remove Column">
+                                        <i class="fa fa-times-circle text-danger"></i>
+                                    </button>
+                                </span>
+                            </div>
                     </th>
                 </tr>
             </thead>
@@ -76,12 +76,19 @@
                             </span>
                         </div>
                     </th>
-                    <td ng-repeat="slot in time.slots" ng-click="ctrl.editSlot(date, time, slot, $event)">
+                    <td ng-repeat-start="slot in time.slots" ng-click="ctrl.editSlot(date, time, slot, $event)" style="{{ctrl.slotStyle(slot)}}" colspan="{{(slot.split) ? 1 : 2}}">
                         <h4 ng-if="!slot.style">Closed</h4>
-                        <div ng-repeat="workshop in slot.workshops" ng-class="{ 'col-xs-12': !slot.split, 'col-xs-6': slot.split }" style="{{ctrl.slotStyle(slot)}}">
-                            <b>{{workshop.artist || "TBC"}}</b><br />
-                            {{workshop.title || "TBC"}}<br />
-                            {{workshop.level || "TBC"}}
+                        <div ng-if="slot.style">
+                            <b>{{slot.workshops[0].artist || "TBC"}}</b><br />
+                            {{slot.workshops[0].title || "TBC"}}<br />
+                            {{slot.workshops[0].level || "TBC"}}
+                        </div>
+                    </td>
+                    <td ng-repeat-end style="{{ctrl.slotStyle(slot)}}" ng-if="slot.style && slot.split">
+                        <div>
+                            <b>{{slot.workshops[1].artist || "TBC"}}</b><br />
+                            {{slot.workshops[1].title || "TBC"}}<br />
+                            {{slot.workshops[1].level || "TBC"}}
                         </div>
                     </td>
                 </tr>
@@ -90,7 +97,6 @@
     </div>
 </div>
 <br />
-<pre>{{timetable}}</pre>
 <script type="text/ng-template" id="templates/slot.html">
     <div class="modal-header">
         <h4>{{ctrl.room}}<br /><small>{{ctrl.date | date: "dd MMM yyyy"}}, {{ctrl.time}}</small></h4>
@@ -132,7 +138,6 @@
                 </div>
             </div>
         </div>
-        {{ctrl.slot}}
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-default">Close</button>
