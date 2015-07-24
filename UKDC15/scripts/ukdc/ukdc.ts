@@ -170,6 +170,51 @@ module UKDC {
             public styles: IStyles = Styles;
         }
     }
+    export module Timetable {
+        export interface IScope extends angular.IScope { Timetable: any; }
+        export class Controller {
+            static $inject: string[] = ["$scope", "$http", "$filter"];
+            private $currentDate: any = undefined;
+            public isCurrentDate = (date: any) => { return this.$currentDate === date; }
+            public setCurrentDate = (date: any) => { this.$currentDate = date; }
+            constructor(
+                private $scope: IScope,
+                private $http: angular.IHttpService,
+                private $filter: angular.IFilterService) {
+                this.$scope.Timetable = {};
+                this.$http.get("timetable.ashx?EventId=1").success((data: any) => { this.$scope.Timetable = data; });
+            }
+            public workshopCssStyle = (workshop: any) => {
+                if (!workshop) { return; }
+                if (!workshop.Style) { return; }
+                var style: any = this.$filter("filter")(this.$scope.Timetable.Styles, (actual: any) => {
+                    return actual.Name === workshop.Style;
+                })[0];
+                var level: any = (workshop.Level) ? this.$filter("filter")(this.$scope.Timetable.Levels, (actual: any) => {
+                    return actual.Name === workshop.Level;
+                })[0] : { Opacity: 1 };
+                return "background-color: rgba(" + style.RGB + "," + level.Opacity + ")";
+            }
+            public artists = () => {
+                var artists: any = {};
+                angular.forEach(this.$scope.Timetable.Dates, (dateItem: any) => {
+                    angular.forEach(dateItem.Times, (timeItem: any) => {
+                        angular.forEach(timeItem.Slots, (slotItem: any) => {
+                            angular.forEach(slotItem.Workshops, (workshopItem: any) => {
+                                if (angular.isDefined(workshopItem.Artist)) {
+                                    if (!angular.isDefined(artists[workshopItem.Artist])) {
+                                        artists[workshopItem.Artist] = { Total: 0 };
+                                    }
+                                    artists[workshopItem.Artist].Total++;
+                                }
+                            });
+                        });
+                    });
+                });
+                return artists;
+            }
+        }
+    }
 }
 
 var ukdc = angular.module("ukdc", ["ngRoute", "ui.bootstrap"]);
@@ -181,6 +226,12 @@ ukdc.config(["$routeProvider", function ($routeProvider: angular.route.IRoutePro
         caseInsensitiveMatch: true,
         templateUrl: "views/build.html",
         controller: UKDC.Build.Controller,
+        controllerAs: "ctrl"
+    })
+        .when("/timetable", {
+        caseInsensitiveMatch: true,
+        templateUrl: "views/timetable.html",
+        controller: UKDC.Timetable.Controller,
         controllerAs: "ctrl"
     })
         .otherwise({ redirectTo: "/home" });

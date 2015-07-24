@@ -2,6 +2,7 @@
 USE [MYDC]
 GO
 
+IF OBJECT_ID(N'apiTimetable', N'P') IS NOT NULL DROP PROCEDURE [apiTimetable]
 IF OBJECT_ID(N'Workshop', N'U') IS NOT NULL DROP TABLE [Workshop]
 IF OBJECT_ID(N'EventDateTime', N'U') IS NOT NULL DROP TABLE [EventDateTime]
 IF OBJECT_ID(N'EventDateRoom', N'U') IS NOT NULL DROP TABLE [EventDateRoom]
@@ -99,4 +100,96 @@ CREATE TABLE [Workshop] (
 GO
 
 CREATE INDEX [IX_Workshop_Time_Room] ON [Workshop] ([EventId], [Date], [Time], [Room])
+GO
+
+CREATE PROCEDURE [apiTimetable](@EventId INT)
+AS
+BEGIN
+ SET NOCOUNT ON
+	SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED
+	;WITH XMLNAMESPACES (N'http://james.newtonking.com/projects/json' AS [json])
+	SELECT
+	 [Salsa_x0020_On1] = 'Hello',
+		[Event] = e.[Name],
+		[StartDate] = e.[StartDate],
+		[EndDate] = e.[EndDate],
+		(
+				SELECT
+				 [@json:Array] = N'true',
+				 [Name],
+					[RGB],
+					[Sort]
+				FROM [Style]
+				ORDER BY [Sort]
+				FOR XML PATH (N'Styles'), TYPE
+		 ),
+		(
+		  SELECT
+				 [@json:Array] = N'true',
+					[Name],
+					[Opacity],
+					[Sort]
+				FROM [Level]
+				ORDER BY [Sort]
+				FOR XML PATH (N'Levels'), TYPE
+		 ),
+		(
+				SELECT
+					[@json:Array] = N'true',
+					[Date] = ed.[Date],
+					(
+							SELECT
+								[@json:Array] = N'true',
+								[Name] = edr.[Room]
+							FROM [EventDateRoom] edr
+							WHERE edr.[EventId] = ed.[EventId]
+								AND edr.[Date] = ed.[Date]
+							ORDER BY edr.[Sort]
+							FOR XML PATH (N'Rooms'), TYPE
+						),
+					(
+							SELECT
+								[@json:Array] = N'true',
+								[Time] = CONVERT(NCHAR(5), edt.[Time], 114),
+								(
+										SELECT
+											[@json:Array] = N'true',
+											(
+													SELECT
+														[@json:Array] = N'true',
+														[Artist] = ws.[Artist],
+														[Title] = ws.[Title],
+														[Style] = ws.[Style],
+														[Level] = ws.[Level]
+													FROM [Workshop] ws
+														LEFT JOIN [Level] lev ON ws.[Level] = lev.[Name]
+													WHERE ws.[EventId] = edt.[EventId]
+														AND ws.[Date] = edt.[Date]
+														AND ws.[Time] = edt.[Time]
+														AND ws.[Room] = s.[Room]
+													ORDER BY ws.[Level]
+													FOR XML PATH (N'Workshops'), TYPE
+												)
+										FROM [EventDateRoom] s
+										WHERE s.[EventId] = ed.[EventId]
+											AND s.[Date] = ed.[Date]
+										ORDER BY s.[Sort]
+										FOR XML PATH (N'Slots'), TYPE
+									)
+							FROM [EventDateTime] edt
+							WHERE edt.[EventId] = ed.[EventId]
+								AND edt.[Date] = ed.[Date]
+							ORDER BY edt.[Time]
+							FOR XML PATH (N'Times'), TYPE
+						)
+				FROM [EventDate] ed
+				WHERE ed.[EventId] = e.[Id]
+				ORDER BY ed.[Date]
+				FOR XML PATH (N'Dates'), TYPE
+			)
+	FROM [Event] e
+	WHERE [Id] = @EventId
+	FOR XML PATH (N'Timetable')
+	RETURN
+END
 GO

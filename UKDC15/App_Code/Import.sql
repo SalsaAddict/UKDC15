@@ -1773,6 +1773,19 @@ FROM @XML.nodes(N'/UKDC[1]/Workshops/Day/Room/Slot/Workshop') ws (w)
 UPDATE [#Timetable] SET [Level] = N'Intermediate' WHERE [Level] IN (N'Int I & II', N'Intermediate I')
 UPDATE [#Timetable] SET [Level] = N'Int/Adv' WHERE [Level] = N'Intermediate II'
 UPDATE [#Timetable] SET [Level] = NULL WHERE [Level] = N'TBC'
+UPDATE [#Timetable]
+SET [Time] = CASE [Time]
+  WHEN N'09:30' THEN N'10:00'
+		WHEN N'10:30' THEN N'11:00'
+		WHEN N'11:30' THEN N'12:00'
+		WHEN N'14:00' THEN N'14:30'
+		WHEN N'15:00' THEN N'15:30'
+		WHEN N'16:00' THEN N'16:30'
+		WHEN N'17:00' THEN N'17:30'
+		ELSE [Time]
+ END
+WHERE [Date] <> N'2015-09-11'
+DELETE [#Timetable] WHERE [Room] = N'Yacht' AND ([Time] < N'12:00' OR [Time] > N'16:30')
 
 SELECT
  [Room] = r.value(N'.', N'NVARCHAR(25)'),
@@ -1832,7 +1845,7 @@ OUTPUT [inserted].*
 SELECT DISTINCT @EventId, [Date], [Time], [Room], [Artist], [Title], [Style], [Level]
 FROM [#Timetable]
 
-ROLLBACK TRANSACTION
+COMMIT TRANSACTION
 
 DROP TABLE [#Rooms]
 DROP TABLE [#Timetable]

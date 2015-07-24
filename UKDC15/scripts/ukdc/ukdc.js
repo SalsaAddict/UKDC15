@@ -181,6 +181,58 @@ var UKDC;
         })();
         Slot.Controller = Controller;
     })(Slot = UKDC.Slot || (UKDC.Slot = {}));
+    var Timetable;
+    (function (Timetable) {
+        var Controller = (function () {
+            function Controller($scope, $http, $filter) {
+                var _this = this;
+                this.$scope = $scope;
+                this.$http = $http;
+                this.$filter = $filter;
+                this.$currentDate = undefined;
+                this.isCurrentDate = function (date) { return _this.$currentDate === date; };
+                this.setCurrentDate = function (date) { _this.$currentDate = date; };
+                this.workshopCssStyle = function (workshop) {
+                    if (!workshop) {
+                        return;
+                    }
+                    if (!workshop.Style) {
+                        return;
+                    }
+                    var style = _this.$filter("filter")(_this.$scope.Timetable.Styles, function (actual) {
+                        return actual.Name === workshop.Style;
+                    })[0];
+                    var level = (workshop.Level) ? _this.$filter("filter")(_this.$scope.Timetable.Levels, function (actual) {
+                        return actual.Name === workshop.Level;
+                    })[0] : { Opacity: 1 };
+                    return "background-color: rgba(" + style.RGB + "," + level.Opacity + ")";
+                };
+                this.artists = function () {
+                    var artists = {};
+                    angular.forEach(_this.$scope.Timetable.Dates, function (dateItem) {
+                        angular.forEach(dateItem.Times, function (timeItem) {
+                            angular.forEach(timeItem.Slots, function (slotItem) {
+                                angular.forEach(slotItem.Workshops, function (workshopItem) {
+                                    if (angular.isDefined(workshopItem.Artist)) {
+                                        if (!angular.isDefined(artists[workshopItem.Artist])) {
+                                            artists[workshopItem.Artist] = { Total: 0 };
+                                        }
+                                        artists[workshopItem.Artist].Total++;
+                                    }
+                                });
+                            });
+                        });
+                    });
+                    return artists;
+                };
+                this.$scope.Timetable = {};
+                this.$http.get("timetable.ashx?EventId=1").success(function (data) { _this.$scope.Timetable = data; });
+            }
+            Controller.$inject = ["$scope", "$http", "$filter"];
+            return Controller;
+        })();
+        Timetable.Controller = Controller;
+    })(Timetable = UKDC.Timetable || (UKDC.Timetable = {}));
 })(UKDC || (UKDC = {}));
 var ukdc = angular.module("ukdc", ["ngRoute", "ui.bootstrap"]);
 ukdc.config(["$routeProvider", function ($routeProvider) {
@@ -190,6 +242,12 @@ ukdc.config(["$routeProvider", function ($routeProvider) {
             caseInsensitiveMatch: true,
             templateUrl: "views/build.html",
             controller: UKDC.Build.Controller,
+            controllerAs: "ctrl"
+        })
+            .when("/timetable", {
+            caseInsensitiveMatch: true,
+            templateUrl: "views/timetable.html",
+            controller: UKDC.Timetable.Controller,
             controllerAs: "ctrl"
         })
             .otherwise({ redirectTo: "/home" });
