@@ -7,9 +7,17 @@ IF OBJECT_ID(N'Workshop', N'U') IS NOT NULL DROP TABLE [Workshop]
 IF OBJECT_ID(N'EventDateTime', N'U') IS NOT NULL DROP TABLE [EventDateTime]
 IF OBJECT_ID(N'EventDateRoom', N'U') IS NOT NULL DROP TABLE [EventDateRoom]
 IF OBJECT_ID(N'EventDate', N'U') IS NOT NULL DROP TABLE [EventDate]
+IF OBJECT_ID(N'EventArtist', N'U') IS NOT NULL DROP TABLE [EventArtist]
 IF OBJECT_ID(N'Event', N'U') IS NOT NULL DROP TABLE [Event]
 IF OBJECT_ID(N'Level', N'U') IS NOT NULL DROP TABLE [Level]
 IF OBJECT_ID(N'Style', N'U') IS NOT NULL DROP TABLE [Style]
+IF OBJECT_ID(N'Artist', N'U') IS NOT NULL DROP TABLE [Artist]
+GO
+
+CREATE TABLE [Artist] (
+  [Name] NVARCHAR(50) NOT NULL
+		CONSTRAINT [PK_Artist] PRIMARY KEY CLUSTERED ([Name])
+ )
 GO
 
 CREATE TABLE [Style] (
@@ -43,6 +51,16 @@ CREATE TABLE [Event] (
 		CONSTRAINT [UQ_Event_Period] UNIQUE ([Id], [StartDate], [EndDate]),
 		CONSTRAINT [CK_Event_EndDate] CHECK ([EndDate] >= [StartDate])
 	)
+GO
+
+CREATE TABLE [EventArtist] (
+  [EventId] INT NOT NULL,
+  [Artist] NVARCHAR(50) NOT NULL,
+		[Workshops] TINYINT NOT NULL CONSTRAINT [DF_EventArtist_Agreed] DEFAULT (0),
+		CONSTRAINT [PK_EventArtist] PRIMARY KEY CLUSTERED ([EventId], [Artist]),
+		CONSTRAINT [FK_EventArtist_Event] FOREIGN KEY ([EventId]) REFERENCES [Event] ([Id]) ON DELETE CASCADE,
+		CONSTRAINT [FK_EventArtist_Artist] FOREIGN KEY ([Artist]) REFERENCES [Artist] ([Name]) ON UPDATE CASCADE ON DELETE CASCADE,
+ )
 GO
 
 CREATE TABLE [EventDate] (
@@ -94,6 +112,8 @@ CREATE TABLE [Workshop] (
 		 REFERENCES [EventDateRoom] ([EventId], [Date], [Room]),
 		CONSTRAINT [FK_Workshop_EventDateTime] FOREIGN KEY ([EventId], [Date], [Time])
 		 REFERENCES [EventDateTime] ([EventId], [Date], [Time]),
+		CONSTRAINT [FK_Workshop_EventArtist] FOREIGN KEY ([EventId], [Artist])
+		 REFERENCES [EventArtist] ([EventId], [Artist]) ON UPDATE CASCADE ON DELETE CASCADE,
 		CONSTRAINT [FK_Workshop_Style] FOREIGN KEY ([Style]) REFERENCES [Style] ([Name]),
 		CONSTRAINT [FK_Workshop_Level] FOREIGN KEY ([Level]) REFERENCES [Level] ([Name])
  )

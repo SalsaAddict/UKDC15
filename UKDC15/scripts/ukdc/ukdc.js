@@ -184,9 +184,10 @@ var UKDC;
     var Timetable;
     (function (Timetable) {
         var Controller = (function () {
-            function Controller($scope, $http, $filter) {
+            function Controller($scope, $routeParams, $http, $filter) {
                 var _this = this;
                 this.$scope = $scope;
+                this.$routeParams = $routeParams;
                 this.$http = $http;
                 this.$filter = $filter;
                 this.$currentDate = undefined;
@@ -226,9 +227,16 @@ var UKDC;
                     return artists;
                 };
                 this.$scope.Timetable = {};
-                this.$http.get("timetable.ashx?EventId=1").success(function (data) { _this.$scope.Timetable = data; });
+                this.$http.get("timetable.ashx?EventId=" + ($routeParams["EventId"] || 0)).success(function (data) {
+                    _this.$scope.Timetable = data;
+                    if (angular.isArray(_this.$scope.Timetable.Dates)) {
+                        if (_this.$scope.Timetable.Dates.length > 0) {
+                            _this.$currentDate = _this.$scope.Timetable.Dates[0];
+                        }
+                    }
+                });
             }
-            Controller.$inject = ["$scope", "$http", "$filter"];
+            Controller.$inject = ["$scope", "$routeParams", "$http", "$filter"];
             return Controller;
         })();
         Timetable.Controller = Controller;
@@ -244,7 +252,7 @@ ukdc.config(["$routeProvider", function ($routeProvider) {
             controller: UKDC.Build.Controller,
             controllerAs: "ctrl"
         })
-            .when("/timetable", {
+            .when("/timetable/:EventId?", {
             caseInsensitiveMatch: true,
             templateUrl: "views/timetable.html",
             controller: UKDC.Timetable.Controller,

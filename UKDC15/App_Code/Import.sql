@@ -660,7 +660,7 @@ SET @XML = N'
           <Workshop>
             <Style>Salsa On1</Style>
             <Title>Partnerwork On 1</Title>
-            <Artist>Gary &amp; Giselle</Artist>
+            <Artist>Garry &amp; Giselle</Artist>
             <Level>Improver</Level>
           </Workshop>
         </Slot>
@@ -1200,7 +1200,7 @@ SET @XML = N'
           <Workshop>
             <Style>Salsa On2</Style>
             <Title>Partnerwork On 2</Title>
-            <Artist>Mikko Kempe</Artist>
+            <Artist>Mikko Kemppe</Artist>
             <Level>TBC</Level>
           </Workshop>
           
@@ -1770,6 +1770,7 @@ SELECT
 INTO [#Timetable]
 FROM @XML.nodes(N'/UKDC[1]/Workshops/Day/Room/Slot/Workshop') ws (w)
 
+UPDATE [#Timetable] SET [Artist] = NULL WHERE [Artist] IN (N'TBA', N'TBC')
 UPDATE [#Timetable] SET [Level] = N'Intermediate' WHERE [Level] IN (N'Int I & II', N'Intermediate I')
 UPDATE [#Timetable] SET [Level] = N'Int/Adv' WHERE [Level] = N'Intermediate II'
 UPDATE [#Timetable] SET [Level] = NULL WHERE [Level] = N'TBC'
@@ -1794,6 +1795,9 @@ INTO [#Rooms]
 FROM @XML.nodes(N'/UKDC[1]/Config[1]/Rooms[1]/Room') rm (r)
 
 BEGIN TRANSACTION
+
+ALTER TABLE [EventArtist] NOCHECK CONSTRAINT [FK_EventArtist_Artist]
+ALTER TABLE [Workshop] NOCHECK CONSTRAINT [FK_Workshop_EventArtist]
 
 DECLARE @EventId INT
 
@@ -1844,6 +1848,76 @@ INSERT INTO [Workshop] ([EventId], [Date], [Time], [Room], [Artist], [Title], [S
 OUTPUT [inserted].*
 SELECT DISTINCT @EventId, [Date], [Time], [Room], [Artist], [Title], [Style], [Level]
 FROM [#Timetable]
+
+INSERT INTO [EventArtist] ([EventId], [Artist], [Workshops])
+SELECT
+ [EventId] = @EventId,
+ [Artist] = ISNULL(t.[Artist], a.[Artist]),
+	[Agreed] = ISNULL(a.[Agreed], t.[Scheduled])
+FROM (
+   SELECT
+			 [Artist],
+				[Scheduled] = COUNT(*)
+			FROM [Workshop]
+			WHERE [Artist] IS NOT NULL
+			GROUP BY [Artist]
+  ) t
+ FULL JOIN (VALUES
+			(N'Alex & Ewelina', 2),
+			(N'Amanda Hawley', 2),
+			(N'Andreas & Julia', 2),
+			(N'Angus & Ovgu', 2),
+			(N'Ataca & La Alemana', 3),
+			(N'Carl & Alex', 2),
+			(N'Cliff & Miho', 1),
+			(N'Christian Jean-Francois', 2),
+			(N'Dani K', 1),
+			(N'Daniel & Pebbles', 2),
+			(N'David & Adriana', 3),
+			(N'Fabhiola & Perry', 1),
+			(N'Fabian & Esther', 4),
+			(N'Fabian & Nicolina', 3),
+			(N'Fadi K', 2),
+			(N'Farid Ferchach', 4),
+			(N'Garry & Giselle', 1),
+			(N'Gus & Grace', 2),
+			(N'Joana & Samet', 1),
+			(N'Joana Carvalho', 2),
+			(N'Joao & Giedre', 4),
+			(N'Joseph Davids', 2),
+			(N'Leo Henriquez', 3),
+			(N'Lisa & Mark', 2),
+			(N'Luz Fernandez', 2),
+			(N'Marchant & Davina', 3),
+			(N'Mauro Casali', 2),
+			(N'Mikko Kemppe', 2),
+			(N'Misael', 2),
+			(N'Moe Flex', 4),
+			(N'Nadia Yammine', 2),
+			(N'Nelson Campos', 3),
+			(N'Osbanis & Aneta', 3),
+			(N'Patrick Mussendijk', 4),
+			(N'Phil Kaila', 2),
+			(N'Pierre', 1),
+			(N'Pierre & Zoe', 1),
+			(N'Richard & Dani-Leigh', 3),
+			(N'Riquita Alta', 3),
+			(N'Sabine & Saulo', 2),
+			(N'Sam & Katie', 2),
+			(N'Sam Sleek', 2),
+			(N'Sami & Roxy', 2),
+			(N'Simon & Natalie', 3),
+			(N'Sol & Laura', 2),
+			(N'Tony & Sophie', 3),
+			(N'Uriel & Vera', 4),
+			(N'YE Mambo', 4),
+			(N'Zoe Hodges', 2)
+  ) a ([Artist], [Agreed]) ON t.[Artist] = a.[Artist]
+
+INSERT INTO [Artist] ([Name]) SELECT [Artist] FROM [EventArtist]
+
+ALTER TABLE [EventArtist] WITH CHECK CHECK CONSTRAINT [FK_EventArtist_Artist]
+ALTER TABLE [Workshop] WITH CHECK CHECK CONSTRAINT [FK_Workshop_EventArtist]
 
 COMMIT TRANSACTION
 

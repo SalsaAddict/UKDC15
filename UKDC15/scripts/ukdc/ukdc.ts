@@ -173,16 +173,24 @@ module UKDC {
     export module Timetable {
         export interface IScope extends angular.IScope { Timetable: any; }
         export class Controller {
-            static $inject: string[] = ["$scope", "$http", "$filter"];
+            static $inject: string[] = ["$scope", "$routeParams", "$http", "$filter"];
             private $currentDate: any = undefined;
             public isCurrentDate = (date: any) => { return this.$currentDate === date; }
             public setCurrentDate = (date: any) => { this.$currentDate = date; }
             constructor(
                 private $scope: IScope,
+                private $routeParams: angular.route.IRouteParamsService,
                 private $http: angular.IHttpService,
                 private $filter: angular.IFilterService) {
                 this.$scope.Timetable = {};
-                this.$http.get("timetable.ashx?EventId=1").success((data: any) => { this.$scope.Timetable = data; });
+                this.$http.get("timetable.ashx?EventId=" + ($routeParams["EventId"] || 0)).success((data: any) => {
+                    this.$scope.Timetable = data;
+                    if (angular.isArray(this.$scope.Timetable.Dates)) {
+                        if (this.$scope.Timetable.Dates.length > 0) {
+                            this.$currentDate = this.$scope.Timetable.Dates[0];
+                        }
+                    }
+                });
             }
             public workshopCssStyle = (workshop: any) => {
                 if (!workshop) { return; }
@@ -228,7 +236,7 @@ ukdc.config(["$routeProvider", function ($routeProvider: angular.route.IRoutePro
         controller: UKDC.Build.Controller,
         controllerAs: "ctrl"
     })
-        .when("/timetable", {
+        .when("/timetable/:EventId?", {
         caseInsensitiveMatch: true,
         templateUrl: "views/timetable.html",
         controller: UKDC.Timetable.Controller,

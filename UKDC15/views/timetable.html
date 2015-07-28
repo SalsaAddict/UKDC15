@@ -1,32 +1,48 @@
-﻿<ul class="nav nav-tabs">
-    <li ng-repeat="Date in Timetable.Dates" ng-class="{active: ctrl.isCurrentDate(Date)}">
-        <a href="" ng-click="ctrl.setCurrentDate(Date)">{{Date.Date | date: "dd MMM yyyy"}}</a>
-    </li>
-</ul>
-<div ng-repeat="Date in Timetable.Dates" ng-show="ctrl.isCurrentDate(Date)">
-    <h4>{{Date.Date | date: "EEEE, dd MMMM yyyy"}}</h4>
-    <table class="timetable">
-        <thead>
-            <tr>
-                <th>Time</th>
-                <th ng-repeat="Room in Date.Rooms">{{Room.Name}}</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr ng-repeat="Time in Date.Times">
-                <th>{{Time.Time}}</th>
-                <td ng-repeat="Slot in Time.Slots" style="{{(Slot.Workshops.length === 1) ? ctrl.workshopCssStyle(Slot.Workshops[0]) : undefined}}">
-                    <ng-switch on="Slot.Workshops.length > 0">
-                        <div ng-switch-when="true" ng-repeat="Workshop in Slot.Workshops | limitTo: 2" style="{{(Slot.Workshops.length > 1) ? ctrl.workshopCssStyle(Workshop) : undefined}}">
-                            <b>{{Workshop.Artist || "TBC"}}</b><br />
-                            {{Workshop.Title || "TBC"}}<br />
-                            {{Workshop.Level || "TBC"}}
-                        </div>
-                        <div ng-switch-default><h4>Closed</h4></div>
-                    </ng-switch>
-                </td>
-            </tr>
-        </tbody>
-    </table>
+﻿<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <div class="navbar-brand">
+                {{Timetable.Event}} - Workshop Timetable
+            </div>
+        </div>
+        <ul class="nav navbar-nav">
+            <li ng-repeat="Date in Timetable.Dates | orderBy: 'Date'" ng-class="{active: ctrl.isCurrentDate(Date)}">
+                <a href="" ng-click="ctrl.setCurrentDate(Date)">{{Date.Date | date: "EEEE"}}</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+<div class="container-fluid">
+    <div ng-repeat="Date in Timetable.Dates" ng-show="ctrl.isCurrentDate(Date)">
+        <div class="text-center">
+            <h4 class="text-uppercase">
+                {{Date.Date | date: "EEEE, dd MMMM yyyy"}}<br />
+                <small>Workshop Timetable</small>
+            </h4>
+        </div>
+        <br />
+        <table class="timetable">
+            <thead>
+                <tr>
+                    <th>Time</th>
+                    <th ng-repeat="Room in Date.Rooms">{{Room.Name}}</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="Time in Date.Times">
+                    <th>{{Time.Time}}</th>
+                    <td ng-repeat="Slot in Time.Slots" style="{{(Slot.Workshops.length === 1) ? ctrl.workshopCssStyle(Slot.Workshops[0]) : undefined}}">
+                        <ng-switch on="Slot.Workshops.length > 0">
+                            <div ng-switch-when="true" ng-repeat="Workshop in Slot.Workshops | limitTo: 2" style="{{(Slot.Workshops.length > 1) ? ctrl.workshopCssStyle(Workshop) : undefined}}">
+                                <b>{{Workshop.Artist || "TBC"}}</b><br />
+                                {{Workshop.Title || "TBC"}}<br />
+                                {{Workshop.Level || "TBC"}}
+                            </div>
+                            <div ng-switch-default><h4>Closed</h4></div>
+                        </ng-switch>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </div>
-{{ctrl.artists()}}
