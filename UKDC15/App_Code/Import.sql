@@ -1801,6 +1801,7 @@ ALTER TABLE [Workshop] NOCHECK CONSTRAINT [FK_Workshop_EventArtist]
 
 DECLARE @EventId INT
 
+/*
 INSERT INTO [Style] ([Name], [R], [G], [B], [Sort])
 OUTPUT [inserted].*
 SELECT
@@ -1820,6 +1821,7 @@ SELECT
 	[Sort] = ROW_NUMBER() OVER (ORDER BY l.value(N'@id', N'TINYINT'))
 FROM @XML.nodes(N'/UKDC[1]/Config[1]/Levels[1]/Level') lvl (l)
 WHERE l.value(N'.', N'NVARCHAR(25)') NOT IN (N'Int I & II', N'Intermediate I', N'Intermediate II', N'TBC')
+*/
 
 INSERT INTO [Event] ([Name], [StartDate], [EndDate])
 OUTPUT [inserted].*

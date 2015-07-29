@@ -575,4 +575,6 @@ FROM @Import.nodes(N'/Event[1]/Workshops[1]/Day/Room/Slot/Workshop') x (n)
 
 EXEC [apiWorkshopsExport] @EventId
 
-ROLLBACK TRANSACTION
+COMMIT TRANSACTION
+
+SELECT * FROM Event

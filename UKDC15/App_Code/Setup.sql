@@ -34,6 +34,21 @@ CREATE TABLE [Style] (
  )
 GO
 
+INSERT INTO [Style] ([Name], [R], [G], [B], [Sort])
+VALUES
+	(N'Beginner Stream', 170, 238, 255, 0),
+	(N'Salsa On1', 170, 255, 170, 1),
+	(N'Salsa On2', 68, 170, 255, 2),
+	(N'Cuban Salsa', 255, 255, 128, 3),
+	(N'Colombian Salsa', 255, 102, 187, 4),
+	(N'Bachata', 221, 170, 255, 5),
+	(N'Kizomba & Afro-Luso', 255, 136, 136, 6),
+	(N'Lambazouk & Brazilian', 255, 150, 68, 7),
+	(N'Other', 187, 187, 187, 8),
+	(N'Closed', 255, 255, 255, 9),
+	(N'Lindy', 255, 174, 51, 10)
+GO
+
 CREATE TABLE [Level] (
   [Name] NVARCHAR(25) NOT NULL,
 		[Opacity] DECIMAL(3,2) NOT NULL CONSTRAINT [DF_Level_Opacity] DEFAULT (1),
@@ -41,6 +56,16 @@ CREATE TABLE [Level] (
 		CONSTRAINT [PK_Level] PRIMARY KEY NONCLUSTERED ([Name]),
 		CONSTRAINT [UQ_Level_Sort] UNIQUE CLUSTERED ([Sort])
  )
+GO
+
+INSERT INTO [Level] ([Name], [Opacity], [Sort])
+VALUES
+	(N'All Levels', 1.00, 1),
+	(N'Beginner', 1.00, 2),
+	(N'Improver', 0.60, 3),
+	(N'Intermediate', 0.70, 4),
+	(N'Int/Adv', 0.80, 5),
+	(N'Advanced', 0.90, 6)
 GO
 
 CREATE TABLE [Event] (
@@ -281,5 +306,3 @@ BEGIN
 	RETURN
 END
 GO
-
-[apiWorkshopsExport] 1
