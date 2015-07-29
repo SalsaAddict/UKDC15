@@ -65,6 +65,7 @@
   <ItemGroup>
     <Content Include="App_Code\Import.sql" />
     <Content Include="App_Code\Setup.sql" />
+    <Content Include="App_Code\temp.sql" />
     <Content Include="content\bootstrap.darkly.css" />
     <Content Include="content\bootstrap.darkly.min.css" />
     <Content Include="content\bootstrap.slate.css" />

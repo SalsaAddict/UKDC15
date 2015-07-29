@@ -2,6 +2,8 @@
 USE [MYDC]
 GO
 
+IF OBJECT_ID(N'apiWorkshopsImport', N'P') IS NOT NULL DROP PROCEDURE [apiWorkshopsImport]
+IF OBJECT_ID(N'apiWorkshopsExport', N'P') IS NOT NULL DROP PROCEDURE [apiWorkshopsExport]
 IF OBJECT_ID(N'apiTimetable', N'P') IS NOT NULL DROP PROCEDURE [apiTimetable]
 IF OBJECT_ID(N'Workshop', N'U') IS NOT NULL DROP TABLE [Workshop]
 IF OBJECT_ID(N'EventDateTime', N'U') IS NOT NULL DROP TABLE [EventDateTime]
@@ -213,3 +215,71 @@ BEGIN
 	RETURN
 END
 GO
+
+CREATE PROCEDURE [apiWorkshopsExport](@EventId INT)
+AS
+BEGIN
+ SET NOCOUNT ON
+	SET TRANSACTION ISOLATION LEVEL SERIALIZABLE
+
+	SELECT
+		[@Name] = e.[Name],
+		[@Start] = CONVERT(NCHAR(10), e.[StartDate], 120),
+		[@End] = CONVERT(NCHAR(10), e.[EndDate], 120),
+		[Artists] = (
+				SELECT
+					[@Name] = a.[Artist],
+					[@Workshops] = a.[Workshops]
+				FROM [EventArtist] a
+				WHERE e.[Id] = a.[EventId]
+				ORDER BY a.[Artist]
+				FOR XML PATH (N'Artist'), TYPE
+			),
+		[Workshops] = (
+				SELECT
+					[@Date] = CONVERT(NCHAR(10), dte.[Date], 120),
+					(
+							SELECT
+								[@Name] = edr.[Room],
+								(
+										SELECT
+											[@Time] = CONVERT(NCHAR(5), edt.[Time], 114),
+											(
+													SELECT
+														[@Artist] = w.[Artist],
+														[@Title] = w.[Title],
+														[@Style] = w.[Style],
+														[@Level] = w.[Level]
+													FROM [Workshop] w
+													WHERE dte.[EventId] = w.[EventId]
+														AND dte.[Date] = w.[Date]
+														AND edt.[Time] = w.[Time]
+														AND edr.[Room] = w.[Room]
+													FOR XML PATH (N'Workshop'), TYPE
+												)
+										FROM [EventDateTime] edt
+										WHERE dte.[EventId] = edt.[EventId]
+											AND dte.[Date] = edt.[Date]
+										ORDER BY edt.[Time]
+										FOR XML PATH (N'Slot'), TYPE
+									)
+							FROM [EventDateRoom] edr
+							WHERE dte.[EventId] = edr.[EventId]
+								AND dte.[Date] = edr.[Date]
+							ORDER BY edr.[Sort]
+							FOR XML PATH (N'Room'), TYPE
+						)
+				FROM [EventDate] dte
+				WHERE e.[Id] = dte.[EventId]
+				ORDER BY dte.[Date]
+				FOR XML PATH (N'Day'), TYPE
+			)
+	FROM [Event] e
+	WHERE e.[Id] = @EventId
+	FOR XML PATH (N'Event')
+
+	RETURN
+END
+GO
+
+[apiWorkshopsExport] 1
