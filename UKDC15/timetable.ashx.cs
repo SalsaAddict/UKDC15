@@ -23,6 +23,16 @@ namespace UKDC15
                 {
                     Command.Connection = Connection;
                     Command.CommandType = CommandType.StoredProcedure;
+                    Command.CommandText = "apiWorkshopsImport";
+                    XmlDocument Document = new XmlDocument();
+                    Document.Load(Context.Server.MapPath(string.Format("/xml/timetable{0}.xml", Context.Request.QueryString["EventId"])));
+                    Command.Parameters.AddWithValue("Import", Document.InnerXml);
+                    Command.ExecuteNonQuery();
+                }
+                using (SqlCommand Command = new SqlCommand())
+                {
+                    Command.Connection = Connection;
+                    Command.CommandType = CommandType.StoredProcedure;
                     Command.CommandText = "apiTimetable";
                     Command.Parameters.AddWithValue("EventId", Context.Request.QueryString["EventId"]);
                     using (XmlReader Reader = Command.ExecuteXmlReader())

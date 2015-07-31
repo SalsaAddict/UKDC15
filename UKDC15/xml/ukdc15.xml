@@ -362,7 +362,7 @@
         <Slot Time="10:00" />
         <Slot Time="11:00" />
         <Slot Time="12:00">
-          <Workshop Artist="Jessica Melaza" Title="Reggaeton" Style="Other" Level="All Levels" />
+          <Workshop Title="To be scheduled" Style="Other" />
         </Slot>
         <Slot Time="14:30">
           <Workshop Artist="Moe Flex" Title="La Rueda" Style="Cuban Salsa" />
@@ -424,7 +424,7 @@
           <Workshop Artist="Fabhiola &amp; Perry" Title="Cuban Partnerwork" Style="Cuban Salsa" />
         </Slot>
         <Slot Time="11:00">
-          <Workshop Artist="Neville Ashman" Title="La Rueda" Style="Cuban Salsa" Level="All Levels" />
+          <Workshop Title="Cuban Partnerwork" Style="Cuban Salsa" />
         </Slot>
         <Slot Time="12:00">
           <Workshop Artist="Osbanis &amp; Aneta" Title="Rumba" Style="Cuban Salsa" />
