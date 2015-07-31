@@ -183,7 +183,7 @@ module UKDC {
                 private $http: angular.IHttpService,
                 private $filter: angular.IFilterService) {
                 this.$scope.Timetable = {};
-                this.$http.get("timetable.ashx?EventId=" + ($routeParams["EventId"] || 0)).success((data: any) => {
+                this.$http.get("timetable.ashx?EventId=" + (this.$routeParams["EventId"] || 0)).success((data: any) => {
                     this.$scope.Timetable = data;
                     if (angular.isArray(this.$scope.Timetable.Dates)) {
                         if (this.$scope.Timetable.Dates.length > 0) {
@@ -203,24 +203,7 @@ module UKDC {
                 })[0] : { Opacity: 1 };
                 return "background-color: rgba(" + style.RGB + "," + level.Opacity + ")";
             }
-            public artists = () => {
-                var artists: any = {};
-                angular.forEach(this.$scope.Timetable.Dates, (dateItem: any) => {
-                    angular.forEach(dateItem.Times, (timeItem: any) => {
-                        angular.forEach(timeItem.Slots, (slotItem: any) => {
-                            angular.forEach(slotItem.Workshops, (workshopItem: any) => {
-                                if (angular.isDefined(workshopItem.Artist)) {
-                                    if (!angular.isDefined(artists[workshopItem.Artist])) {
-                                        artists[workshopItem.Artist] = { Total: 0 };
-                                    }
-                                    artists[workshopItem.Artist].Total++;
-                                }
-                            });
-                        });
-                    });
-                });
-                return artists;
-            }
+            public eventId = () => { return this.$routeParams["EventId"]; }
         }
     }
 }

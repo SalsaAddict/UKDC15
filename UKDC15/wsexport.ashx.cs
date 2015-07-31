@@ -29,7 +29,9 @@ namespace UKDC15
                     {
                         XmlDocument Document = new XmlDocument();
                         Document.Load(Reader);
+                        Document.Save(Context.Server.MapPath(string.Format("/xml/timetable{0}.xml", Context.Request.QueryString["EventId"])));
                         Context.Response.ContentType = "text/xml";
+                        //Context.Response.AddHeader("Content-Disposition", "attachment; filename=timetable.xml");
                         Context.Response.Write(Document.InnerXml);
                         Reader.Close();
                     }

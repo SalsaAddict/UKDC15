@@ -78,6 +78,7 @@
     <Content Include="packages.config" />
     <Content Include="scripts\angular-route.min.js.map" />
     <Content Include="timetable.ashx" />
+    <Content Include="xml\timetable1.xml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

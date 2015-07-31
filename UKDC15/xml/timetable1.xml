@@ -1,9 +1,3 @@
-﻿USE [MYDC]
-GO
-
-DECLARE @Import XML
-
-SET @Import = N'
 <Event Name="UK Dance Congress 2015" Start="2015-09-11" End="2015-09-14">
   <Artists>
     <Artist Name="Alex &amp; Ewelina" Workshops="2" />
@@ -119,8 +113,8 @@ SET @Import = N'
           <Workshop Artist="Uriel &amp; Vera" Title="Partnerwork On 1" Style="Salsa On1" Level="Int/Adv" />
         </Slot>
         <Slot Time="14:30">
-          <Workshop Artist="Dani K" Title="Mens'' Styling" Style="Salsa On2" Level="All Levels" />
-          <Workshop Artist="Joana Carvalho" Title="Ladies'' Styling" Style="Salsa On2" Level="All Levels" />
+          <Workshop Artist="Dani K" Title="Mens' Styling" Style="Salsa On2" Level="All Levels" />
+          <Workshop Artist="Joana Carvalho" Title="Ladies' Styling" Style="Salsa On2" Level="All Levels" />
         </Slot>
         <Slot Time="15:30">
           <Workshop Artist="YE Mambo" Title="Partnerwork On2" Style="Salsa On2" Level="Advanced" />
@@ -318,8 +312,8 @@ SET @Import = N'
           <Workshop Artist="Fabian &amp; Esther" Title="Partnerwork On1" Style="Salsa On1" />
         </Slot>
         <Slot Time="15:30">
-          <Workshop Artist="Farid Ferchach" Title="Mens'' Shines" Style="Salsa On1" />
-          <Workshop Artist="Joana Carvalho" Title="Ladies'' Shines" Style="Salsa On1" />
+          <Workshop Artist="Farid Ferchach" Title="Mens' Shines" Style="Salsa On1" />
+          <Workshop Artist="Joana Carvalho" Title="Ladies' Shines" Style="Salsa On1" />
         </Slot>
         <Slot Time="16:30">
           <Workshop Artist="Pierre &amp; Zoe" Title="Partnerwork with Tricks" Style="Salsa On1" />
@@ -496,88 +490,4 @@ SET @Import = N'
       </Room>
     </Day>
   </Workshops>
-</Event>'
-
-BEGIN TRANSACTION
-
-DECLARE @EventId INT
-
-SELECT @EventId = [Id] FROM [Event] WHERE [Name] = @Import.value(N'/Event[1]/@Name', N'NVARCHAR(255)')
-
-IF @EventId IS NULL BEGIN
- INSERT INTO [Event] ([Name], [StartDate], [EndDate])
-	SELECT
-	 [Name] = n.value(N'@Name', N'NVARCHAR(255)'),
-		[StartDate] = n.value(N'@Start', N'DATE'),
-		[EndDate] = n.value(N'@End', N'DATE')
-	FROM @Import.nodes(N'/Event[1]') x (n)
-	SET @EventId = SCOPE_IDENTITY()
-END ELSE BEGIN
-	DELETE [Workshop] WHERE [EventId] = @EventId
-	DELETE [EventDate] WHERE [EventId] = @EventId
-	DELETE [EventArtist] WHERE [EventId] = @EventId
-END
-
-;WITH [Data] AS (
-		SELECT
-			[Name] = n.value(N'@Name', N'NVARCHAR(100)'),
-			[Workshops] = n.value(N'@Workshops', N'TINYINT')
-		FROM @Import.nodes(N'/Event[1]/Artists[1]/Artist') x (n)
-	)
-INSERT INTO [Artist] ([Name])
-SELECT d.[Name]
-FROM [Data] d
- LEFT JOIN [Artist] a ON d.[Name] = a.[Name]
-WHERE a.[Name] IS NULL
-
-INSERT INTO [EventArtist] ([EventId], [Artist], [Workshops])
-SELECT
- [EventId] = @EventId,
- [Artist] = n.value(N'@Name', N'NVARCHAR(100)'),
-	[Workshops] = n.value(N'@Workshops', N'TINYINT')
-FROM @Import.nodes(N'/Event[1]/Artists[1]/Artist') x (n)
-
-INSERT INTO [EventDate] ([EventId], [Date], [StartDate], [EndDate])
-SELECT
- [EventId] = @EventId,
-	[Date] = n.value(N'@Date', N'DATE'),
-	[StartDate] = n.value(N'../../@Start', N'DATE'),
-	[EndDate] = n.value(N'../../@End', N'DATE')
-FROM @Import.nodes(N'/Event[1]/Workshops[1]/Day') x (n)
-
-INSERT INTO [EventDateRoom] ([EventId], [Date], [Room], [Sort])
-SELECT
- [EventId] = @EventId,
-	[Date] = n.value(N'../@Date', N'DATE'),
-	[Room] = n.value(N'@Name', N'NVARCHAR(50)'),
-	[Sort] = v.[number]
-FROM [master]..[spt_values] v
- CROSS APPLY @Import.nodes(N'/Event[1]/Workshops[1]/Day/Room[sql:column("v.[number]")]') x (n)
-WHERE v.[type] = N'P'
- AND v.[number] BETWEEN 1 AND 255
-ORDER BY 1, 2, 4
-
-INSERT INTO [EventDateTime] ([EventId], [Date], [Time])
-SELECT DISTINCT
- [EventId] = @EventId,
-	[Date] = n.value(N'../../@Date', N'DATE'),
-	[Time] = n.value(N'@Time', N'TIME')
-FROM @Import.nodes(N'/Event[1]/Workshops[1]/Day/Room/Slot') x (n)
-
-INSERT INTO [Workshop] ([EventId], [Date], [Time], [Room], [Artist], [Title], [Style], [Level])
-SELECT
- [EventId] = @EventId,
-	[Date] = n.value(N'../../../@Date', N'DATE'),
-	[Time] = n.value(N'../@Time', N'TIME'),
-	[Room] = n.value(N'../../@Name', N'NVARCHAR(50)'),
-	[Artist] = n.value(N'@Artist', N'NVARCHAR(100)'),
-	[Title] = n.value(N'@Title', N'NVARCHAR(100)'),
-	[Style] = n.value(N'@Style', N'NVARCHAR(50)'),
-	[Level] = n.value(N'@Level', N'NVARCHAR(50)')
-FROM @Import.nodes(N'/Event[1]/Workshops[1]/Day/Room/Slot/Workshop') x (n)
-
-EXEC [apiWorkshopsExport] @EventId
-
-COMMIT TRANSACTION
-
-SELECT * FROM Event
+</Event>

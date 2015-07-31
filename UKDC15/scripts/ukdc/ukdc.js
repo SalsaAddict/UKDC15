@@ -208,26 +208,9 @@ var UKDC;
                     })[0] : { Opacity: 1 };
                     return "background-color: rgba(" + style.RGB + "," + level.Opacity + ")";
                 };
-                this.artists = function () {
-                    var artists = {};
-                    angular.forEach(_this.$scope.Timetable.Dates, function (dateItem) {
-                        angular.forEach(dateItem.Times, function (timeItem) {
-                            angular.forEach(timeItem.Slots, function (slotItem) {
-                                angular.forEach(slotItem.Workshops, function (workshopItem) {
-                                    if (angular.isDefined(workshopItem.Artist)) {
-                                        if (!angular.isDefined(artists[workshopItem.Artist])) {
-                                            artists[workshopItem.Artist] = { Total: 0 };
-                                        }
-                                        artists[workshopItem.Artist].Total++;
-                                    }
-                                });
-                            });
-                        });
-                    });
-                    return artists;
-                };
+                this.eventId = function () { return _this.$routeParams["EventId"]; };
                 this.$scope.Timetable = {};
-                this.$http.get("timetable.ashx?EventId=" + ($routeParams["EventId"] || 0)).success(function (data) {
+                this.$http.get("timetable.ashx?EventId=" + (this.$routeParams["EventId"] || 0)).success(function (data) {
                     _this.$scope.Timetable = data;
                     if (angular.isArray(_this.$scope.Timetable.Dates)) {
                         if (_this.$scope.Timetable.Dates.length > 0) {

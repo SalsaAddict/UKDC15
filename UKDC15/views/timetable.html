@@ -9,6 +9,9 @@
             <li ng-repeat="Date in Timetable.Dates | orderBy: 'Date'" ng-class="{active: ctrl.isCurrentDate(Date)}">
                 <a href="" ng-click="ctrl.setCurrentDate(Date)">{{Date.Date | date: "EEEE"}}</a>
             </li>
+            <li>
+                <a ng-href="/wsexport.ashx?EventId={{ctrl.eventId()}}" target="_self">Export</a>
+            </li>
         </ul>
     </div>
 </nav>
