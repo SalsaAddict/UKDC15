@@ -16,7 +16,7 @@
     <Artist Name="Fabian &amp; Nicolina" Workshops="3" />
     <Artist Name="Fadi K" Workshops="2" />
     <Artist Name="Farid Ferchach" Workshops="4" />
-    <Artist Name="Gabriel &amp; Rasaa" Workshops="2" />
+    <Artist Name="Gabriel &amp; Rasa" Workshops="2" />
     <Artist Name="Garry &amp; Giselle" Workshops="1" />
     <Artist Name="Gus &amp; Grace" Workshops="2" />
     <Artist Name="Ichtiandras &amp; Griušyte" Workshops="7" />
@@ -37,7 +37,7 @@
     <Artist Name="Misael" Workshops="2" />
     <Artist Name="Moe Flex" Workshops="4" />
     <Artist Name="Nadia Yammine" Workshops="2" />
-    <Artist Name="Nelson Campos" Workshops="3" />
+    <Artist Name="Nelson &amp; Jessica" Workshops="3" />
     <Artist Name="Neville Ashman" Workshops="1" />
     <Artist Name="Osbanis &amp; Aneta" Workshops="3" />
     <Artist Name="Patrick Mussendijk" Workshops="4" />
@@ -55,6 +55,7 @@
     <Artist Name="Simon &amp; Natalie" Workshops="3" />
     <Artist Name="Sol &amp; Laura" Workshops="2" />
     <Artist Name="Taina Kortelainen" Workshops="7" />
+    <Artist Name="To Costa" Workshops="2" />
     <Artist Name="Tony &amp; Sophie" Workshops="3" />
     <Artist Name="Uriel &amp; Vera" Workshops="4" />
     <Artist Name="YE Mambo" Workshops="4" />
@@ -204,7 +205,7 @@
       </Room>
       <Room Name="Lounge">
         <Slot Time="10:00">
-          <Workshop Artist="Nelson Campos" Title="Kizomba" Style="Kizomba &amp; Afro-Luso" />
+          <Workshop Artist="Nelson &amp; Jessica" Title="Kizomba" Style="Kizomba &amp; Afro-Luso" />
         </Slot>
         <Slot Time="11:00">
           <Workshop Artist="Joao &amp; Giedre" Title="Kizomba" Style="Kizomba &amp; Afro-Luso" />
@@ -216,7 +217,7 @@
           <Workshop Artist="David &amp; Adriana" Title="Kizomba" Style="Kizomba &amp; Afro-Luso" />
         </Slot>
         <Slot Time="15:30">
-          <Workshop Artist="Nelson Campos" Title="Semba" Style="Kizomba &amp; Afro-Luso" />
+          <Workshop Artist="Nelson &amp; Jessica" Title="Semba" Style="Kizomba &amp; Afro-Luso" />
         </Slot>
         <Slot Time="16:30">
           <Workshop Artist="Tony &amp; Sophie" Title="Kizomba" Style="Kizomba &amp; Afro-Luso" />
@@ -410,7 +411,7 @@
           <Workshop Artist="Tony &amp; Sophie" Title="Kizomba" Style="Kizomba &amp; Afro-Luso" />
         </Slot>
         <Slot Time="15:30">
-          <Workshop Artist="Nelson Campos" Title="Kizomba" Style="Kizomba &amp; Afro-Luso" />
+          <Workshop Artist="Nelson &amp; Jessica" Title="Kizomba" Style="Kizomba &amp; Afro-Luso" />
         </Slot>
         <Slot Time="16:30">
           <Workshop Artist="Christian Jean-Francois" Title="Semba de Roda" Style="Kizomba &amp; Afro-Luso" />

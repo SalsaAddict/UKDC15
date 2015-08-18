@@ -393,3 +393,22 @@ BEGIN
  RETURN @EventId
 END
 GO
+
+SELECT
+ ea.[Artist],
+	ea.[Workshops],
+	[Styles] = ISNULL(wn.[Styles], N'TBC')
+FROM [EventArtist] ea
+ OUTER APPLY (
+	  SELECT ws.[Style]
+			FROM [Workshop] ws
+			 LEFT JOIN [Style] s ON ws.[Style] = s.[Name]
+			WHERE ws.[EventId] = ea.[EventId]
+			 AND ws.[Artist] = ea.[Artist]
+			GROUP BY ws.[Style]
+			ORDER BY MIN(s.[Sort])
+			FOR XML PATH (N''), TYPE
+	 ) w ([Styles])
+	OUTER APPLY (SELECT REPLACE(REPLACE(REPLACE(REPLACE(CONVERT(NVARCHAR(max), w.[Styles]),
+	 N'</Style><Style>', N', '), N'<Style>', N''), N'</Style>', N''), N'&amp;', N'&')) wn ([Styles])
+WHERE ea.[EventId] = 1
