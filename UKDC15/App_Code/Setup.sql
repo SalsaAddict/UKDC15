@@ -2,6 +2,7 @@
 USE [MYDC]
 GO
 
+IF OBJECT_ID(N'apiWorkshopsImportFile', N'P') IS NOT NULL DROP PROCEDURE [apiWorkshopsImportFile]
 IF OBJECT_ID(N'apiWorkshopsImport', N'P') IS NOT NULL DROP PROCEDURE [apiWorkshopsImport]
 IF OBJECT_ID(N'apiWorkshopsExport', N'P') IS NOT NULL DROP PROCEDURE [apiWorkshopsExport]
 IF OBJECT_ID(N'apiTimetable', N'P') IS NOT NULL DROP PROCEDURE [apiTimetable]
@@ -44,13 +45,13 @@ VALUES
 	(N'Bachata', 180, 170, 255, 5),
 	(N'Kizomba & Afro-Luso', 255, 100, 100, 6),
 	(N'Lambazouk & Brazilian', 255, 150, 68, 7),
-	(N'Other', 187, 187, 187, 8),
-	(N'Closed', 255, 255, 255, 9),
-	(N'Lindy', 255, 174, 51, 10)
+	(N'Lindy', 255, 174, 51, 8),
+	(N'Other', 187, 187, 187, 9)
 GO
 
 CREATE TABLE [Level] (
   [Name] NVARCHAR(25) NOT NULL,
+		[Code] NVARCHAR(5) NOT NULL,
 		[Opacity] DECIMAL(3,2) NOT NULL CONSTRAINT [DF_Level_Opacity] DEFAULT (1),
 		[Sort] TINYINT NOT NULL,
 		CONSTRAINT [PK_Level] PRIMARY KEY NONCLUSTERED ([Name]),
@@ -58,14 +59,14 @@ CREATE TABLE [Level] (
  )
 GO
 
-INSERT INTO [Level] ([Name], [Opacity], [Sort])
+INSERT INTO [Level] ([Name], [Code], [Opacity], [Sort])
 VALUES
-	(N'All Levels', 1.00, 1),
-	(N'Beginner', 1.00, 2),
-	(N'Improver', 0.60, 3),
-	(N'Intermediate', 0.70, 4),
-	(N'Int/Adv', 0.80, 5),
-	(N'Advanced', 0.90, 6)
+	(N'All Levels', N'ALL', 1.00, 1),
+	(N'Beginner', N'BEG', 1.00, 2),
+	(N'Improver', N'IMP', 0.60, 3),
+	(N'Intermediate', N'INT', 0.70, 4),
+	(N'Int/Adv', N'I/A', 0.80, 5),
+	(N'Advanced', N'ADV', 0.90, 6)
 GO
 
 CREATE TABLE [Event] (
@@ -388,10 +389,89 @@ BEGIN
 	 [Level] = n.value(N'@Level', N'NVARCHAR(50)')
  FROM @Import.nodes(N'/Event[1]/Workshops[1]/Day/Room/Slot/Workshop') x (n)
 
- EXEC [apiWorkshopsExport] @EventId
-
  RETURN @EventId
 END
+GO
+
+CREATE PROCEDURE [apiWorkshopsImportFile](@Filename NVARCHAR(max))
+AS
+BEGIN
+ SET NOCOUNT ON
+	DECLARE @SQL NVARCHAR(max), @XML XML
+	SET @SQL = N'SELECT @XML = CONVERT(XML, [BulkColumn]) FROM OPENROWSET(BULK ' + QUOTENAME(@Filename, N'''') + N', SINGLE_BLOB) AS [xml]'
+	EXEC sp_executesql @SQL, N'@XML XML OUTPUT', @XML OUT
+	EXEC [apiWorkshopsImport] @XML
+	RETURN
+END
+GO
+
+EXEC [apiWorkshopsImportFile] N'C:\Users\pierre.WHITESPACE\Documents\UKDC15\UKDC15\xml\timetable1.xml'
+GO
+
+DECLARE @EventId INT; SET @EventId = 1
+
+-- Workshop count mismatch
+SELECT
+ [Artist] = ea.[Artist],
+	[Agreed] = ea.[Workshops],
+	[Scheduled] = COUNT(ws.[Id])
+FROM [EventArtist] ea
+ LEFT JOIN [Workshop] ws ON ea.[EventId] = ws.[EventId] AND ea.[Artist] = ws.[Artist]
+WHERE ea.[EventId] = @EventId
+GROUP BY ea.[Artist], ea.[Workshops]
+HAVING COUNT(ws.[Id]) <> ea.[Workshops]
+ORDER BY ea.[Artist]
+
+-- Incomplete workshop info
+SELECT *
+FROM [Workshop]
+WHERE [EventId] = @EventId
+ AND ([Artist] IS NULL OR [Title] IS NULL OR [Style] IS NULL OR [Level] IS NULL)
+ORDER BY [Date], [Room], [Time]
+
+-- Artist schedule conflicts
+SELECT ws.*
+FROM (
+			SELECT [Date], [Time], [Artist]
+			FROM [Workshop]
+			GROUP BY [Date], [Time], [Artist]
+			HAVING COUNT(*) > 1
+		) c
+	JOIN [Workshop] ws ON c.[Date] = ws.[Date] AND c.[Time] = ws.[Time] AND c.[Artist] = ws.[Artist]
+ORDER BY c.[Date], c.[Time], c.[Artist]
+
+-- Subsequent workshops in different rooms
+;WITH [Data] AS (
+		SELECT
+			[Artist] = ws.[Artist],
+			[Date] = ws.[Date],
+			[Time] = ws.[Time],
+			[Room] = ws.[Room],
+			[Index] = edt.[Index]
+		FROM [Workshop] ws
+			JOIN (
+					SELECT
+						[EventId],
+						[Date],
+						[Time],
+						[Index] = ROW_NUMBER() OVER (PARTITION BY [Date] ORDER BY [Time])
+					FROM [EventDateTime]
+				) edt ON ws.[EventId] = edt.[EventId] AND ws.[Date] = edt.[Date] AND ws.[Time] = edt.[Time]
+		WHERE ws.[EventId] = @EventId
+			AND ws.[Artist] IS NOT NULL
+ )
+SELECT
+ [Artist] = d1.[Artist],
+	[Date] = d1.[Date],
+	[Time1] = d1.[Time],
+	[Room1] = d1.[Room],
+	[Time2] = d2.[Time],
+	[Room2] = d2.[Room]
+FROM [Data] d1
+ JOIN [Data] d2 ON d1.[Artist] = d2.[Artist] AND d1.[Date] = d2.[Date]
+WHERE d1.[Index] + 1 = d2.[Index]
+ AND d1.[Room] <> d2.[Room]
+ORDER BY d1.[Artist], d1.[Date], d1.[Index]
 GO
 
 SELECT
@@ -412,3 +492,111 @@ FROM [EventArtist] ea
 	OUTER APPLY (SELECT REPLACE(REPLACE(REPLACE(REPLACE(CONVERT(NVARCHAR(max), w.[Styles]),
 	 N'</Style><Style>', N', '), N'<Style>', N''), N'</Style>', N''), N'&amp;', N'&')) wn ([Styles])
 WHERE ea.[EventId] = 1
+
+DECLARE @EventId INT; SET @EventId = 1
+
+SELECT
+ ( -- Config
+	  SELECT
+			 ( -- Times
+				  SELECT DISTINCT
+						 [@id] = DENSE_RANK() OVER (ORDER BY edt.[Time]),
+						 CONVERT(NVARCHAR(8), edt.[Time], 114)
+						FROM [EventDateTime] edt
+						ORDER BY 1
+						FOR XML PATH (N'Time'), ROOT (N'Times'), TYPE
+				 ),
+				( -- Days
+						SELECT
+							[@id] = ROW_NUMBER() OVER (ORDER BY dte.[Date]),
+							[@First] = MIN(edt.[Time]),
+							[@Last] = MAX(edt.[Time]),
+							DATENAME(weekday, dte.[Date])
+						FROM [EventDate] dte
+							JOIN [EventDateTime] edt ON dte.[EventId] = edt.[EventId] AND dte.[Date] = edt.[Date]
+						WHERE dte.[EventId] = e.[Id]
+						GROUP BY dte.[Date]
+					 ORDER BY dte.[Date]
+						FOR XML PATH (N'Day'), ROOT (N'Days'), TYPE
+					),
+				( -- Rooms
+				  SELECT
+						 [@id] = DENSE_RANK() OVER (ORDER BY MAX(edr.[Sort])),
+							[@Description] = edr.[Room],
+						 LTRIM(RTRIM(edr.[Room]))
+						FROM [EventDateRoom] edr
+						WHERE edr.[EventId] = e.[Id]
+						GROUP BY edr.[Room]
+						FOR XML PATH (N'Room'), ROOT (N'Rooms'), TYPE
+				 ),
+				( -- Styles
+				  SELECT
+						 [@id] = ROW_NUMBER() OVER (ORDER BY s.[Sort]) - 1,
+							[@RGB] = CONVERT(NVARCHAR(3), s.[R]) + N',' + CONVERT(NVARCHAR(3), s.[G]) + N',' + CONVERT(NVARCHAR(3), s.[B]),
+							LTRIM(RTRIM(s.[Name]))
+						FROM [Style] s
+						ORDER BY s.[Sort]
+						FOR XML PATH (N'Style'), ROOT (N'Styles'), TYPE
+				 ),
+				( -- Levels
+				  SELECT
+						 [@id] = ROW_NUMBER() OVER (ORDER BY l.[Sort]) - 1,
+							[@Code] = l.[Code],
+							[@Opacity] = CONVERT(NVARCHAR(5), l.[Opacity]),
+							LTRIM(RTRIM(l.[Name]))
+						FROM [Level] l
+						ORDER BY l.[Sort]
+						FOR XML PATH (N'Level'), ROOT (N'Levels'), TYPE
+				 ),
+				( -- Artists
+						SELECT
+							[Name] = ea.[Artist]
+						FROM [EventArtist] ea
+						WHERE ea.[EventId] = e.[Id]
+						ORDER BY ea.[Artist]
+						FOR XML PATH (N'Artist'), ROOT (N'Artists'), TYPE
+					)
+			FOR XML PATH (N'Config'), TYPE
+  ),
+	( -- Workshops
+	  SELECT
+			 [@Name] = DATENAME(weekday, dte.[Date]),
+				( -- Room
+				  SELECT
+						 [@Name] = edr.[Room],
+							( -- Slot
+							  SELECT
+									 [@Time] = CONVERT(NVARCHAR(8), edt.[Time], 114),
+										( -- Workshop
+										  SELECT
+												 [Style] = ws.[Style],
+													[Title] = ws.[Title],
+													[Artist] = ws.[Artist],
+													[Level] = ws.[Level]
+												FROM [Workshop] ws
+												WHERE ws.[EventId] = dte.[EventId]
+												 AND ws.[Date] = dte.[Date]
+													AND ws.[Time] = edt.[Time]
+													AND ws.[Room] = edr.[Room]
+												FOR XML PATH (N'Workshop'), TYPE
+										 )
+									FROM [EventDateTime] edt
+									WHERE edt.[EventId] = dte.[EventId]
+									 AND edt.[Date] = dte.[Date]
+									ORDER BY edt.[Time]
+									FOR XML PATH (N'Slot'), TYPE
+							 )
+						FROM [EventDateRoom] edr
+						WHERE edr.[EventId] = dte.[EventId]
+						 AND edr.[Date] = dte.[Date]
+						ORDER BY edr.[Sort]
+						FOR XML PATH (N'Room'), TYPE
+				 )
+			FROM [EventDate] dte
+			WHERE dte.[EventId] = e.[Id]
+			ORDER BY dte.[Date]
+			FOR XML PATH (N'Day'), ROOT (N'Workshops'), TYPE
+	 )
+FROM [Event] e
+WHERE e.[Id] = @EventId
+FOR XML PATH (N'UKDC')

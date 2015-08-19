@@ -19,16 +19,16 @@ namespace UKDC15
             using (SqlConnection Connection = new SqlConnection(WebConfigurationManager.ConnectionStrings["MYDC"].ConnectionString))
             {
                 Connection.Open();
-                using (SqlCommand Command = new SqlCommand())
-                {
-                    Command.Connection = Connection;
-                    Command.CommandType = CommandType.StoredProcedure;
-                    Command.CommandText = "apiWorkshopsImport";
-                    XmlDocument Document = new XmlDocument();
-                    Document.Load(Context.Server.MapPath(string.Format("/xml/timetable{0}.xml", Context.Request.QueryString["EventId"])));
-                    Command.Parameters.AddWithValue("Import", Document.InnerXml);
-                    Command.ExecuteNonQuery();
-                }
+                //using (SqlCommand Command = new SqlCommand())
+                //{
+                //    Command.Connection = Connection;
+                //    Command.CommandType = CommandType.StoredProcedure;
+                //    Command.CommandText = "apiWorkshopsImport";
+                //    XmlDocument Document = new XmlDocument();
+                //    Document.Load(Context.Server.MapPath(string.Format("/xml/timetable{0}.xml", Context.Request.QueryString["EventId"])));
+                //    Command.Parameters.AddWithValue("Import", Document.InnerXml);
+                //    Command.ExecuteNonQuery();
+                //}
                 using (SqlCommand Command = new SqlCommand())
                 {
                     Command.Connection = Connection;
