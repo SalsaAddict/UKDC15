@@ -9,8 +9,32 @@
             <li ng-repeat="Date in Timetable.Dates | orderBy: 'Date'" ng-class="{active: ctrl.isCurrentDate(Date)}">
                 <a href="" ng-click="ctrl.setCurrentDate(Date)">{{Date.Date | date: "EEEE"}}</a>
             </li>
-            <li>
+            <!--<li>
                 <a ng-href="/wsexport.ashx?EventId={{ctrl.eventId()}}" target="_self">Export</a>
+            </li>-->
+            <li class="dropdown" dropdown is-open="StylesFilter.IsOpen">
+                <a href="" class="dropdown-toggle" dropdown-toggle>Styles</a>
+                <ul class="dropdown-menu">
+                    <li ng-repeat="Style in Timetable.Styles">
+                        <a href="" ng-click="ctrl.toggleStyle(Style)">
+                            <i class="fa fa-lg fa-check-circle" ng-if="Style.Enabled === '1'" style="color: rgb({{Style.RGB}})"></i>
+                            <i class="fa fa-lg fa-times text-danger" ng-if="Style.Enabled === '0'"></i>
+                            {{Style.Name}}
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li class="dropdown" dropdown is-open="LevelsFilter.IsOpen">
+                <a href class="dropdown-toggle" dropdown-toggle>Levels</a>
+                <ul class="dropdown-menu">
+                    <li ng-repeat="Level in Timetable.Levels">
+                        <a href ng-click="ctrl.toggleStyle(Style)">
+                            <i class="fa fa-lg fa-check-circle text-success" ng-if="Style.Enabled === '1'"></i>
+                            <i class="fa fa-lg fa-times-circle text-danger" ng-if="Style.Enabled === '0'"></i>
+                            {{Level.Name}}
+                        </a>
+                    </li>
+                </ul>
             </li>
         </ul>
     </div>
@@ -37,9 +61,9 @@
                     <td ng-repeat="Slot in Time.Slots" style="{{(Slot.Workshops.length === 1) ? ctrl.workshopCssStyle(Slot.Workshops[0]) : undefined}}">
                         <ng-switch on="Slot.Workshops.length > 0">
                             <div ng-switch-when="true" ng-repeat="Workshop in Slot.Workshops | limitTo: 2" style="{{(Slot.Workshops.length > 1) ? ctrl.workshopCssStyle(Workshop) : undefined}}">
-                                <b>{{Workshop.Artist || "TBC"}}</b><br />
-                                {{Workshop.Title || "TBC"}}<br />
-                                {{Workshop.Level || "TBC"}}
+                                <b>{{Workshop.Title || "TBC"}}</b><br />
+                                {{Workshop.Artist || "TBC"}}<br />
+                                <i>{{Workshop.Level || "TBC"}}</i>
                             </div>
                             <div ng-switch-default><h4>Closed</h4></div>
                         </ng-switch>
@@ -49,3 +73,4 @@
         </table>
     </div>
 </div>
+{{Timetable.Styles}}

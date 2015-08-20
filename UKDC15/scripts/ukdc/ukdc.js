@@ -193,6 +193,9 @@ var UKDC;
                 this.$currentDate = undefined;
                 this.isCurrentDate = function (date) { return _this.$currentDate === date; };
                 this.setCurrentDate = function (date) { _this.$currentDate = date; };
+                this.toggleStyle = function (style) {
+                    style.Enabled = (style.Enabled === "1") ? "0" : "1";
+                };
                 this.workshopCssStyle = function (workshop) {
                     if (!workshop) {
                         return;
@@ -203,10 +206,15 @@ var UKDC;
                     var style = _this.$filter("filter")(_this.$scope.Timetable.Styles, function (actual) {
                         return actual.Name === workshop.Style;
                     })[0];
-                    var level = (workshop.Level) ? _this.$filter("filter")(_this.$scope.Timetable.Levels, function (actual) {
-                        return actual.Name === workshop.Level;
-                    })[0] : { Opacity: 1 };
-                    return "background-color: rgba(" + style.RGB + "," + level.Opacity + ")";
+                    if (style.Enabled === "1") {
+                        var level = (workshop.Level) ? _this.$filter("filter")(_this.$scope.Timetable.Levels, function (actual) {
+                            return actual.Name === workshop.Level;
+                        })[0] : { Opacity: 1 };
+                        return "background-color: rgba(" + style.RGB + "," + level.Opacity + ")";
+                    }
+                    else {
+                        return "background-color: rgba(" + style.RGB + ",0.1); color: #AAA;";
+                    }
                 };
                 this.eventId = function () { return _this.$routeParams["EventId"]; };
                 this.$scope.Timetable = {};

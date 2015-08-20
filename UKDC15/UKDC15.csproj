@@ -66,44 +66,21 @@
     <Content Include="App_Code\Import.sql" />
     <Content Include="App_Code\Setup.sql" />
     <Content Include="App_Code\temp.sql" />
+    <Content Include="content\bootstrap-theme.css" />
+    <Content Include="content\bootstrap-theme.min.css" />
+    <Content Include="content\bootstrap.css" />
     <Content Include="content\bootstrap.darkly.css" />
     <Content Include="content\bootstrap.darkly.min.css" />
+    <Content Include="content\bootstrap.min.css" />
     <Content Include="content\bootstrap.slate.css" />
     <Content Include="content\bootstrap.slate.min.css" />
+    <Content Include="content\ui-bootstrap-csp.css" />
     <Content Include="content\ukdc.css" />
     <Content Include="content\ukdc.min.css">
       <DependentUpon>ukdc.css</DependentUpon>
     </Content>
-    <Content Include="scripts\angular.min.js.map" />
-    <Content Include="packages.config" />
-    <Content Include="scripts\angular-route.min.js.map" />
-    <Content Include="timetable.ashx" />
-    <Content Include="xml\ukdc15.xml" />
-    <Content Include="xml\timetable1.xml" />
-    <None Include="Web.Debug.config">
-      <DependentUpon>Web.config</DependentUpon>
-    </None>
-    <None Include="Web.Release.config">
-      <DependentUpon>Web.config</DependentUpon>
-    </None>
-    <Content Include="wsexport.ashx" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="content\bootstrap-theme.css" />
-    <Content Include="content\bootstrap-theme.min.css" />
-    <Content Include="content\bootstrap.css" />
-    <Content Include="content\bootstrap.min.css" />
-    <Content Include="content\bootstrap.paper.css" />
-    <Content Include="content\bootstrap.paper.min.css" />
-    <Content Include="content\bootstrap.yeti.css" />
-    <Content Include="content\bootstrap.yeti.min.css" />
-    <Content Include="content\font-awesome.css" />
-    <Content Include="content\font-awesome.min.css" />
-    <Content Include="content\ui-bootstrap-csp.css" />
-    <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
-    <Content Include="Icon.png" />
-    <Content Include="main.html" />
+    <Content Include="packages.config" />
     <Content Include="scripts\angular-mocks.js" />
     <Content Include="scripts\angular-route.js" />
     <Content Include="scripts\angular-route.min.js" />
@@ -113,26 +90,47 @@
     <Content Include="scripts\angular-ui\ui-bootstrap.min.js" />
     <Content Include="scripts\angular.js" />
     <Content Include="scripts\angular.min.js" />
+    <Content Include="scripts\bootstrap.js" />
+    <Content Include="scripts\bootstrap.min.js" />
+    <Content Include="scripts\moment-with-locales.js" />
+    <Content Include="scripts\moment-with-locales.min.js" />
+    <Content Include="scripts\moment.js" />
+    <Content Include="scripts\moment.min.js" />
+    <Content Include="timetable.ashx" />
+    <Content Include="xml\ukdc15.xml" />
+    <Content Include="xml\timetable1.xml" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="content\bootstrap-theme.css.map" />
     <Content Include="content\bootstrap.css.map" />
+    <Content Include="scripts\angular.min.js.map" />
+    <Content Include="scripts\angular-route.min.js.map" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <Content Include="wsexport.ashx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="content\bootstrap.paper.css" />
+    <Content Include="content\bootstrap.paper.min.css" />
+    <Content Include="content\bootstrap.yeti.css" />
+    <Content Include="content\bootstrap.yeti.min.css" />
+    <Content Include="content\font-awesome.css" />
+    <Content Include="content\font-awesome.min.css" />
+    <Content Include="fonts\fontawesome-webfont.svg" />
+    <Content Include="main.html" />
     <Content Include="fonts\fontawesome-webfont.woff" />
     <Content Include="fonts\fontawesome-webfont.ttf" />
     <Content Include="fonts\fontawesome-webfont.eot" />
     <Content Include="fonts\FontAwesome.otf" />
-    <Content Include="scripts\bootstrap.js" />
-    <Content Include="scripts\bootstrap.min.js" />
     <None Include="scripts\jquery-2.1.4.intellisense.js" />
     <Content Include="scripts\jquery-2.1.4.js" />
     <Content Include="scripts\jquery-2.1.4.min.js" />
-    <Content Include="scripts\moment-with-locales.js" />
-    <Content Include="scripts\moment-with-locales.min.js" />
-    <Content Include="scripts\moment.js" />
-    <Content Include="scripts\moment.min.js" />
-    <Content Include="scripts\npm.js" />
     <Content Include="scripts\ukdc\ukdc.js" />
     <Content Include="scripts\ukdc\ukdc.min.js">
       <DependentUpon>ukdc.js</DependentUpon>

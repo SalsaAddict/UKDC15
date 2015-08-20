@@ -192,16 +192,23 @@ module UKDC {
                     }
                 });
             }
+            public toggleStyle = (style: any) => {
+                style.Enabled = (style.Enabled === "1") ? "0" : "1";
+            }
             public workshopCssStyle = (workshop: any) => {
                 if (!workshop) { return; }
                 if (!workshop.Style) { return; }
                 var style: any = this.$filter("filter")(this.$scope.Timetable.Styles, (actual: any) => {
                     return actual.Name === workshop.Style;
                 })[0];
-                var level: any = (workshop.Level) ? this.$filter("filter")(this.$scope.Timetable.Levels, (actual: any) => {
-                    return actual.Name === workshop.Level;
-                })[0] : { Opacity: 1 };
-                return "background-color: rgba(" + style.RGB + "," + level.Opacity + ")";
+                if (style.Enabled === "1") {
+                    var level: any = (workshop.Level) ? this.$filter("filter")(this.$scope.Timetable.Levels, (actual: any) => {
+                        return actual.Name === workshop.Level;
+                    })[0] : { Opacity: 1 };
+                    return "background-color: rgba(" + style.RGB + "," + level.Opacity + ")";
+                } else {
+                    return "background-color: rgba(" + style.RGB + ",0.1); color: #AAA;";
+                }
             }
             public eventId = () => { return this.$routeParams["EventId"]; }
         }

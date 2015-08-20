@@ -37,16 +37,14 @@ GO
 
 INSERT INTO [Style] ([Name], [R], [G], [B], [Sort])
 VALUES
-	(N'Beginner Stream', 170, 238, 255, 0),
 	(N'Salsa On1', 170, 255, 170, 1),
 	(N'Salsa On2', 68, 170, 255, 2),
 	(N'Cuban Salsa', 255, 255, 128, 3),
 	(N'Colombian Salsa', 255, 102, 150, 4),
 	(N'Bachata', 180, 170, 255, 5),
 	(N'Kizomba & Afro-Luso', 255, 100, 100, 6),
-	(N'Lambazouk & Brazilian', 255, 150, 68, 7),
-	(N'Lindy', 255, 174, 51, 8),
-	(N'Other', 187, 187, 187, 9)
+	(N'Lindy', 255, 174, 51, 7),
+	(N'Other', 187, 187, 187, 8)
 GO
 
 CREATE TABLE [Level] (
@@ -166,7 +164,8 @@ BEGIN
 				 [@json:Array] = N'true',
 				 [Name],
 					[RGB],
-					[Sort]
+					[Sort],
+					[Enabled] = CONVERT(BIT, 1)
 				FROM [Style]
 				ORDER BY [Sort]
 				FOR XML PATH (N'Styles'), TYPE
@@ -572,7 +571,7 @@ SELECT
 												 [Style] = ws.[Style],
 													[Title] = ws.[Title],
 													[Artist] = ws.[Artist],
-													[Level] = ws.[Level]
+													[Level] = ISNULL(ws.[Level], NULL)
 												FROM [Workshop] ws
 												WHERE ws.[EventId] = dte.[EventId]
 												 AND ws.[Date] = dte.[Date]
