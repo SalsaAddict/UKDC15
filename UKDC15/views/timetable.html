@@ -60,12 +60,18 @@
                     <th>{{Time.Time}}</th>
                     <td ng-repeat="Slot in Time.Slots" style="{{(Slot.Workshops.length === 1) ? ctrl.workshopCssStyle(Slot.Workshops[0]) : undefined}}">
                         <ng-switch on="Slot.Workshops.length > 0">
-                            <div ng-switch-when="true" ng-repeat="Workshop in Slot.Workshops | limitTo: 2" style="{{(Slot.Workshops.length > 1) ? ctrl.workshopCssStyle(Workshop) : undefined}}">
+                            <div ng-switch-when="true" ng-repeat="Workshop in Slot.Workshops | limitTo: 2" class="workshop"
+                                 style="{{(Slot.Workshops.length > 1) ? ctrl.workshopCssStyle(Workshop) : undefined}}">
                                 <b>{{Workshop.Title || "TBC"}}</b><br />
                                 {{Workshop.Artist || "TBC"}}<br />
                                 <i>{{Workshop.Level || "TBC"}}</i>
                             </div>
-                            <div ng-switch-default><h4>Closed</h4></div>
+                            <div ng-switch-default>
+                                <h4>
+                                    <b ng-if="Slot.Description">{{Slot.Description}}</b>
+                                    <span ng-if="!Slot.Description">Closed</span>
+                                </h4>
+                            </div>
                         </ng-switch>
                     </td>
                 </tr>

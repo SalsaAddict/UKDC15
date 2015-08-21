@@ -7,6 +7,7 @@ IF OBJECT_ID(N'apiWorkshopsImport', N'P') IS NOT NULL DROP PROCEDURE [apiWorksho
 IF OBJECT_ID(N'apiWorkshopsExport', N'P') IS NOT NULL DROP PROCEDURE [apiWorkshopsExport]
 IF OBJECT_ID(N'apiTimetable', N'P') IS NOT NULL DROP PROCEDURE [apiTimetable]
 IF OBJECT_ID(N'Workshop', N'U') IS NOT NULL DROP TABLE [Workshop]
+IF OBJECT_ID(N'Activity', N'U') IS NOT NULL DROP TABLE [Activity]
 IF OBJECT_ID(N'EventDateTime', N'U') IS NOT NULL DROP TABLE [EventDateTime]
 IF OBJECT_ID(N'EventDateRoom', N'U') IS NOT NULL DROP TABLE [EventDateRoom]
 IF OBJECT_ID(N'EventDate', N'U') IS NOT NULL DROP TABLE [EventDate]
@@ -123,6 +124,20 @@ CREATE TABLE [EventDateTime] (
  )
 GO
 
+CREATE TABLE [Activity] (
+  [EventId] INT NOT NULL,
+		[Date] DATE NOT NULL,
+		[Time] TIME NOT NULL,
+		[Room] NVARCHAR(25) NOT NULL,
+		[Description] NVARCHAR(255) NOT NULL,
+		CONSTRAINT [PK_Activity] PRIMARY KEY CLUSTERED ([EventId], [Date], [Time]),
+		CONSTRAINT [FK_Activity_EventDateRoom] FOREIGN KEY ([EventId], [Date], [Room])
+		 REFERENCES [EventDateRoom] ([EventId], [Date], [Room]),
+		CONSTRAINT [FK_Activity_EventDateTime] FOREIGN KEY ([EventId], [Date], [Time])
+		 REFERENCES [EventDateTime] ([EventId], [Date], [Time])
+	)
+GO
+
 CREATE TABLE [Workshop] (
   [Id] INT NOT NULL IDENTITY (1, 1),
   [EventId] INT NOT NULL,
@@ -201,6 +216,7 @@ BEGIN
 								(
 										SELECT
 											[@json:Array] = N'true',
+											[Description] = a.[Description],
 											(
 													SELECT
 														[@json:Array] = N'true',
@@ -210,14 +226,19 @@ BEGIN
 														[Level] = ws.[Level]
 													FROM [Workshop] ws
 														LEFT JOIN [Level] lev ON ws.[Level] = lev.[Name]
-													WHERE ws.[EventId] = edt.[EventId]
+													WHERE a.[Description] IS NULL 
+													 AND ws.[EventId] = edt.[EventId]
 														AND ws.[Date] = edt.[Date]
 														AND ws.[Time] = edt.[Time]
 														AND ws.[Room] = s.[Room]
-													ORDER BY ws.[Level]
+													ORDER BY lev.[Sort] DESC
 													FOR XML PATH (N'Workshops'), TYPE
 												)
 										FROM [EventDateRoom] s
+										 LEFT JOIN [Activity] a ON edt.[EventId] = a.[EventId]
+											 AND edt.[Date] = a.[Date]
+												AND edt.[Time] = a.[Time]
+												AND s.[Room] = a.[Room]
 										WHERE s.[EventId] = ed.[EventId]
 											AND s.[Date] = ed.[Date]
 										ORDER BY s.[Sort]
@@ -326,6 +347,7 @@ BEGIN
 	 SET @EventId = SCOPE_IDENTITY()
  END ELSE BEGIN
 	 DELETE [Workshop] WHERE [EventId] = @EventId
+		DELETE [Activity] WHERE [EventId] = @EventId
 	 DELETE [EventDate] WHERE [EventId] = @EventId
 	 DELETE [EventArtist] WHERE [EventId] = @EventId
  END
@@ -376,6 +398,16 @@ BEGIN
 	 [Time] = n.value(N'@Time', N'TIME')
  FROM @Import.nodes(N'/Event[1]/Workshops[1]/Day/Room/Slot') x (n)
 
+ INSERT INTO [Activity] ([EventId], [Date], [Time], [Room], [Description])
+	SELECT
+  [EventId] = @EventId,
+	 [Date] = n.value(N'../../@Date', N'DATE'),
+	 [Time] = n.value(N'@Time', N'TIME'),
+		[Room] = n.value(N'../@Name', N'NVARCHAR(50)'),
+		[Description] = n.value(N'@Description', N'NVARCHAR(255)')
+ FROM @Import.nodes(N'/Event[1]/Workshops[1]/Day/Room/Slot') x (n)
+	WHERE n.value(N'@Description', N'NVARCHAR(255)') IS NOT NULL
+
  INSERT INTO [Workshop] ([EventId], [Date], [Time], [Room], [Artist], [Title], [Style], [Level])
  SELECT
   [EventId] = @EventId,
@@ -408,6 +440,15 @@ EXEC [apiWorkshopsImportFile] N'C:\Users\pierre.WHITESPACE\Documents\UKDC15\UKDC
 GO
 
 DECLARE @EventId INT; SET @EventId = 1
+
+-- Activity/workshop clash
+SELECT a.*, ws.[Artist], ws.[Title], ws.[Style], ws.[Level]
+FROM [Activity] a
+ JOIN [Workshop] ws ON a.[EventId] = ws.[EventId]
+	 AND a.[Date] = ws.[Date]
+		AND a.[Time] = ws.[Time]
+		AND a.[Room] = ws.[Room]
+WHERE a.[EventId] = @EventId
 
 -- Workshop count mismatch
 SELECT
