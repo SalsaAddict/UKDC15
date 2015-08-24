@@ -4,6 +4,7 @@
     <Artist Name="Amanda Hawley" Workshops="2" />
     <Artist Name="Andreas &amp; Julia" Workshops="2" />
     <Artist Name="Angus &amp; Ovgu" Workshops="2" />
+    <Artist Name="Anthony Gatfield" Workshops="0" />
     <Artist Name="Island Touch" Workshops="3" />
     <Artist Name="Carl &amp; Alex" Workshops="2" />
     <Artist Name="Christian Jean-Francois" Workshops="2" />
@@ -11,6 +12,7 @@
     <Artist Name="Daniel &amp; Pebbles" Workshops="2" />
     <Artist Name="David &amp; Adriana" Workshops="3" />
     <Artist Name="David &amp; Suzanne" Workshops="1" />
+    <Artist Name="Eddie &amp; Kat" Workshops="1" />
     <Artist Name="Fabhiola &amp; Perry" Workshops="1" />
     <Artist Name="Fabian &amp; Esther" Workshops="4" />
     <Artist Name="Fabian &amp; Nicolina" Workshops="3" />
@@ -20,11 +22,14 @@
     <Artist Name="Garry &amp; Giselle" Workshops="1" />
     <Artist Name="Gus &amp; Grace" Workshops="2" />
     <Artist Name="Ichtiandras &amp; Griušyte" Workshops="7" />
+    <Artist Name="Jessica Melaza" Workshops="1" />
     <Artist Name="Joana &amp; Samet" Workshops="1" />
     <Artist Name="Joana Carvalho" Workshops="2" />
     <Artist Name="Joao &amp; Giedre" Workshops="4" />
+    <Artist Name="Jon Denning" Workshops="0" />
     <Artist Name="Joseph Davids" Workshops="2" />
     <Artist Name="Juan Soto" Workshops="2" />
+    <Artist Name="Julian the Duke" Workshops="0" />
     <Artist Name="Laura &amp; Laura" Workshops="2" />
     <Artist Name="Leo Henriquez" Workshops="3" />
     <Artist Name="Lisa &amp; Mark" Workshops="1" />
@@ -39,7 +44,7 @@
     <Artist Name="Nadia Yammine" Workshops="2" />
     <Artist Name="Nelson &amp; Jessica" Workshops="3" />
     <Artist Name="Neville Ashman" Workshops="1" />
-    <Artist Name="Osbanis &amp; Aneta" Workshops="3" />
+    <Artist Name="Osbanis &amp; Anneta" Workshops="3" />
     <Artist Name="Patrick Mussendijk" Workshops="4" />
     <Artist Name="Phil Kaila" Workshops="2" />
     <Artist Name="Pierre &amp; Zoe" Workshops="1" />
@@ -47,7 +52,7 @@
     <Artist Name="Richard &amp; Dani-Leigh" Workshops="3" />
     <Artist Name="Riquita Alta" Workshops="3" />
     <Artist Name="Rudy B" Workshops="1" />
-    <Artist Name="Sabine &amp; Saulo" Workshops="2" />
+    <Artist Name="Saulo &amp; Sabine" Workshops="2" />
     <Artist Name="Sam &amp; Katie" Workshops="2" />
     <Artist Name="Sam Sleek" Workshops="2" />
     <Artist Name="Sami &amp; Roxy" Workshops="2" />
@@ -174,7 +179,7 @@
           <Workshop Artist="Fadi K" Title="La Rueda" Style="Cuban Salsa" Level="All Levels" />
         </Slot>
         <Slot Time="15:30">
-          <Workshop Artist="Osbanis &amp; Aneta" Title="Afro-Cuban" Style="Cuban Salsa" Level="Intermediate" />
+          <Workshop Artist="Osbanis &amp; Anneta" Title="Afro-Cuban" Style="Cuban Salsa" Level="Intermediate" />
         </Slot>
         <Slot Time="16:30">
           <Workshop Artist="Leo Henriquez" Title="Cuban Partnerwork" Style="Cuban Salsa" Level="Int/Adv" />
@@ -238,7 +243,7 @@
           <Workshop Artist="Misael" Title="Cuban Partnerwork" Style="Cuban Salsa" Level="Intermediate" />
         </Slot>
         <Slot Time="12:00">
-          <Workshop Artist="Osbanis &amp; Aneta" Title="Cuban Partnerwork" Style="Cuban Salsa" Level="Advanced" />
+          <Workshop Artist="Osbanis &amp; Anneta" Title="Cuban Partnerwork" Style="Cuban Salsa" Level="Advanced" />
         </Slot>
         <Slot Time="14:30">
           <Workshop Artist="Sam Sleek" Title="Cha Cha" Style="Salsa On2" Level="All Levels" />
@@ -273,7 +278,7 @@
           <Workshop Artist="Luz Fernandez" Title="Cali Partnerwork" Style="Colombian Salsa" Level="Intermediate" />
         </Slot>
         <Slot Time="17:30">
-          <Workshop Artist="Sabine &amp; Saulo" Title="Cali Show" Style="Colombian Salsa" Level="Int/Adv" />
+          <Workshop Artist="Saulo &amp; Sabine" Title="Cali Show" Style="Colombian Salsa" Level="Int/Adv" />
         </Slot>
       </Room>
       <Room Name="Regency">
@@ -440,7 +445,7 @@
           <Workshop Artist="Neville Ashman" Title="La Rueda" Style="Cuban Salsa" Level="All Levels" />
         </Slot>
         <Slot Time="12:00">
-          <Workshop Artist="Osbanis &amp; Aneta" Title="Rumba" Style="Cuban Salsa" Level="Intermediate" />
+          <Workshop Artist="Osbanis &amp; Anneta" Title="Rumba" Style="Cuban Salsa" Level="Intermediate" />
         </Slot>
         <Slot Time="14:30">
           <Workshop Artist="Dani K" Title="Merengue" Style="Other" Level="All Levels" />
@@ -466,7 +471,7 @@
           <Workshop Artist="Riquita Alta" Title="Kizomba" Style="Kizomba &amp; Afro-Luso" Level="Improver" />
         </Slot>
         <Slot Time="14:30">
-          <Workshop Artist="Sabine &amp; Saulo" Title="Cali Partnerwork" Style="Colombian Salsa" Level="Improver" />
+          <Workshop Artist="Saulo &amp; Sabine" Title="Cali Partnerwork" Style="Colombian Salsa" Level="Improver" />
         </Slot>
         <Slot Time="15:30">
           <Workshop Artist="Nadia Yammine" Title="Kizomba (Part I)" Style="Kizomba &amp; Afro-Luso" Level="Beginner" />

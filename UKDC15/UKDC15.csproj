@@ -63,6 +63,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Code\Accommodation.sql" />
     <Content Include="App_Code\Import.sql" />
     <Content Include="App_Code\Setup.sql" />
     <Content Include="App_Code\temp.sql" />
@@ -98,6 +99,7 @@
     <Content Include="scripts\moment.min.js" />
     <Content Include="standalone.html" />
     <Content Include="timetable.ashx" />
+    <Content Include="xml\accommodation.xml" />
     <Content Include="xml\ukdc15.xml" />
     <Content Include="xml\timetable1.xml" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
