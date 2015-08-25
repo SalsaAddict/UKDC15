@@ -37,6 +37,75 @@
       <Room>Twin</Room>
     </Rooms>
     <Unit>
+      <Room Type="Twin">
+        <Guest Name="Vera Rowe" Gender="F" Artist="Uriel &amp; Vera" />
+      </Room>
+      <Room Type="Twin">
+        <Guest Name="Uriel Garcia" Gender="M" Artist="Uriel &amp; Vera" />
+      </Room>
+    </Unit>
+    <Unit>
+      <Room Type="Double">
+        <Guest Name="Tanja Kensinger" Gender="F" Artist="Island Touch" />
+      </Room>
+    </Unit>
+    <Unit>
+      <Room Type="Double">
+        <Guest Name="Julian Duke" Gender="M" Artist="Julian the Duke" />
+      </Room>
+      <Room Type="Twin">
+        <Guest Name="Julian Marmolejo" Gender="M" Artist="Island Touch" />
+      </Room>
+    </Unit>
+    <Unit>
+      <Room Type="Double">
+        <Guest Name="Richard Harris" Gender="M" Artist="Richard &amp; Dani-Leigh" />
+        <Guest Name="Dani-Leigh Harris" Gender="F" Artist="Richard &amp; Dani-Leigh" />
+      </Room>
+    </Unit>
+    <Unit>
+      <Room Type="Double">
+        <Guest Name="Fadi Kasseem" Gender="M" Artist="Fadi K" />
+        <Guest Name="Missy Annette" Gender="F" Artist="Fadi K" />
+      </Room>
+      <Room Type="Twin">
+        <Guest Name="Jessica Melaza" Gender="F" Artist="Jessica Melaza" />
+      </Room>
+    </Unit>
+    <Unit>
+      <Room Type="Twin">
+        <Guest Name="Dani K" Gender="M" Artist="Dani K" />
+      </Room>
+      <Room Type="Twin">
+        <Guest Name="Magda Sobolewska" Gender="F" Artist="Otradanz" />
+        <Guest Name="Angelique Sinclair" Gender="F" Artist="Otradanz" />
+      </Room>
+    </Unit>
+    <Unit>
+      <Room Type="Double">
+        <Guest Name="Pebbles Paculan" Gender="F" Artist="Daniel &amp; Pebbles" />
+        <Guest Name="Naz Adamson" Gender="M" Artist="Daniel &amp; Pebbles" />
+      </Room>
+      <Room Type="Twin">
+        <Guest Name="Daniel Chong" Gender="M" Artist="Daniel &amp; Pebbles" />
+      </Room>
+    </Unit>
+    <Unit>
+      <Room Type="Double">
+        <Guest Name="Ovgu Adatas" Gender="F" Artist="Angus &amp; Ovgu" />
+        <Guest Name="Sam Sleek" Gender="M" Artist="Sam Sleek" />
+      </Room>
+      <Room Type="Twin">
+        <Guest Name="Angus Bowman" Gender="F" Artist="Angus &amp; Ovgu" />
+      </Room>
+    </Unit>
+    <Unit>
+      <Room Type="Double">
+        <Guest Name="Marchant Birch" Gender="M" Artist="Marchant &amp; Davina" />
+        <Guest Name="Davina Birch" Gender="F" Artist="Marchant &amp; Davina" />
+      </Room>
+    </Unit>
+    <Unit>
       <Room Type="Double">
         <Guest Name="Carl Hales Davies" Gender="M" Artist="Carl &amp; Alex" />
         <Guest Name="Alexandra Davies" Gender="F" Artist="Carl &amp; Alex" />
@@ -93,16 +162,6 @@
     </Unit>
     <Unit>
       <Room Type="Double">
-        <Guest Name="Tony Sherwani" Gender="M" Artist="Tony &amp; Carolina" />
-        <Guest Name="Carolina Sherwani" Gender="F" Artist="Tony &amp; Carolina" />
-      </Room>
-      <Room Type="Twin">
-        <Guest Name="David Hynes" Gender="M" Artist="David &amp; Suzanne" />
-        <Guest Name="Suzanne Coates" Gender="F" Artist="David &amp; Suzanne" />
-      </Room>
-    </Unit>
-    <Unit>
-      <Room Type="Double">
         <Guest Name="Fabian Dario" Gender="M" Artist="Fabian &amp; Esther" />
         <Guest Name="Esther Vazquez" Gender="F" Artist="Fabian &amp; Esther" />
       </Room>
@@ -128,9 +187,6 @@
       <Room Type="Double">
         <Guest Name="Sol Hissirou" Gender="M" Artist="Sol &amp; Laura" />
         <Guest Name="Laura Fogliata" Gender="F" Artist="Sol &amp; Laura" />
-      </Room>
-      <Room Type="Twin">
-        <Guest Name="Julia Marmolejo" Gender="M" Artist="Island Touch" />
       </Room>
     </Unit>
     <Unit>
@@ -236,6 +292,16 @@
       <Room Type="Twin">
         <Guest Name="Sam Hounsell" Gender="M" Artist="Sam &amp; Katie" />
         <Guest Name="Katie Bretherick" Gender="F" Artist="Sam &amp; Katie" />
+      </Room>
+    </Unit>
+    <Unit>
+      <Room Type="Double">
+        <Guest Name="Tony Sherwani" Gender="M" Artist="Tony &amp; Carolina" />
+        <Guest Name="Carolina Sherwani" Gender="F" Artist="Tony &amp; Carolina" />
+      </Room>
+      <Room Type="Twin">
+        <Guest Name="David Hynes" Gender="M" Artist="David &amp; Suzanne" />
+        <Guest Name="Suzanne Coates" Gender="F" Artist="David &amp; Suzanne" />
       </Room>
     </Unit>
     <!-- ORDERS -->
@@ -518,33 +584,6 @@
       <Room>Twin</Room>
       <Room>Twin</Room>
     </Rooms>
-    <Unit>
-      <Room Type="Double">
-        <Guest Name="Pebbles Paculan" Gender="F" Artist="Daniel &amp; Pebbles" />
-        <Guest Name="Naz Adamson" Gender="M" Artist="Daniel &amp; Pebbles" />
-      </Room>
-      <Room Type="Twin">
-        <Guest Name="Daniel Chong" Gender="M" Artist="Daniel &amp; Pebbles" />
-        <Guest Name="Angus Bowman" Gender="F" Artist="Angus &amp; Ovgu" />
-      </Room>
-      <Room Type="Twin">
-        <Guest Name="Ovgu Adatas" Gender="F" Artist="Angus &amp; Ovgu" />
-        <Guest Name="Sam Sleek" Gender="M" Artist="Sam Sleek" />
-      </Room>
-    </Unit>
-    <Unit>
-      <Room Type="Double">
-        <Guest Name="Fadi Kasseem" Gender="M" Artist="Fadi K" />
-        <Guest Name="Missy Annette" Gender="F" Artist="Fadi K" />
-      </Room>
-      <Room Type="Twin">
-        <Guest Name="Magda Sobolewska" Gender="F" Artist="Magda Sobolewska" />
-        <Guest Name="Jessica Melaza" Gender="F" Artist="Jessica Melaza" />
-      </Room>
-      <Room Type="Twin">
-        <Guest Name="Dani K" Gender="M" Artist="Dani K" />
-      </Room>
-    </Unit>
     <!-- ORDERS -->
     <Unit>
       <Room Type="Double">
@@ -789,12 +828,6 @@
     </Rooms>
     <Unit>
       <Room Type="Twin">
-        <Guest Name="Uriel Garcia" Gender="M" Artist="Uriel &amp; Vera" />
-        <Guest Name="Vera Rowe" Gender="F" Artist="Uriel &amp; Vera" />
-      </Room>
-    </Unit>
-    <Unit>
-      <Room Type="Twin">
         <Guest Name="JAMES HURTAULT" OrderNo="1173" />
       </Room>
     </Unit>
@@ -838,27 +871,5 @@
     <Rooms>
       <Room>Double</Room>
     </Rooms>
-    <Unit>
-      <Room Type="Double">
-        <Guest Name="Marchant Birch" Gender="M" Artist="Marchant &amp; Davina" />
-        <Guest Name="Davina Birch" Gender="F" Artist="Marchant &amp; Davina" />
-      </Room>
-    </Unit>
-    <Unit>
-      <Room Type="Double">
-        <Guest Name="Richard Harris" Gender="M" Artist="Richard &amp; Dani-Leigh" />
-        <Guest Name="Dani-Leigh Harris" Gender="F" Artist="Richard &amp; Dani-Leigh" />
-      </Room>
-    </Unit>
-    <Unit>
-      <Room Type="Double">
-        <Guest Name="Tanja Kensinger" Gender="F" Artist="Island Touch" />
-      </Room>
-    </Unit>
-    <Unit>
-      <Room Type="Double">
-        <Guest Name="Julian Duke" Gender="M" Artist="Julian the Duke" />
-      </Room>
-    </Unit>
   </Batch>
 </Accommodation>

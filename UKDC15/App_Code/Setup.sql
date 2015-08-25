@@ -436,7 +436,8 @@ BEGIN
 END
 GO
 
-EXEC [apiWorkshopsImportFile] N'C:\Users\pierre.WHITESPACE\Documents\UKDC15\UKDC15\xml\timetable1.xml'
+--EXEC [apiWorkshopsImportFile] N'C:\Users\pierre.WHITESPACE\Documents\UKDC15\UKDC15\xml\timetable1.xml'
+EXEC [apiWorkshopsImportFile] N'C:\Users\Pierre\Documents\GitHub\UKDC15\UKDC15\xml\timetable1.xml'
 GO
 
 DECLARE @EventId INT; SET @EventId = 1

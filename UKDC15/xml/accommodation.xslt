@@ -30,6 +30,13 @@
       <xsl:variable name="Rooms" select="Rooms/Room"/>
       <h1>
         <xsl:value-of select="@Type" />
+        <br/>
+        <small>
+          <xsl:value-of select="count(Unit)"/>
+          of
+          <xsl:value-of select="@Quantity"/>
+          units allocated
+        </small>
       </h1>
       <table cellspacing="0" cellpadding="0">
         <thead>
@@ -94,7 +101,9 @@
         background-color:
         <xsl:value-of select="$BGColor"/>
       </xsl:attribute>
-      <xsl:value-of select="$ThisGuest/@Name"/>
+      <b>
+        <xsl:value-of select="$ThisGuest/@Name"/>
+      </b>
       <xsl:if test="$ThisGuest/@OrderNo">
         <br/>
         <small>

@@ -1,6 +1,7 @@
 DECLARE @Filename NVARCHAR(max)
 
-SET @Filename = N'C:\Users\pierre.WHITESPACE\Documents\UKDC15\UKDC15\xml\accommodation.xml'
+--SET @Filename = N'C:\Users\pierre.WHITESPACE\Documents\UKDC15\UKDC15\xml\accommodation.xml'
+SET @Filename = N'C:\Users\Pierre\Documents\GitHub\UKDC15\UKDC15\xml\accommodation.xml'
 
 DECLARE @SQL NVARCHAR(max), @XML XML
 SET @SQL = N'SELECT @XML = CONVERT(XML, [BulkColumn]) FROM OPENROWSET(BULK ' + QUOTENAME(@Filename, N'''') + N', SINGLE_BLOB) AS [xml]'
