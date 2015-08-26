@@ -9,7 +9,8 @@
       <head>
         <style>
           body, table { font-size: 10pt; }
-          table { border-collapse: collapse }
+          table { border-collapse: collapse; page-break-inside: auto; }
+          tr { page-break-inside: avoid; page-break-after: auto; }
           td, th {
           border: solid 1px black;
           padding: 5px 5px 5px 5px;

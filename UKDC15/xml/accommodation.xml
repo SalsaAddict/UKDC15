@@ -37,7 +37,7 @@
       <Room>Twin</Room>
     </Rooms>
     <Unit>
-      <Room Type="Twin">
+      <Room Type="Double">
         <Guest Name="Vera Rowe" Gender="F" Artist="Uriel &amp; Vera" />
       </Room>
       <Room Type="Twin">
@@ -59,6 +59,15 @@
     </Unit>
     <Unit>
       <Room Type="Double">
+        <Guest Name="John Otaran" Gender="M" Artist="John Otaran" />
+      </Room>
+      <Room Type="Twin">
+        <Guest Name="Jon Denning" Gender="M" Artist="Jon Denning" />
+        <Guest Name="Anthony Gatfield" Gender="M" Artist="Anthony Gatfield" />
+      </Room>
+    </Unit>
+    <Unit>
+      <Room Type="Double">
         <Guest Name="Richard Harris" Gender="M" Artist="Richard &amp; Dani-Leigh" />
         <Guest Name="Dani-Leigh Harris" Gender="F" Artist="Richard &amp; Dani-Leigh" />
       </Room>
@@ -73,11 +82,11 @@
       </Room>
     </Unit>
     <Unit>
-      <Room Type="Twin">
+      <Room Type="Double">
         <Guest Name="Dani K" Gender="M" Artist="Dani K" />
       </Room>
       <Room Type="Twin">
-        <Guest Name="Magda Sobolewska" Gender="F" Artist="Otradanz" />
+        <Guest Name="Magda Sobolewska" Gender="F" Artist="Magda Sobolewska" />
         <Guest Name="Angelique Sinclair" Gender="F" Artist="Otradanz" />
       </Room>
     </Unit>
@@ -145,11 +154,18 @@
     </Unit>
     <Unit>
       <Room Type="Double">
+        <Guest Name="Mauro Casali" Gender="M" Artist="Mauro Casali" />
+        <Guest Name="Keoni Bougouneau" Gender="F" Artist="Mauro Casali" />
+      </Room>
+      <Room Type="Twin">
+      </Room>
+    </Unit>
+    <Unit>
+      <Room Type="Double">
         <Guest Name="Joana Carvalho" Gender="F" Artist="Joana &amp; Samet" />
       </Room>
       <Room Type="Twin">
         <Guest Name="Samet Sahin" Gender="M" Artist="Joana &amp; Samet" />
-        <Guest Name="Mauro Casali" Gender="M" Artist="Mauro Casali" />
       </Room>
     </Unit>
     <Unit>
@@ -181,6 +197,9 @@
       <Room Type="Double">
         <Guest Name="Fabhiola Oviedo" Gender="F" Artist="Fabhiola &amp; Perry" />
         <Guest Name="Perry Beaumont" Gender="M" Artist="Fabhiola &amp; Perry" />
+      </Room>
+      <Room Type="Twin">
+        <Guest Name="Amanda Hawley" Gender="F" Artist="Amanda Hawley" />
       </Room>
     </Unit>
     <Unit>
@@ -244,10 +263,9 @@
     </Unit>
     <Unit>
       <Room Type="Double">
-        <Guest Name="Amanda Hawley" Gender="F" Artist="Amanda Hawley" />
+        <Guest Name="Simon Ofoborh" Gender="M" Artist="Simon &amp; Natalie" />
       </Room>
       <Room Type="Twin">
-        <Guest Name="Simon Ofoborh" Gender="M" Artist="Simon &amp; Natalie" />
         <Guest Name="Natalie Watterson" Gender="F" Artist="Simon &amp; Natalie" />
       </Room>
     </Unit>
@@ -701,7 +719,6 @@
     <!-- SINGLES -->
     <Unit>
       <Room Type="Double">
-        <Guest Name="SHERLOCK NORVILLE" OrderNo="1042"/>
       </Room>
       <Room Type="Twin">
         <Guest Name="JOANNE RICKETTS" OrderNo="1070"/>
@@ -731,6 +748,7 @@
         <Guest Name="SEVERINE DELFOSSE" OrderNo="1090"/>
       </Room>
       <Room Type="Twin">
+        <Guest Name="MR. P. HAYTER" OrderNo="1274"/>
       </Room>
     </Unit>
     <Unit>
@@ -746,18 +764,19 @@
     </Unit>
     <Unit>
       <Room Type="Double">
-        <Guest Name="MARIYA DERELIEVA" OrderNo="1100"/>
       </Room>
       <Room Type="Twin">
+        <Guest Name="MARIYA DERELIEVA" OrderNo="1100"/>
         <Guest Name="SHARMIN MALEKOUT" OrderNo="1117"/>
       </Room>
       <Room Type="Twin">
-        <Guest Name="LEVENTE FEHER" OrderNo="1102"/>
+        <Guest Name="LAURA BAILEY" OrderNo="1104"/>
+        <Guest Name="NATALIE SAVAGE" OrderNo="1107"/>
       </Room>
     </Unit>
     <Unit>
       <Room Type="Double">
-        <Guest Name="LAURA BAILEY" OrderNo="1104"/>
+        <Guest Name="LEVENTE FEHER" OrderNo="1102"/>
       </Room>
       <Room Type="Twin">
         <Guest Name="ANISSA BENADDA" OrderNo="1105"/>
@@ -768,10 +787,10 @@
     </Unit>
     <Unit>
       <Room Type="Double">
-        <Guest Name="NATALIE SAVAGE" OrderNo="1107"/>
       </Room>
       <Room Type="Twin">
         <Guest Name="BONITA DRAKE" OrderNo="1110"/>
+        <Guest Name="NAOMI-JAYNE HAPPYFEET" OrderNo="1115"/>
       </Room>
       <Room Type="Twin">
         <Guest Name="ANNE GOODRIDGE&#x0D;&#x0A;" OrderNo="1111"/>
@@ -786,7 +805,7 @@
         <Guest Name="CIPRIAN BEJENARU" OrderNo="1114"/>
       </Room>
       <Room Type="Twin">
-        <Guest Name="NAOMI-JAYNE HAPPYFEET" OrderNo="1115"/>
+        <Guest Name="ANDREW MACPHERSON" OrderNo="1291"/>
       </Room>
     </Unit>
     <Unit>
@@ -802,8 +821,246 @@
     </Unit>
     <Unit>
       <Room Type="Double">
+        <Guest Name="JOEL ROBERTS" OrderNo="1126"/>
+        <Guest Name="LOUISE HUDDART" OrderNo="1126"/>
       </Room>
       <Room Type="Twin">
+        <Guest Name="MARYAM AKBARI" OrderNo="1128"/>
+        <Guest Name="LAETITIA POISBEAU" OrderNo="1128"/>
+      </Room>
+      <Room Type="Twin">
+        <Guest Name="MATTHEW ROGERS" OrderNo="1300"/>
+      </Room>
+    </Unit>
+    <Unit>
+      <Room Type="Double">
+        <Guest Name="YVONNE PATON" OrderNo="1141"/>
+        <Guest Name="DAVID PATON" OrderNo="1141"/>
+      </Room>
+      <Room Type="Twin">
+        <Guest Name="ADAM BATENIN" OrderNo="1249"/>
+        <Guest Name="RICHARD OLIVER" OrderNo="1249"/>
+      </Room>
+      <Room Type="Twin">
+        <Guest Name="EILEEN CODRINGTON" OrderNo="1123"/>
+      </Room>
+    </Unit>
+    <Unit>
+      <Room Type="Double">
+      </Room>
+      <Room Type="Twin">
+        <Guest Name="PECHONIA COLEMAN" OrderNo="1124"/>
+      </Room>
+      <Room Type="Twin">
+        <Guest Name="JOHN CHAMBERS" OrderNo="1130"/>
+      </Room>
+    </Unit>
+    <Unit>
+      <Room Type="Double">
+        <Guest Name="JENNIE CASTRO" OrderNo="1152"/>
+      </Room>
+      <Room Type="Twin">
+        <Guest Name="CLAIR CASS" OrderNo="1131"/>
+      </Room>
+      <Room Type="Twin">
+        <Guest Name="NATASHA SAUNDERS" OrderNo="1140"/>
+      </Room>
+    </Unit>
+    <Unit>
+      <Room Type="Double">
+      </Room>
+      <Room Type="Twin">
+        <Guest Name="STEVE SYLVESTER" OrderNo="1133"/>
+      </Room>
+      <Room Type="Twin">
+        <Guest Name="STEF FERRUCI " OrderNo="1134"/>
+      </Room>
+    </Unit>
+    <Unit>
+      <Room Type="Double">
+      </Room>
+      <Room Type="Twin">
+        <Guest Name="SIV GABRIELSSON" OrderNo="1135"/>
+      </Room>
+      <Room Type="Twin">
+        <Guest Name="BARBARA WOOD" OrderNo="1136"/>
+      </Room>
+    </Unit>
+    <Unit>
+      <Room Type="Double">
+        <Guest Name="DAVITT HUGHES" OrderNo="1168"/>
+      </Room>
+      <Room Type="Twin">
+        <Guest Name="HARJIT SOHAL" OrderNo="1137"/>
+      </Room>
+      <Room Type="Twin">
+        <Guest Name="ANGELINA VETERE" OrderNo="1138"/>
+      </Room>
+    </Unit>
+    <Unit>
+      <Room Type="Double">
+        <Guest Name="DIEGO ANDERSON" OrderNo="1167"/>
+      </Room>
+      <Room Type="Twin">
+        <Guest Name="RICHARD LEWIS" OrderNo="1139"/>
+      </Room>
+      <Room Type="Twin">
+        <Guest Name="SIMON COOKE" OrderNo="1162"/>
+      </Room>
+    </Unit>
+    <Unit>
+      <Room Type="Double">
+      </Room>
+      <Room Type="Twin">
+        <Guest Name="MARCIA HARPER" OrderNo="1142"/>
+        <Guest Name="MARIAM O'GORMAN" OrderNo="1149"/>
+      </Room>
+      <Room Type="Twin">
+        <Guest Name="TRACY L EATON" OrderNo="1150"/>
+      </Room>
+    </Unit>
+    <Unit>
+      <Room Type="Double">
+        <Guest Name="LAURA MUGGLETON" OrderNo="1171"/>
+      </Room>
+      <Room Type="Twin">
+        <Guest Name="JOLANTA KOWALEWSKA-ZIETEK" OrderNo="1177"/>
+      </Room>
+      <Room Type="Twin">
+        <Guest Name="JOCELYN INGHAM" OrderNo="1192"/>
+      </Room>
+    </Unit>
+    <Unit>
+      <Room Type="Double">
+        <Guest Name="SUSANNE DAVIDSON" OrderNo="1200"/>
+      </Room>
+      <Room Type="Twin">
+        <Guest Name="KAREN PEARSON" OrderNo="1195"/>
+        <Guest Name="JAKI BOUGHTON" OrderNo="1196"/>
+      </Room>
+      <Room Type="Twin">
+        <Guest Name="JACQUETTA MORRIS" OrderNo="1227"/>
+      </Room>
+    </Unit>
+    <Unit>
+      <Room Type="Double">
+      </Room>
+      <Room Type="Twin">
+        <Guest Name="FLORA HATAHINTWALI" OrderNo="1256"/>
+        <Guest Name="JENNIFER HERNANDEZ PERDIGON" OrderNo="1260"/>
+      </Room>
+      <Room Type="Twin">
+        <Guest Name="JASON ANDREWS" OrderNo="1169"/>
+      </Room>
+    </Unit>
+    <Unit>
+      <Room Type="Double">
+        <Guest Name="JAMES SMITH" OrderNo="1176"/>
+      </Room>
+      <Room Type="Twin">
+        <Guest Name="PAUL MINSHALL" OrderNo="1213"/>
+      </Room>
+      <Room Type="Twin">
+        <Guest Name="UDAY SOANPET" OrderNo="1224"/>
+      </Room>
+    </Unit>
+    <Unit>
+      <Room Type="Double">
+        <Guest Name="TEIFION JORDAN" OrderNo="1189"/>
+      </Room>
+      <Room Type="Twin">
+      </Room>
+      <Room Type="Twin">
+      </Room>
+    </Unit>
+    <Unit>
+      <Room Type="Double">
+        <Guest Name="STEPHEN WALKER" OrderNo="1193"/>
+      </Room>
+      <Room Type="Twin">
+      </Room>
+      <Room Type="Twin">
+      </Room>
+    </Unit>
+    <Unit>
+      <Room Type="Double">
+        <Guest Name="EMELINE METTAVANT" OrderNo="1234"/>
+      </Room>
+      <Room Type="Twin">
+        <Guest Name="KARLENE AGARD" OrderNo="1237"/>
+      </Room>
+      <Room Type="Twin">
+        <Guest Name="MISS ALYSON CHADWICK" OrderNo="1241"/>
+      </Room>
+    </Unit>
+    <Unit>
+      <Room Type="Double">
+        <Guest Name="MASHA (MARIA) KHOKHLOVA" OrderNo="1242"/>
+      </Room>
+      <Room Type="Twin">
+        <Guest Name="KRISTIE SEDDIK" OrderNo="1246"/>
+      </Room>
+      <Room Type="Twin">
+        <Guest Name="CAROL COVILL" OrderNo="1251"/>
+      </Room>
+    </Unit>
+    <Unit>
+      <Room Type="Double">
+        <Guest Name="CAROL COVILL" OrderNo="1251"/>
+      </Room>
+      <Room Type="Twin">
+        <Guest Name="HELEN YUAN" OrderNo="1263"/>
+      </Room>
+      <Room Type="Twin">
+        <Guest Name="GRACE MOORE" OrderNo="1289"/>
+        <Guest Name="JUSTYNA PECKA" OrderNo="1314"/>
+      </Room>
+    </Unit>
+    <Unit>
+      <Room Type="Double">
+      </Room>
+      <Room Type="Twin">
+        <Guest Name="CHRISTOPHER OWENS" OrderNo="1231"/>
+      </Room>
+      <Room Type="Twin">
+        <Guest Name="TIM FRANKS" OrderNo="1252"/>
+      </Room>
+    </Unit>
+    <Unit>
+      <Room Type="Double">
+      </Room>
+      <Room Type="Twin">
+        <Guest Name="GLENN JONES" OrderNo="1245"/>
+      </Room>
+      <Room Type="Twin">
+        <Guest Name="KEVIN BOWEN" OrderNo="1283"/>
+      </Room>
+    </Unit>
+    <Unit>
+      <Room Type="Double">
+      </Room>
+      <Room Type="Twin">
+        <Guest Name="ELEFTERIOS POULAKIS " OrderNo="1180"/>
+      </Room>
+      <Room Type="Twin">
+        <Guest Name="M T GEEVES" OrderNo="1198"/>
+      </Room>
+    </Unit>
+    <Unit>
+      <Room Type="Double">
+      </Room>
+      <Room Type="Twin">
+        <Guest Name="ADRIAN SWINDLEHURST" OrderNo="1201"/>
+      </Room>
+      <Room Type="Twin">
+        <Guest Name="KERAN TURAKHIA" OrderNo="1310"/>
+      </Room>
+    </Unit>
+    <Unit>
+      <Room Type="Double">
+      </Room>
+      <Room Type="Twin">
+        <Guest Name="PAUL MAXWELL" OrderNo="1315"/>
       </Room>
       <Room Type="Twin">
       </Room>
@@ -844,18 +1101,6 @@
     </Unit>
     <Unit>
       <Room Type="Twin">
-        <Guest Name="ROBERT WHITE" OrderNo="1259" />
-        <Guest Name="JEAN WHITE" OrderNo="1259" />
-      </Room>
-    </Unit>
-    <Unit>
-      <Room Type="Twin">
-        <Guest Name="GILES EADLE" OrderNo="1264" />
-        <Guest Name="ROSA EADLE" OrderNo="1264" />
-      </Room>
-    </Unit>
-    <Unit>
-      <Room Type="Twin">
         <Guest Name="STEPAN KOLESNIK" OrderNo="1280" />
         <Guest Name="LINH THUY NGUYEN" OrderNo="1280" />
       </Room>
@@ -871,5 +1116,22 @@
     <Rooms>
       <Room>Double</Room>
     </Rooms>
+    <Unit>
+      <Room Type="Double">
+        <Guest Name="ROBERT WHITE" OrderNo="1259" />
+        <Guest Name="JEAN WHITE" OrderNo="1259" />
+      </Room>
+    </Unit>
+    <Unit>
+      <Room Type="Double">
+        <Guest Name="GILES EADLE" OrderNo="1264" />
+        <Guest Name="ROSA EADLE" OrderNo="1264" />
+      </Room>
+    </Unit>
+    <Unit>
+      <Room Type="Double">
+        <Guest Name="SHERLOCK NORVILLE" OrderNo="1042"/>
+      </Room>
+    </Unit>
   </Batch>
 </Accommodation>

@@ -1,0 +1,39 @@
+﻿body {
+    padding-top: 70px;
+}
+
+table.timetable {
+    width: 100% !important;
+    border-collapse: collapse !important;
+}
+
+    table.timetable td, table.timetable th {
+        text-align: center !important;
+        vertical-align: middle !important;
+        border: 1px solid black;
+    }
+
+    table.timetable input {
+        text-align: center !important;
+    }
+
+.form-control {
+    font-size: small !important;
+}
+
+table.timetable td {
+    font-size: small !important;
+    padding: 0 0 0 0 !important;
+}
+
+table.timetable .input-group {
+    width: 100% !important;
+}
+
+table.timetable td div {
+    padding: 5px 5px 5px 5px;
+}
+
+    table.timetable td div.workshop {
+        white-space: nowrap;
+    }
