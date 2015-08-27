@@ -25,6 +25,7 @@ CREATE TABLE [Artist] (
 GO
 
 CREATE TABLE [Style] (
+  [Id] AS N'S' + RIGHT(N'000' + CONVERT(NVARCHAR(3), [Sort]), 3) PERSISTED,
   [Name] NVARCHAR(25) NOT NULL,
 		[R] TINYINT NOT NULL,
 		[G] TINYINT NOT NULL,
@@ -32,6 +33,7 @@ CREATE TABLE [Style] (
 		[RGB] AS CONVERT(NVARCHAR(3), [R]) + N',' + CONVERT(NVARCHAR(3), [G]) + N',' + CONVERT(NVARCHAR(3), [B]) PERSISTED,
 		[Sort] TINYINT NOT NULL,
 		CONSTRAINT [PK_Style] PRIMARY KEY NONCLUSTERED ([Name]),
+		CONSTRAINT [UQ_Style_Id] UNIQUE ([Id]),
 		CONSTRAINT [UQ_Style_Sort] UNIQUE CLUSTERED ([Sort])
  )
 GO
@@ -129,7 +131,8 @@ CREATE TABLE [Activity] (
 		[Date] DATE NOT NULL,
 		[Time] TIME NOT NULL,
 		[Room] NVARCHAR(25) NOT NULL,
-		[Description] NVARCHAR(255) NOT NULL,
+		[Description] NVARCHAR(255) NULL,
+		[Span] TINYINT NULL,
 		CONSTRAINT [PK_Activity] PRIMARY KEY CLUSTERED ([EventId], [Date], [Time]),
 		CONSTRAINT [FK_Activity_EventDateRoom] FOREIGN KEY ([EventId], [Date], [Room])
 		 REFERENCES [EventDateRoom] ([EventId], [Date], [Room]),
@@ -217,6 +220,7 @@ BEGIN
 										SELECT
 											[@json:Array] = N'true',
 											[Description] = a.[Description],
+											[Span] = ISNULL(a.[Span], 1),
 											(
 													SELECT
 														[@json:Array] = N'true',
@@ -398,15 +402,16 @@ BEGIN
 	 [Time] = n.value(N'@Time', N'TIME')
  FROM @Import.nodes(N'/Event[1]/Workshops[1]/Day/Room/Slot') x (n)
 
- INSERT INTO [Activity] ([EventId], [Date], [Time], [Room], [Description])
+ INSERT INTO [Activity] ([EventId], [Date], [Time], [Room], [Description], [Span])
 	SELECT
   [EventId] = @EventId,
 	 [Date] = n.value(N'../../@Date', N'DATE'),
 	 [Time] = n.value(N'@Time', N'TIME'),
 		[Room] = n.value(N'../@Name', N'NVARCHAR(50)'),
-		[Description] = n.value(N'@Description', N'NVARCHAR(255)')
+		[Description] = n.value(N'@Description', N'NVARCHAR(255)'),
+		[Span] = n.value(N'@Span', N'TINYINT')
  FROM @Import.nodes(N'/Event[1]/Workshops[1]/Day/Room/Slot') x (n)
-	WHERE n.value(N'@Description', N'NVARCHAR(255)') IS NOT NULL
+	WHERE n.exist(N'@Desciption') | n.exist(N'@Span') = 1
 
  INSERT INTO [Workshop] ([EventId], [Date], [Time], [Room], [Artist], [Title], [Style], [Level])
  SELECT

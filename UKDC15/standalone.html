@@ -1,10 +1,1930 @@
 ﻿<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" ng-app>
+<html xmlns="http://www.w3.org/1999/xhtml" ng-app="ukdc">
 <head>
     <title>UKDC15 Workshops</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link href='https://fonts.googleapis.com/css?family=Roboto+Condensed' rel='stylesheet' type='text/css'>
+    <style type="text/css">
+        body, table {
+            font-family: "Roboto Condensed" !important;
+        }
+    </style>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.min.js"></script>
+    <script>
+        var ukdc = angular.module("ukdc", []);
+        ukdc.controller("timetable", ["$scope", function ($scope) {
+            $scope.Timetable = {
+                "Salsa_x0020_On1": "Hello",
+                "Event": "UK Dance Congress 2015",
+                "StartDate": "2015-09-11",
+                "EndDate": "2015-09-14",
+                "Styles": [
+                  {
+                      "Name": "Salsa On1",
+                      "RGB": "170,255,170",
+                      "Sort": "1",
+                      "Enabled": "1"
+                  },
+                  {
+                      "Name": "Salsa On2",
+                      "RGB": "68,170,255",
+                      "Sort": "2",
+                      "Enabled": "1"
+                  },
+                  {
+                      "Name": "Cuban Salsa",
+                      "RGB": "255,255,128",
+                      "Sort": "3",
+                      "Enabled": "1"
+                  },
+                  {
+                      "Name": "Colombian Salsa",
+                      "RGB": "255,102,150",
+                      "Sort": "4",
+                      "Enabled": "1"
+                  },
+                  {
+                      "Name": "Bachata",
+                      "RGB": "180,170,255",
+                      "Sort": "5",
+                      "Enabled": "1"
+                  },
+                  {
+                      "Name": "Kizomba & Afro-Luso",
+                      "RGB": "255,100,100",
+                      "Sort": "6",
+                      "Enabled": "1"
+                  },
+                  {
+                      "Name": "Lindy",
+                      "RGB": "255,174,51",
+                      "Sort": "7",
+                      "Enabled": "1"
+                  },
+                  {
+                      "Name": "Other",
+                      "RGB": "187,187,187",
+                      "Sort": "8",
+                      "Enabled": "1"
+                  }
+                ],
+                "Levels": [
+                  {
+                      "Name": "All Levels",
+                      "Opacity": "1.00",
+                      "Sort": "1"
+                  },
+                  {
+                      "Name": "Beginner",
+                      "Opacity": "1.00",
+                      "Sort": "2"
+                  },
+                  {
+                      "Name": "Improver",
+                      "Opacity": "0.60",
+                      "Sort": "3"
+                  },
+                  {
+                      "Name": "Intermediate",
+                      "Opacity": "0.70",
+                      "Sort": "4"
+                  },
+                  {
+                      "Name": "Int/Adv",
+                      "Opacity": "0.80",
+                      "Sort": "5"
+                  },
+                  {
+                      "Name": "Advanced",
+                      "Opacity": "0.90",
+                      "Sort": "6"
+                  }
+                ],
+                "Dates": [
+                  {
+                      "Date": "2015-09-11",
+                      "Rooms": [
+                        {
+                            "Name": "Jaks"
+                        },
+                        {
+                            "Name": "Princes"
+                        },
+                        {
+                            "Name": "Lounge"
+                        },
+                        {
+                            "Name": "Regency"
+                        }
+                      ],
+                      "Times": [
+                        {
+                            "Time": "16:30",
+                            "Slots": [
+                              {
+                                  "Span": "1",
+                                  "Workshops": [
+                                    {
+                                        "Artist": "Andreas & Julia",
+                                        "Title": "Bachata Sensual",
+                                        "Style": "Bachata",
+                                        "Level": "All Levels"
+                                    }
+                                  ]
+                              },
+                              {
+                                  "Span": "1",
+                                  "Workshops": [
+                                    {
+                                        "Artist": "Phil Kaila",
+                                        "Title": "Partnerwork On 1",
+                                        "Style": "Salsa On1",
+                                        "Level": "Improver"
+                                    }
+                                  ]
+                              },
+                              {
+                                  "Span": "1"
+                              },
+                              {
+                                  "Span": "1",
+                                  "Workshops": [
+                                    {
+                                        "Title": "Lindy",
+                                        "Style": "Lindy",
+                                        "Level": "Beginner"
+                                    }
+                                  ]
+                              }
+                            ]
+                        },
+                        {
+                            "Time": "17:30",
+                            "Slots": [
+                              {
+                                  "Span": "1",
+                                  "Workshops": [
+                                    {
+                                        "Artist": "Simon & Natalie",
+                                        "Title": "Bachata Moderna",
+                                        "Style": "Bachata",
+                                        "Level": "All Levels"
+                                    }
+                                  ]
+                              },
+                              {
+                                  "Span": "1",
+                                  "Workshops": [
+                                    {
+                                        "Artist": "Carl & Alex",
+                                        "Title": "Partnerwork On1",
+                                        "Style": "Salsa On1",
+                                        "Level": "Intermediate"
+                                    }
+                                  ]
+                              },
+                              {
+                                  "Span": "1",
+                                  "Workshops": [
+                                    {
+                                        "Artist": "Christian Jean-Francois",
+                                        "Title": "Kizomba",
+                                        "Style": "Kizomba & Afro-Luso",
+                                        "Level": "Improver"
+                                    }
+                                  ]
+                              },
+                              {
+                                  "Span": "1",
+                                  "Workshops": [
+                                    {
+                                        "Title": "Lindy",
+                                        "Style": "Lindy",
+                                        "Level": "Intermediate"
+                                    }
+                                  ]
+                              }
+                            ]
+                        },
+                        {
+                            "Time": "18:30",
+                            "Slots": [
+                              {
+                                  "Span": "1",
+                                  "Workshops": [
+                                    {
+                                        "Artist": "Daniel & Pebbles",
+                                        "Title": "Sensual Bachata",
+                                        "Style": "Bachata",
+                                        "Level": "All Levels"
+                                    }
+                                  ]
+                              },
+                              {
+                                  "Span": "1",
+                                  "Workshops": [
+                                    {
+                                        "Artist": "Farid Ferchach",
+                                        "Title": "Partnerwork On1",
+                                        "Style": "Salsa On1",
+                                        "Level": "Int/Adv"
+                                    }
+                                  ]
+                              },
+                              {
+                                  "Span": "1",
+                                  "Workshops": [
+                                    {
+                                        "Artist": "David & Adriana",
+                                        "Title": "Kizomba",
+                                        "Style": "Kizomba & Afro-Luso",
+                                        "Level": "Intermediate"
+                                    }
+                                  ]
+                              },
+                              {
+                                  "Span": "1",
+                                  "Workshops": [
+                                    {
+                                        "Title": "Social Big Apple",
+                                        "Style": "Lindy",
+                                        "Level": "All Levels"
+                                    }
+                                  ]
+                              }
+                            ]
+                        }
+                      ]
+                  },
+                  {
+                      "Date": "2015-09-12",
+                      "Rooms": [
+                        {
+                            "Name": "Reds"
+                        },
+                        {
+                            "Name": "Jaks"
+                        },
+                        {
+                            "Name": "Yacht"
+                        },
+                        {
+                            "Name": "Princes"
+                        },
+                        {
+                            "Name": "Lounge"
+                        },
+                        {
+                            "Name": "Kent"
+                        },
+                        {
+                            "Name": "York"
+                        },
+                        {
+                            "Name": "Regency"
+                        }
+                      ],
+                      "Times": [
+                        {
+                            "Time": "09:30",
+                            "Slots": [
+                              {
+                                  "Span": "1"
+                              },
+                              {
+                                  "Span": "1"
+                              },
+                              {
+                                  "Span": "1"
+                              },
+                              {
+                                  "Span": "1"
+                              },
+                              {
+                                  "Span": "1",
+                                  "Workshops": [
+                                    {
+                                        "Artist": "Laura & Laura",
+                                        "Title": "Zumba",
+                                        "Style": "Other",
+                                        "Level": "All Levels"
+                                    }
+                                  ]
+                              },
+                              {
+                                  "Span": "1"
+                              },
+                              {
+                                  "Span": "1"
+                              },
+                              {
+                                  "Span": "1"
+                              }
+                            ]
+                        },
+                        {
+                            "Time": "10:00",
+                            "Slots": [
+                              {
+                                  "Span": "1",
+                                  "Workshops": [
+                                    {
+                                        "Artist": "Juan Soto",
+                                        "Title": "Partnerwork On 1",
+                                        "Style": "Salsa On1",
+                                        "Level": "Int/Adv"
+                                    },
+                                    {
+                                        "Artist": "Zoe Hodges",
+                                        "Title": "Salsa On1 (Part I)",
+                                        "Style": "Salsa On1",
+                                        "Level": "Beginner"
+                                    }
+                                  ]
+                              },
+                              {
+                                  "Span": "1",
+                                  "Workshops": [
+                                    {
+                                        "Artist": "Angus & Ovgu",
+                                        "Title": "Sensual Bachata",
+                                        "Style": "Bachata",
+                                        "Level": "Int/Adv"
+                                    },
+                                    {
+                                        "Artist": "Gus & Grace",
+                                        "Title": "Sensual Bachata",
+                                        "Style": "Bachata",
+                                        "Level": "Improver"
+                                    }
+                                  ]
+                              },
+                              {
+                                  "Span": "1"
+                              },
+                              {
+                                  "Span": "1",
+                                  "Workshops": [
+                                    {
+                                        "Artist": "Patrick Mussendijk",
+                                        "Title": "Partnerwork On2",
+                                        "Style": "Salsa On2",
+                                        "Level": "Improver"
+                                    }
+                                  ]
+                              },
+                              {
+                                  "Span": "1",
+                                  "Workshops": [
+                                    {
+                                        "Artist": "Nelson & Jessica",
+                                        "Title": "Kizomba",
+                                        "Style": "Kizomba & Afro-Luso",
+                                        "Level": "Improver"
+                                    }
+                                  ]
+                              },
+                              {
+                                  "Span": "1",
+                                  "Workshops": [
+                                    {
+                                        "Artist": "Leo Henriquez",
+                                        "Title": "Cuban Partnerwork",
+                                        "Style": "Cuban Salsa",
+                                        "Level": "Improver"
+                                    }
+                                  ]
+                              },
+                              {
+                                  "Span": "1"
+                              },
+                              {
+                                  "Span": "1",
+                                  "Workshops": [
+                                    {
+                                        "Artist": "Taina Kortelainen",
+                                        "Title": "Lindy",
+                                        "Style": "Lindy",
+                                        "Level": "Intermediate"
+                                    },
+                                    {
+                                        "Artist": "Lizzie Abrahams",
+                                        "Title": "Lindy",
+                                        "Style": "Lindy",
+                                        "Level": "Beginner"
+                                    }
+                                  ]
+                              }
+                            ]
+                        },
+                        {
+                            "Time": "11:00",
+                            "Slots": [
+                              {
+                                  "Span": "1",
+                                  "Workshops": [
+                                    {
+                                        "Artist": "Marchant & Davina",
+                                        "Title": "Partnerwork On 1",
+                                        "Style": "Salsa On1",
+                                        "Level": "Advanced"
+                                    },
+                                    {
+                                        "Artist": "Zoe Hodges",
+                                        "Title": "Salsa On1 (Part II)",
+                                        "Style": "Salsa On1",
+                                        "Level": "Beginner"
+                                    }
+                                  ]
+                              },
+                              {
+                                  "Span": "1",
+                                  "Workshops": [
+                                    {
+                                        "Artist": "Richard & Dani-Leigh",
+                                        "Title": "Dominican Bachata",
+                                        "Style": "Bachata",
+                                        "Level": "Int/Adv"
+                                    },
+                                    {
+                                        "Artist": "Amanda Hawley",
+                                        "Title": "Dominican Bachata",
+                                        "Style": "Bachata",
+                                        "Level": "Improver"
+                                    }
+                                  ]
+                              },
+                              {
+                                  "Span": "1"
+                              },
+                              {
+                                  "Span": "1",
+                                  "Workshops": [
+                                    {
+                                        "Artist": "YE Mambo",
+                                        "Title": "Partnerwork On2",
+                                        "Style": "Salsa On2",
+                                        "Level": "Intermediate"
+                                    }
+                                  ]
+                              },
+                              {
+                                  "Span": "1",
+                                  "Workshops": [
+                                    {
+                                        "Artist": "David & Adriana",
+                                        "Title": "Kizomba",
+                                        "Style": "Kizomba & Afro-Luso",
+                                        "Level": "Intermediate"
+                                    }
+                                  ]
+                              },
+                              {
+                                  "Span": "1",
+                                  "Workshops": [
+                                    {
+                                        "Artist": "Misael",
+                                        "Title": "Cuban Partnerwork",
+                                        "Style": "Cuban Salsa",
+                                        "Level": "Intermediate"
+                                    }
+                                  ]
+                              },
+                              {
+                                  "Span": "1"
+                              },
+                              {
+                                  "Span": "1",
+                                  "Workshops": [
+                                    {
+                                        "Artist": "Ichtiandras & Griušyte",
+                                        "Title": "Lindy",
+                                        "Style": "Lindy",
+                                        "Level": "Int/Adv"
+                                    },
+                                    {
+                                        "Artist": "Simon & Anna",
+                                        "Title": "Balboa",
+                                        "Style": "Lindy",
+                                        "Level": "All Levels"
+                                    }
+                                  ]
+                              }
+                            ]
+                        },
+                        {
+                            "Time": "12:00",
+                            "Slots": [
+                              {
+                                  "Span": "1",
+                                  "Workshops": [
+                                    {
+                                        "Artist": "Uriel & Vera",
+                                        "Title": "Partnerwork On 1",
+                                        "Style": "Salsa On1",
+                                        "Level": "Int/Adv"
+                                    },
+                                    {
+                                        "Artist": "Garry & Giselle",
+                                        "Title": "Partnerwork On 1",
+                                        "Style": "Salsa On1",
+                                        "Level": "Improver"
+                                    }
+                                  ]
+                              },
+                              {
+                                  "Span": "1",
+                                  "Workshops": [
+                                    {
+                                        "Artist": "Island Touch",
+                                        "Title": "Touch Bachata",
+                                        "Style": "Bachata",
+                                        "Level": "Advanced"
+                                    },
+                                    {
+                                        "Artist": "Gabriel & Rasa",
+                                        "Title": "Bachata Fusion",
+                                        "Style": "Bachata",
+                                        "Level": "Improver"
+                                    }
+                                  ]
+                              },
+                              {
+                                  "Span": "1",
+                                  "Workshops": [
+                                    {
+                                        "Artist": "Moe Flex",
+                                        "Title": "Hip Hop",
+                                        "Style": "Other",
+                                        "Level": "All Levels"
+                                    }
+                                  ]
+                              },
+                              {
+                                  "Span": "1",
+                                  "Workshops": [
+                                    {
+                                        "Artist": "Fabian & Esther",
+                                        "Title": "Partnerwork On2",
+                                        "Style": "Salsa On2",
+                                        "Level": "Int/Adv"
+                                    }
+                                  ]
+                              },
+                              {
+                                  "Span": "1",
+                                  "Workshops": [
+                                    {
+                                        "Artist": "Tony & Sophie",
+                                        "Title": "Semba",
+                                        "Style": "Kizomba & Afro-Luso",
+                                        "Level": "Advanced"
+                                    }
+                                  ]
+                              },
+                              {
+                                  "Span": "1",
+                                  "Workshops": [
+                                    {
+                                        "Artist": "Osbanis & Anneta",
+                                        "Title": "Cuban Partnerwork",
+                                        "Style": "Cuban Salsa",
+                                        "Level": "Advanced"
+                                    }
+                                  ]
+                              },
+                              {
+                                  "Span": "1",
+                                  "Workshops": [
+                                    {
+                                        "Artist": "Sami & Roxy",
+                                        "Title": "Cali Partnerwork",
+                                        "Style": "Colombian Salsa",
+                                        "Level": "Improver"
+                                    }
+                                  ]
+                              },
+                              {
+                                  "Span": "1",
+                                  "Workshops": [
+                                    {
+                                        "Artist": "Lizzie Abrahams",
+                                        "Title": "Lindy",
+                                        "Style": "Lindy",
+                                        "Level": "Intermediate"
+                                    },
+                                    {
+                                        "Artist": "Ichtiandras & Griušyte",
+                                        "Title": "Easy Airsteps",
+                                        "Style": "Lindy",
+                                        "Level": "All Levels"
+                                    }
+                                  ]
+                              }
+                            ]
+                        },
+                        {
+                            "Time": "13:00",
+                            "Slots": [
+                              {
+                                  "Span": "1"
+                              },
+                              {
+                                  "Span": "1"
+                              },
+                              {
+                                  "Description": "Afternoon Social",
+                                  "Span": "1"
+                              },
+                              {
+                                  "Span": "1"
+                              },
+                              {
+                                  "Span": "1"
+                              },
+                              {
+                                  "Span": "1"
+                              },
+                              {
+                                  "Span": "1"
+                              },
+                              {
+                                  "Span": "1"
+                              }
+                            ]
+                        },
+                        {
+                            "Time": "14:30",
+                            "Slots": [
+                              {
+                                  "Span": "1",
+                                  "Workshops": [
+                                    {
+                                        "Artist": "Farid Ferchach",
+                                        "Title": "Mens' Styling",
+                                        "Style": "Salsa On2",
+                                        "Level": "All Levels"
+                                    },
+                                    {
+                                        "Artist": "Joana Carvalho",
+                                        "Title": "Ladies' Styling",
+                                        "Style": "Salsa On2",
+                                        "Level": "All Levels"
+                                    }
+                                  ]
+                              },
+                              {
+                                  "Span": "1",
+                                  "Workshops": [
+                                    {
+                                        "Artist": "Fabian & Nicolina",
+                                        "Title": "Sensual Bachata",
+                                        "Style": "Bachata",
+                                        "Level": "Int/Adv"
+                                    },
+                                    {
+                                        "Artist": "Carl & Alex",
+                                        "Title": "Bachata Fusion",
+                                        "Style": "Bachata",
+                                        "Level": "Improver"
+                                    }
+                                  ]
+                              },
+                              {
+                                  "Span": "1",
+                                  "Workshops": [
+                                    {
+                                        "Artist": "Fadi K",
+                                        "Title": "La Rueda",
+                                        "Style": "Cuban Salsa",
+                                        "Level": "All Levels"
+                                    }
+                                  ]
+                              },
+                              {
+                                  "Span": "1",
+                                  "Workshops": [
+                                    {
+                                        "Artist": "Sam Sleek",
+                                        "Title": "Sleek Tricks",
+                                        "Style": "Salsa On1",
+                                        "Level": "Advanced"
+                                    }
+                                  ]
+                              },
+                              {
+                                  "Span": "1",
+                                  "Workshops": [
+                                    {
+                                        "Artist": "Joao & Giedre",
+                                        "Title": "Kizomba",
+                                        "Style": "Kizomba & Afro-Luso",
+                                        "Level": "Intermediate"
+                                    }
+                                  ]
+                              },
+                              {
+                                  "Span": "1",
+                                  "Workshops": [
+                                    {
+                                        "Artist": "Mauro Casali",
+                                        "Title": "Cha Cha",
+                                        "Style": "Salsa On2",
+                                        "Level": "Improver"
+                                    }
+                                  ]
+                              },
+                              {
+                                  "Span": "1",
+                                  "Workshops": [
+                                    {
+                                        "Artist": "Sam & Katie",
+                                        "Title": "Bachata (Part I)",
+                                        "Style": "Bachata",
+                                        "Level": "Beginner"
+                                    }
+                                  ]
+                              },
+                              {
+                                  "Span": "1",
+                                  "Workshops": [
+                                    {
+                                        "Artist": "Simon & Anna",
+                                        "Title": "Lindy",
+                                        "Style": "Lindy",
+                                        "Level": "Int/Adv"
+                                    },
+                                    {
+                                        "Artist": "Taina Kortelainen",
+                                        "Title": "Lindy",
+                                        "Style": "Lindy",
+                                        "Level": "Beginner"
+                                    }
+                                  ]
+                              }
+                            ]
+                        },
+                        {
+                            "Time": "15:30",
+                            "Slots": [
+                              {
+                                  "Span": "1",
+                                  "Workshops": [
+                                    {
+                                        "Artist": "YE Mambo",
+                                        "Title": "Partnerwork On2",
+                                        "Style": "Salsa On2",
+                                        "Level": "Advanced"
+                                    },
+                                    {
+                                        "Artist": "Lisa & Mark",
+                                        "Title": "Partnerwork On 2",
+                                        "Style": "Salsa On2",
+                                        "Level": "Intermediate"
+                                    }
+                                  ]
+                              },
+                              {
+                                  "Span": "1",
+                                  "Workshops": [
+                                    {
+                                        "Artist": "Uriel & Vera",
+                                        "Title": "Bachata Moderna",
+                                        "Style": "Bachata",
+                                        "Level": "Advanced"
+                                    },
+                                    {
+                                        "Artist": "Simon & Natalie",
+                                        "Title": "Bachata Moderna",
+                                        "Style": "Bachata",
+                                        "Level": "Intermediate"
+                                    }
+                                  ]
+                              },
+                              {
+                                  "Span": "1",
+                                  "Workshops": [
+                                    {
+                                        "Artist": "Osbanis & Anneta",
+                                        "Title": "Afro-Cuban",
+                                        "Style": "Cuban Salsa",
+                                        "Level": "Intermediate"
+                                    }
+                                  ]
+                              },
+                              {
+                                  "Span": "1",
+                                  "Workshops": [
+                                    {
+                                        "Artist": "Fabian & Esther",
+                                        "Title": "Partnerwork On1",
+                                        "Style": "Salsa On1",
+                                        "Level": "Intermediate"
+                                    }
+                                  ]
+                              },
+                              {
+                                  "Span": "1",
+                                  "Workshops": [
+                                    {
+                                        "Artist": "To Costa",
+                                        "Title": "Kizomba",
+                                        "Style": "Kizomba & Afro-Luso",
+                                        "Level": "Intermediate"
+                                    }
+                                  ]
+                              },
+                              {
+                                  "Span": "1",
+                                  "Workshops": [
+                                    {
+                                        "Artist": "Moe Flex",
+                                        "Title": "Musicality",
+                                        "Style": "Other",
+                                        "Level": "All Levels"
+                                    }
+                                  ]
+                              },
+                              {
+                                  "Span": "1",
+                                  "Workshops": [
+                                    {
+                                        "Artist": "Sam & Katie",
+                                        "Title": "Bachata (Part II)",
+                                        "Style": "Bachata",
+                                        "Level": "Beginner"
+                                    }
+                                  ]
+                              },
+                              {
+                                  "Span": "1",
+                                  "Workshops": [
+                                    {
+                                        "Artist": "Simon & Anna",
+                                        "Title": "Lindy",
+                                        "Style": "Lindy",
+                                        "Level": "Intermediate"
+                                    },
+                                    {
+                                        "Artist": "Taina Kortelainen",
+                                        "Title": "20s Charleston",
+                                        "Style": "Lindy",
+                                        "Level": "All Levels"
+                                    }
+                                  ]
+                              }
+                            ]
+                        },
+                        {
+                            "Time": "16:30",
+                            "Slots": [
+                              {
+                                  "Span": "1",
+                                  "Workshops": [
+                                    {
+                                        "Artist": "Mikko & Liz",
+                                        "Title": "Partnerwork On2",
+                                        "Style": "Salsa On2",
+                                        "Level": "Int/Adv"
+                                    },
+                                    {
+                                        "Artist": "Richard & Dani-Leigh",
+                                        "Title": "Partnerwork On2",
+                                        "Style": "Salsa On2",
+                                        "Level": "Improver"
+                                    }
+                                  ]
+                              },
+                              {
+                                  "Span": "1",
+                                  "Workshops": [
+                                    {
+                                        "Artist": "Alex & Ewelina",
+                                        "Title": "Sensual Bachata",
+                                        "Style": "Bachata",
+                                        "Level": "Int/Adv"
+                                    },
+                                    {
+                                        "Artist": "Sol & Laura",
+                                        "Title": "Sensual Bachata",
+                                        "Style": "Bachata",
+                                        "Level": "Improver"
+                                    }
+                                  ]
+                              },
+                              {
+                                  "Span": "1",
+                                  "Workshops": [
+                                    {
+                                        "Artist": "Leo Henriquez",
+                                        "Title": "Cuban Partnerwork",
+                                        "Style": "Cuban Salsa",
+                                        "Level": "Int/Adv"
+                                    }
+                                  ]
+                              },
+                              {
+                                  "Span": "1",
+                                  "Workshops": [
+                                    {
+                                        "Artist": "Joana & Samet",
+                                        "Title": "Partnerwork On1",
+                                        "Style": "Salsa On1",
+                                        "Level": "Improver"
+                                    }
+                                  ]
+                              },
+                              {
+                                  "Span": "1",
+                                  "Workshops": [
+                                    {
+                                        "Artist": "Tony & Sophie",
+                                        "Title": "Kizomba",
+                                        "Style": "Kizomba & Afro-Luso",
+                                        "Level": "Int/Adv"
+                                    }
+                                  ]
+                              },
+                              {
+                                  "Span": "1",
+                                  "Workshops": [
+                                    {
+                                        "Artist": "Riquita Alta",
+                                        "Title": "Kizomba",
+                                        "Style": "Kizomba & Afro-Luso",
+                                        "Level": "Improver"
+                                    }
+                                  ]
+                              },
+                              {
+                                  "Span": "1",
+                                  "Workshops": [
+                                    {
+                                        "Artist": "Luz Fernandez",
+                                        "Title": "Cali Partnerwork",
+                                        "Style": "Colombian Salsa",
+                                        "Level": "Intermediate"
+                                    }
+                                  ]
+                              },
+                              {
+                                  "Span": "1",
+                                  "Workshops": [
+                                    {
+                                        "Artist": "Ichtiandras & Griušyte",
+                                        "Title": "Lindy",
+                                        "Style": "Lindy",
+                                        "Level": "Intermediate"
+                                    },
+                                    {
+                                        "Artist": "Simon & Anna",
+                                        "Title": "Lindy",
+                                        "Style": "Lindy",
+                                        "Level": "Beginner"
+                                    }
+                                  ]
+                              }
+                            ]
+                        },
+                        {
+                            "Time": "17:30",
+                            "Slots": [
+                              {
+                                  "Span": "1",
+                                  "Workshops": [
+                                    {
+                                        "Artist": "Patrick Mussendijk",
+                                        "Title": "Partnerwork On2",
+                                        "Style": "Salsa On2",
+                                        "Level": "Int/Adv"
+                                    },
+                                    {
+                                        "Artist": "Marchant & Davina",
+                                        "Title": "Partnerwork On2",
+                                        "Style": "Salsa On2",
+                                        "Level": "Improver"
+                                    }
+                                  ]
+                              },
+                              {
+                                  "Span": "1",
+                                  "Workshops": [
+                                    {
+                                        "Artist": "Island Touch",
+                                        "Title": "Touch Bachata",
+                                        "Style": "Bachata",
+                                        "Level": "Int/Adv"
+                                    },
+                                    {
+                                        "Artist": "Andreas & Julia",
+                                        "Title": "Bachata Moderna",
+                                        "Style": "Bachata",
+                                        "Level": "Improver"
+                                    }
+                                  ]
+                              },
+                              {
+                                  "Span": "1"
+                              },
+                              {
+                                  "Span": "1",
+                                  "Workshops": [
+                                    {
+                                        "Artist": "Farid Ferchach",
+                                        "Title": "Lifts & Tricks",
+                                        "Style": "Salsa On1",
+                                        "Level": "Int/Adv"
+                                    }
+                                  ]
+                              },
+                              {
+                                  "Span": "1",
+                                  "Workshops": [
+                                    {
+                                        "Artist": "Joao & Giedre",
+                                        "Title": "Semba",
+                                        "Style": "Kizomba & Afro-Luso",
+                                        "Level": "Intermediate"
+                                    }
+                                  ]
+                              },
+                              {
+                                  "Span": "1",
+                                  "Workshops": [
+                                    {
+                                        "Artist": "Nelson & Jessica",
+                                        "Title": "Semba",
+                                        "Style": "Kizomba & Afro-Luso",
+                                        "Level": "Improver"
+                                    }
+                                  ]
+                              },
+                              {
+                                  "Span": "1",
+                                  "Workshops": [
+                                    {
+                                        "Artist": "Saulo & Sabine",
+                                        "Title": "Cali Show",
+                                        "Style": "Colombian Salsa",
+                                        "Level": "Int/Adv"
+                                    }
+                                  ]
+                              },
+                              {
+                                  "Span": "1",
+                                  "Workshops": [
+                                    {
+                                        "Artist": "Ichtiandras & Griušyte",
+                                        "Title": "Lindy",
+                                        "Style": "Lindy",
+                                        "Level": "Int/Adv"
+                                    },
+                                    {
+                                        "Artist": "Lizzie Abrahams",
+                                        "Title": "Shim Sham",
+                                        "Style": "Lindy",
+                                        "Level": "All Levels"
+                                    }
+                                  ]
+                              }
+                            ]
+                        }
+                      ]
+                  },
+                  {
+                      "Date": "2015-09-13",
+                      "Rooms": [
+                        {
+                            "Name": "Reds"
+                        },
+                        {
+                            "Name": "Jaks"
+                        },
+                        {
+                            "Name": "Yacht"
+                        },
+                        {
+                            "Name": "Princes"
+                        },
+                        {
+                            "Name": "Lounge"
+                        },
+                        {
+                            "Name": "Kent"
+                        },
+                        {
+                            "Name": "York"
+                        },
+                        {
+                            "Name": "Regency"
+                        }
+                      ],
+                      "Times": [
+                        {
+                            "Time": "09:30",
+                            "Slots": [
+                              {
+                                  "Span": "1"
+                              },
+                              {
+                                  "Span": "1"
+                              },
+                              {
+                                  "Span": "1"
+                              },
+                              {
+                                  "Span": "1"
+                              },
+                              {
+                                  "Span": "1",
+                                  "Workshops": [
+                                    {
+                                        "Artist": "Laura & Laura",
+                                        "Title": "Zumba",
+                                        "Style": "Other",
+                                        "Level": "All Levels"
+                                    }
+                                  ]
+                              },
+                              {
+                                  "Span": "1"
+                              },
+                              {
+                                  "Span": "1"
+                              },
+                              {
+                                  "Span": "1"
+                              }
+                            ]
+                        },
+                        {
+                            "Time": "10:00",
+                            "Slots": [
+                              {
+                                  "Span": "1",
+                                  "Workshops": [
+                                    {
+                                        "Artist": "Mikko & Liz",
+                                        "Title": "Partnerwork On 2",
+                                        "Style": "Salsa On2",
+                                        "Level": "Intermediate"
+                                    },
+                                    {
+                                        "Artist": "Joseph Davids",
+                                        "Title": "Salsa On2 (Part I)",
+                                        "Style": "Salsa On2",
+                                        "Level": "Beginner"
+                                    }
+                                  ]
+                              },
+                              {
+                                  "Span": "1",
+                                  "Workshops": [
+                                    {
+                                        "Artist": "Fabian & Nicolina",
+                                        "Title": "Sensual Bachata",
+                                        "Style": "Bachata",
+                                        "Level": "Int/Adv"
+                                    },
+                                    {
+                                        "Artist": "Juan Soto",
+                                        "Title": "Bachata Fusion",
+                                        "Style": "Bachata",
+                                        "Level": "Improver"
+                                    }
+                                  ]
+                              },
+                              {
+                                  "Span": "1"
+                              },
+                              {
+                                  "Span": "1",
+                                  "Workshops": [
+                                    {
+                                        "Artist": "Marchant & Davina",
+                                        "Title": "Partnerwork On1",
+                                        "Style": "Salsa On1",
+                                        "Level": "Int/Adv"
+                                    }
+                                  ]
+                              },
+                              {
+                                  "Span": "1",
+                                  "Workshops": [
+                                    {
+                                        "Artist": "Riquita Alta",
+                                        "Title": "Kizomba",
+                                        "Style": "Kizomba & Afro-Luso",
+                                        "Level": "Improver"
+                                    }
+                                  ]
+                              },
+                              {
+                                  "Span": "1",
+                                  "Workshops": [
+                                    {
+                                        "Artist": "Fabhiola & Perry",
+                                        "Title": "Cuban Partnerwork",
+                                        "Style": "Cuban Salsa",
+                                        "Level": "Improver"
+                                    }
+                                  ]
+                              },
+                              {
+                                  "Span": "1",
+                                  "Workshops": [
+                                    {
+                                        "Artist": "Luz Fernandez",
+                                        "Title": "Cali Ladies Styling",
+                                        "Style": "Colombian Salsa",
+                                        "Level": "All Levels"
+                                    }
+                                  ]
+                              },
+                              {
+                                  "Span": "1",
+                                  "Workshops": [
+                                    {
+                                        "Artist": "Lizzie Abrahams",
+                                        "Title": "Lindy",
+                                        "Style": "Lindy",
+                                        "Level": "Intermediate"
+                                    },
+                                    {
+                                        "Artist": "Taina Kortelainen",
+                                        "Title": "Lindy",
+                                        "Style": "Lindy",
+                                        "Level": "Beginner"
+                                    }
+                                  ]
+                              }
+                            ]
+                        },
+                        {
+                            "Time": "11:00",
+                            "Slots": [
+                              {
+                                  "Span": "1",
+                                  "Workshops": [
+                                    {
+                                        "Artist": "YE Mambo",
+                                        "Title": "Partnerwork On 2",
+                                        "Style": "Salsa On2",
+                                        "Level": "Advanced"
+                                    },
+                                    {
+                                        "Artist": "Joseph Davids",
+                                        "Title": "Salsa On2 (Part II)",
+                                        "Style": "Salsa On2",
+                                        "Level": "Beginner"
+                                    }
+                                  ]
+                              },
+                              {
+                                  "Span": "1",
+                                  "Workshops": [
+                                    {
+                                        "Artist": "Uriel & Vera",
+                                        "Title": "Bachata Moderna",
+                                        "Style": "Bachata",
+                                        "Level": "Advanced"
+                                    },
+                                    {
+                                        "Artist": "Alex & Ewelina",
+                                        "Title": "Bachata Moderna",
+                                        "Style": "Bachata",
+                                        "Level": "Improver"
+                                    }
+                                  ]
+                              },
+                              {
+                                  "Span": "1"
+                              },
+                              {
+                                  "Span": "1",
+                                  "Workshops": [
+                                    {
+                                        "Artist": "Farid Ferchach",
+                                        "Title": "Partnerwork On1",
+                                        "Style": "Salsa On1",
+                                        "Level": "Int/Adv"
+                                    }
+                                  ]
+                              },
+                              {
+                                  "Span": "1",
+                                  "Workshops": [
+                                    {
+                                        "Artist": "David & Adriana",
+                                        "Title": "Kizomba",
+                                        "Style": "Kizomba & Afro-Luso",
+                                        "Level": "Intermediate"
+                                    }
+                                  ]
+                              },
+                              {
+                                  "Span": "1",
+                                  "Workshops": [
+                                    {
+                                        "Artist": "Neville Ashman",
+                                        "Title": "La Rueda",
+                                        "Style": "Cuban Salsa",
+                                        "Level": "All Levels"
+                                    }
+                                  ]
+                              },
+                              {
+                                  "Span": "1",
+                                  "Workshops": [
+                                    {
+                                        "Artist": "To Costa",
+                                        "Title": "Kizomba",
+                                        "Style": "Kizomba & Afro-Luso",
+                                        "Level": "Intermediate"
+                                    }
+                                  ]
+                              },
+                              {
+                                  "Span": "1",
+                                  "Workshops": [
+                                    {
+                                        "Artist": "Simon & Anna",
+                                        "Title": "Lindy",
+                                        "Style": "Lindy",
+                                        "Level": "Int/Adv"
+                                    },
+                                    {
+                                        "Artist": "Ichtiandras & Griušyte",
+                                        "Title": "Blackbottom",
+                                        "Style": "Lindy",
+                                        "Level": "All Levels"
+                                    }
+                                  ]
+                              }
+                            ]
+                        },
+                        {
+                            "Time": "12:00",
+                            "Slots": [
+                              {
+                                  "Span": "1",
+                                  "Workshops": [
+                                    {
+                                        "Artist": "Patrick Mussendijk",
+                                        "Title": "Partnerwork On 2",
+                                        "Style": "Salsa On2",
+                                        "Level": "Int/Adv"
+                                    },
+                                    {
+                                        "Artist": "David & Suzanne",
+                                        "Title": "Partnerwork On 2",
+                                        "Style": "Salsa On2",
+                                        "Level": "Improver"
+                                    }
+                                  ]
+                              },
+                              {
+                                  "Span": "1",
+                                  "Workshops": [
+                                    {
+                                        "Artist": "Daniel & Pebbles",
+                                        "Title": "Sensual Bachata",
+                                        "Style": "Bachata",
+                                        "Level": "Int/Adv"
+                                    },
+                                    {
+                                        "Artist": "Angus & Ovgu",
+                                        "Title": "Sensual Bachata",
+                                        "Style": "Bachata",
+                                        "Level": "Improver"
+                                    }
+                                  ]
+                              },
+                              {
+                                  "Span": "1",
+                                  "Workshops": [
+                                    {
+                                        "Artist": "Magda Sobolewska",
+                                        "Title": "Tango",
+                                        "Style": "Other",
+                                        "Level": "All Levels"
+                                    }
+                                  ]
+                              },
+                              {
+                                  "Span": "1",
+                                  "Workshops": [
+                                    {
+                                        "Artist": "Fadi K",
+                                        "Title": "Partnerwork On1",
+                                        "Style": "Salsa On1",
+                                        "Level": "Intermediate"
+                                    }
+                                  ]
+                              },
+                              {
+                                  "Span": "1",
+                                  "Workshops": [
+                                    {
+                                        "Artist": "Joao & Giedre",
+                                        "Title": "Kizomba",
+                                        "Style": "Kizomba & Afro-Luso",
+                                        "Level": "Int/Adv"
+                                    }
+                                  ]
+                              },
+                              {
+                                  "Span": "1",
+                                  "Workshops": [
+                                    {
+                                        "Artist": "Osbanis & Anneta",
+                                        "Title": "Rumba",
+                                        "Style": "Cuban Salsa",
+                                        "Level": "Intermediate"
+                                    }
+                                  ]
+                              },
+                              {
+                                  "Span": "1",
+                                  "Workshops": [
+                                    {
+                                        "Artist": "Riquita Alta",
+                                        "Title": "Kizomba",
+                                        "Style": "Kizomba & Afro-Luso",
+                                        "Level": "Improver"
+                                    }
+                                  ]
+                              },
+                              {
+                                  "Span": "1",
+                                  "Workshops": [
+                                    {
+                                        "Artist": "Ichtiandras & Griušyte",
+                                        "Title": "Lindy",
+                                        "Style": "Lindy",
+                                        "Level": "Beginner"
+                                    },
+                                    {
+                                        "Artist": "Lizzie Abrahams",
+                                        "Title": "Shag",
+                                        "Style": "Lindy",
+                                        "Level": "All Levels"
+                                    }
+                                  ]
+                              }
+                            ]
+                        },
+                        {
+                            "Time": "14:30",
+                            "Slots": [
+                              {
+                                  "Span": "1",
+                                  "Workshops": [
+                                    {
+                                        "Artist": "Fabian & Esther",
+                                        "Title": "Partnerwork On1",
+                                        "Style": "Salsa On1",
+                                        "Level": "Int/Adv"
+                                    },
+                                    {
+                                        "Artist": "Tony & Carolina",
+                                        "Title": "Partnerwork On1",
+                                        "Style": "Salsa On1",
+                                        "Level": "Improver"
+                                    }
+                                  ]
+                              },
+                              {
+                                  "Span": "1",
+                                  "Workshops": [
+                                    {
+                                        "Artist": "Island Touch",
+                                        "Title": "Touch Bachata",
+                                        "Style": "Bachata",
+                                        "Level": "Advanced"
+                                    },
+                                    {
+                                        "Artist": "Gus & Grace",
+                                        "Title": "Bachata Moderna",
+                                        "Style": "Bachata",
+                                        "Level": "Improver"
+                                    }
+                                  ]
+                              },
+                              {
+                                  "Span": "1",
+                                  "Workshops": [
+                                    {
+                                        "Artist": "Moe Flex",
+                                        "Title": "La Rueda",
+                                        "Style": "Cuban Salsa",
+                                        "Level": "Intermediate"
+                                    }
+                                  ]
+                              },
+                              {
+                                  "Span": "1",
+                                  "Workshops": [
+                                    {
+                                        "Artist": "Patrick Mussendijk",
+                                        "Title": "Cha Cha",
+                                        "Style": "Salsa On2",
+                                        "Level": "Intermediate"
+                                    }
+                                  ]
+                              },
+                              {
+                                  "Span": "1",
+                                  "Workshops": [
+                                    {
+                                        "Artist": "Tony & Sophie",
+                                        "Title": "Kizomba",
+                                        "Style": "Kizomba & Afro-Luso",
+                                        "Level": "Intermediate"
+                                    }
+                                  ]
+                              },
+                              {
+                                  "Span": "1",
+                                  "Workshops": [
+                                    {
+                                        "Artist": "Dani K",
+                                        "Title": "Merengue",
+                                        "Style": "Other",
+                                        "Level": "All Levels"
+                                    }
+                                  ]
+                              },
+                              {
+                                  "Span": "1",
+                                  "Workshops": [
+                                    {
+                                        "Artist": "Saulo & Sabine",
+                                        "Title": "Cali Partnerwork",
+                                        "Style": "Colombian Salsa",
+                                        "Level": "Improver"
+                                    }
+                                  ]
+                              },
+                              {
+                                  "Span": "1",
+                                  "Workshops": [
+                                    {
+                                        "Artist": "Taina Kortelainen",
+                                        "Title": "Lindy",
+                                        "Style": "Lindy",
+                                        "Level": "Int/Adv"
+                                    },
+                                    {
+                                        "Artist": "Simon & Anna",
+                                        "Title": "Lindy",
+                                        "Style": "Lindy",
+                                        "Level": "Intermediate"
+                                    }
+                                  ]
+                              }
+                            ]
+                        },
+                        {
+                            "Time": "15:30",
+                            "Slots": [
+                              {
+                                  "Span": "1",
+                                  "Workshops": [
+                                    {
+                                        "Artist": "Mauro Casali",
+                                        "Title": "Mens' Styling",
+                                        "Style": "Salsa On1",
+                                        "Level": "All Levels"
+                                    },
+                                    {
+                                        "Artist": "Joana Carvalho",
+                                        "Title": "Ladies' Styling",
+                                        "Style": "Salsa On1",
+                                        "Level": "All Levels"
+                                    }
+                                  ]
+                              },
+                              {
+                                  "Span": "1",
+                                  "Workshops": [
+                                    {
+                                        "Artist": "Simon & Natalie",
+                                        "Title": "Bachata Moderna",
+                                        "Style": "Bachata",
+                                        "Level": "Intermediate"
+                                    },
+                                    {
+                                        "Artist": "Fabian & Nicolina",
+                                        "Title": "Sensual Bachata",
+                                        "Style": "Bachata",
+                                        "Level": "Improver"
+                                    }
+                                  ]
+                              },
+                              {
+                                  "Description": "Afternoon Social",
+                                  "Span": "2"
+                              },
+                              {
+                                  "Span": "1",
+                                  "Workshops": [
+                                    {
+                                        "Artist": "Sam Sleek",
+                                        "Title": "Sleek Technique",
+                                        "Style": "Salsa On2",
+                                        "Level": "Intermediate"
+                                    }
+                                  ]
+                              },
+                              {
+                                  "Span": "1",
+                                  "Workshops": [
+                                    {
+                                        "Artist": "Nelson & Jessica",
+                                        "Title": "Kizomba",
+                                        "Style": "Kizomba & Afro-Luso",
+                                        "Level": "Improver"
+                                    }
+                                  ]
+                              },
+                              {
+                                  "Span": "1",
+                                  "Workshops": [
+                                    {
+                                        "Artist": "Dani K",
+                                        "Title": "Zouk Love",
+                                        "Style": "Other",
+                                        "Level": "All Levels"
+                                    }
+                                  ]
+                              },
+                              {
+                                  "Span": "1",
+                                  "Workshops": [
+                                    {
+                                        "Artist": "Nadia Yammine",
+                                        "Title": "Kizomba (Part I)",
+                                        "Style": "Kizomba & Afro-Luso",
+                                        "Level": "Beginner"
+                                    }
+                                  ]
+                              },
+                              {
+                                  "Span": "1",
+                                  "Workshops": [
+                                    {
+                                        "Artist": "Lizzie Abrahams",
+                                        "Title": "Lindy",
+                                        "Style": "Lindy",
+                                        "Level": "Beginner"
+                                    },
+                                    {
+                                        "Artist": "Simon & Anna",
+                                        "Title": "Easy Airsteps",
+                                        "Style": "Lindy",
+                                        "Level": "All Levels"
+                                    }
+                                  ]
+                              }
+                            ]
+                        },
+                        {
+                            "Time": "16:30",
+                            "Slots": [
+                              {
+                                  "Span": "1",
+                                  "Workshops": [
+                                    {
+                                        "Artist": "Uriel & Vera",
+                                        "Title": "Partnerwork On1",
+                                        "Style": "Salsa On1",
+                                        "Level": "Advanced"
+                                    },
+                                    {
+                                        "Artist": "Eddie & Kat",
+                                        "Title": "Partnerwork On1",
+                                        "Style": "Salsa On1",
+                                        "Level": "Intermediate"
+                                    }
+                                  ]
+                              },
+                              {
+                                  "Span": "1",
+                                  "Workshops": [
+                                    {
+                                        "Artist": "Richard & Dani-Leigh",
+                                        "Title": "Dominican Fusion",
+                                        "Style": "Bachata",
+                                        "Level": "Intermediate"
+                                    },
+                                    {
+                                        "Artist": "Amanda Hawley",
+                                        "Title": "Dominican Bachata",
+                                        "Style": "Bachata",
+                                        "Level": "Improver"
+                                    }
+                                  ]
+                              },
+                              {
+                                  "Span": "1"
+                              },
+                              {
+                                  "Span": "1",
+                                  "Workshops": [
+                                    {
+                                        "Artist": "Moe Flex",
+                                        "Title": "Funky Flex Moves",
+                                        "Style": "Salsa On2",
+                                        "Level": "Improver"
+                                    }
+                                  ]
+                              },
+                              {
+                                  "Span": "1",
+                                  "Workshops": [
+                                    {
+                                        "Artist": "Christian Jean-Francois",
+                                        "Title": "Semba de Roda",
+                                        "Style": "Kizomba & Afro-Luso",
+                                        "Level": "Intermediate"
+                                    }
+                                  ]
+                              },
+                              {
+                                  "Span": "1",
+                                  "Workshops": [
+                                    {
+                                        "Artist": "Misael",
+                                        "Title": "Cuban Partnerwork",
+                                        "Style": "Cuban Salsa",
+                                        "Level": "Intermediate"
+                                    }
+                                  ]
+                              },
+                              {
+                                  "Span": "1",
+                                  "Workshops": [
+                                    {
+                                        "Artist": "Nadia Yammine",
+                                        "Title": "Kizomba (Part II)",
+                                        "Style": "Kizomba & Afro-Luso",
+                                        "Level": "Beginner"
+                                    }
+                                  ]
+                              },
+                              {
+                                  "Span": "1",
+                                  "Workshops": [
+                                    {
+                                        "Artist": "Taina Kortelainen",
+                                        "Title": "Lindy",
+                                        "Style": "Lindy",
+                                        "Level": "Intermediate"
+                                    },
+                                    {
+                                        "Artist": "Ichtiandras & Griušyte",
+                                        "Title": "Lindy",
+                                        "Style": "Lindy",
+                                        "Level": "Beginner"
+                                    }
+                                  ]
+                              }
+                            ]
+                        },
+                        {
+                            "Time": "17:30",
+                            "Slots": [
+                              {
+                                  "Span": "1",
+                                  "Workshops": [
+                                    {
+                                        "Artist": "Fabian & Esther",
+                                        "Title": "Partnerwork On1",
+                                        "Style": "Salsa On1",
+                                        "Level": "Int/Adv"
+                                    },
+                                    {
+                                        "Artist": "Rudy B",
+                                        "Title": "Partnerwork On1",
+                                        "Style": "Salsa On1",
+                                        "Level": "Improver"
+                                    }
+                                  ]
+                              },
+                              {
+                                  "Span": "1",
+                                  "Workshops": [
+                                    {
+                                        "Artist": "Sol & Laura",
+                                        "Title": "Sensual Bachata",
+                                        "Style": "Bachata",
+                                        "Level": "Intermediate"
+                                    },
+                                    {
+                                        "Artist": "Pierre Henry",
+                                        "Title": "Social Bachata",
+                                        "Style": "Bachata",
+                                        "Level": "All Levels"
+                                    }
+                                  ]
+                              },
+                              {
+                                  "Span": "1"
+                              },
+                              {
+                                  "Span": "1",
+                                  "Workshops": [
+                                    {
+                                        "Artist": "YE Mambo",
+                                        "Title": "Pachanga",
+                                        "Style": "Salsa On2",
+                                        "Level": "Intermediate"
+                                    }
+                                  ]
+                              },
+                              {
+                                  "Span": "1",
+                                  "Workshops": [
+                                    {
+                                        "Artist": "Joao & Giedre",
+                                        "Title": "Semba",
+                                        "Style": "Kizomba & Afro-Luso",
+                                        "Level": "Int/Adv"
+                                    }
+                                  ]
+                              },
+                              {
+                                  "Span": "1",
+                                  "Workshops": [
+                                    {
+                                        "Artist": "Leo Henriquez",
+                                        "Title": "Cuban Partnerwork",
+                                        "Style": "Cuban Salsa",
+                                        "Level": "Int/Adv"
+                                    }
+                                  ]
+                              },
+                              {
+                                  "Span": "1",
+                                  "Workshops": [
+                                    {
+                                        "Artist": "Sami & Roxy",
+                                        "Title": "Cali Tricks",
+                                        "Style": "Colombian Salsa",
+                                        "Level": "Int/Adv"
+                                    }
+                                  ]
+                              },
+                              {
+                                  "Span": "1",
+                                  "Workshops": [
+                                    {
+                                        "Artist": "Lizzie Abrahams",
+                                        "Title": "Lindy",
+                                        "Style": "Lindy",
+                                        "Level": "Int/Adv"
+                                    },
+                                    {
+                                        "Artist": "Taina Kortelainen",
+                                        "Title": "Jazz Roots",
+                                        "Style": "Lindy",
+                                        "Level": "All Levels"
+                                    }
+                                  ]
+                              }
+                            ]
+                        }
+                      ]
+                  }
+                ]
+            };
+        }]);
+    </script>
 </head>
-<body>
-    {{"Hello"}}
+<body ng-controller="timetable">
+    <div class="container-fluid">
+        <div ng-repeat="Date in Timetable.Dates">
+            <h3 class="text-center">UK Dance Congress 2015<br /><small>Full Programme</small></h3>
+            <div class="form-inline text-center">
+                <div class="input-group">
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default">
+                            <i class="fa fa-chevron-left"></i>
+                        </button>
+                    </span>
+                    <p class="form-control">{{Date.Date | date: "EEEE, dd MMMM yyyy"}}</p>
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default">
+                            <i class="fa fa-chevron-right"></i>
+                        </button>
+                    </span>
+                </div>
+            </div>
+            
+        </div>
+    </div>
 </body>
 </html>

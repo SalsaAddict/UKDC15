@@ -58,7 +58,7 @@
             <tbody>
                 <tr ng-repeat="Time in Date.Times">
                     <th>{{Time.Time}}</th>
-                    <td ng-repeat="Slot in Time.Slots" style="{{(Slot.Workshops.length === 1) ? ctrl.workshopCssStyle(Slot.Workshops[0]) : undefined}}">
+                    <td ng-repeat="Slot in Time.Slots | filter: {Span: '!0' }" style="{{(Slot.Workshops.length === 1) ? ctrl.workshopCssStyle(Slot.Workshops[0]) : undefined}}" rowspan="{{Slot.Span}}">
                         <ng-switch on="Slot.Workshops.length > 0">
                             <div ng-switch-when="true" ng-repeat="Workshop in Slot.Workshops | limitTo: 2" class="workshop"
                                  style="{{(Slot.Workshops.length > 1) ? ctrl.workshopCssStyle(Workshop) : undefined}}">
