@@ -12,7 +12,7 @@
     <Artist Name="Daniel &amp; Pebbles" Workshops="2" />
     <Artist Name="David &amp; Adriana" Workshops="3" />
     <Artist Name="David &amp; Suzanne" Workshops="1" />
-    <Artist Name="Eddie &amp; Kat" Workshops="1" />
+    <Artist Name="Eddie &amp; Kat" Workshops="2" />
     <Artist Name="Fabhiola &amp; Perry" Workshops="1" />
     <Artist Name="Fabian &amp; Esther" Workshops="4" />
     <Artist Name="Fabian &amp; Nicolina" Workshops="3" />
@@ -83,7 +83,7 @@
       </Room>
       <Room Name="Princes">
         <Slot Time="16:30">
-            <Workshop Artist="Phil Kaila" Title="Partnerwork On 1" Style="Salsa On1" Level="Improver" />
+          <Workshop Artist="Phil Kaila" Title="Partnerwork On 1" Style="Salsa On1" Level="Improver" />
         </Slot>
         <Slot Time="17:30">
           <Workshop Artist="Carl &amp; Alex" Title="Partnerwork On1" Style="Salsa On1" Level="Intermediate" />
@@ -126,6 +126,8 @@
           <Workshop Artist="Garry &amp; Giselle" Title="Partnerwork On 1" Style="Salsa On1" Level="Improver" />
           <Workshop Artist="Uriel &amp; Vera" Title="Partnerwork On 1" Style="Salsa On1" Level="Int/Adv" />
         </Slot>
+        <Slot Time="13:00" Description="Afternoon Social">
+        </Slot>
         <Slot Time="14:30">
           <Workshop Artist="Farid Ferchach" Title="Mens' Styling" Style="Salsa On2" Level="All Levels" />
           <Workshop Artist="Joana Carvalho" Title="Ladies' Styling" Style="Salsa On2" Level="All Levels" />
@@ -141,6 +143,8 @@
         <Slot Time="17:30">
           <Workshop Artist="Patrick Mussendijk" Title="Partnerwork On2" Style="Salsa On2" Level="Int/Adv" />
           <Workshop Artist="Marchant &amp; Davina" Title="Partnerwork On2" Style="Salsa On2" Level="Improver" />
+        </Slot>
+        <Slot Time="18:30" Description="Afternoon Social">
         </Slot>
       </Room>
       <Room Name="Jaks">
@@ -383,12 +387,14 @@
         <Slot Time="12:00">
           <Workshop Artist="Magda Sobolewska" Title="Tango" Style="Other" Level="All Levels" />
         </Slot>
-        <Slot Time="14:30">
+        <Slot Time="13:00" Description="Afternoon Social" Span="3">
+        </Slot>
+        <Slot Time="14:30" Span="0">
+        </Slot>
+        <Slot Time="15:30" Span="0">
+        </Slot>
+        <Slot Time="16:30">
           <Workshop Artist="Moe Flex" Title="La Rueda" Style="Cuban Salsa" Level="Intermediate" />
-        </Slot>
-        <Slot Time="15:30" Description="Afternoon Social" Span="2">
-        </Slot>
-        <Slot Time="16:30" Span="0">
         </Slot>
         <Slot Time="17:30" />
       </Room>
@@ -403,13 +409,13 @@
           <Workshop Artist="Fadi K" Title="Partnerwork On1" Style="Salsa On1" Level="Intermediate" />
         </Slot>
         <Slot Time="14:30">
-          <Workshop Artist="Patrick Mussendijk" Title="Cha Cha" Style="Salsa On2" Level="Intermediate" />
+          <Workshop Artist="Moe Flex" Title="Funky Flex Moves" Style="Salsa On2" Level="Improver" />
         </Slot>
         <Slot Time="15:30">
           <Workshop Artist="Sam Sleek" Title="Sleek Technique" Style="Salsa On2" Level="Intermediate" />
         </Slot>
         <Slot Time="16:30">
-          <Workshop Artist="Moe Flex" Title="Funky Flex Moves" Style="Salsa On2" Level="Improver" />
+          <Workshop Artist="Patrick Mussendijk" Title="Cha Cha" Style="Salsa On2" Level="Intermediate" />
         </Slot>
         <Slot Time="17:30">
           <Workshop Artist="YE Mambo" Title="Pachanga" Style="Salsa On2" Level="Intermediate" />

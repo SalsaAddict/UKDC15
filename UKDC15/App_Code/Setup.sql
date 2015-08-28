@@ -221,21 +221,29 @@ BEGIN
 											[@json:Array] = N'true',
 											[Description] = a.[Description],
 											[Span] = ISNULL(a.[Span], 1),
+           [CSS] = scss.[CSS],
 											(
 													SELECT
 														[@json:Array] = N'true',
 														[Artist] = ws.[Artist],
 														[Title] = ws.[Title],
 														[Style] = ws.[Style],
-														[Level] = ws.[Level]
+														[Level] = ws.[Level],
+              [CSS] = CASE WHEN scss.[CSS] IS NULL THEN (
+                SELECT N'background-color: rgba('
+                 + ISNULL(wss.[RGB], N'255,255,255')
+                 + N',' + ISNULL(CONVERT(NVARCHAR(6), wsl.[Opacity]), N'1') + N'); '
+                 + N'padding: 5px 5px 5px 5px;'
+                ) END
 													FROM [Workshop] ws
-														LEFT JOIN [Level] lev ON ws.[Level] = lev.[Name]
+              LEFT JOIN [Style] wss ON ws.[Style] = wss.[Name]
+              LEFT JOIN [Level] wsl ON ws.[Level] = wsl.[Name]
 													WHERE a.[Description] IS NULL 
 													 AND ws.[EventId] = edt.[EventId]
 														AND ws.[Date] = edt.[Date]
 														AND ws.[Time] = edt.[Time]
 														AND ws.[Room] = s.[Room]
-													ORDER BY lev.[Sort] DESC
+													ORDER BY wsl.[Sort] DESC
 													FOR XML PATH (N'Workshops'), TYPE
 												)
 										FROM [EventDateRoom] s
@@ -243,6 +251,21 @@ BEGIN
 											 AND edt.[Date] = a.[Date]
 												AND edt.[Time] = a.[Time]
 												AND s.[Room] = a.[Room]
+           OUTER APPLY (
+             SELECT N'background-color: rgba('
+              + MIN(ISNULL(wss.[RGB], N'255,255,255'))
+              + N',' + MIN(ISNULL(CONVERT(NVARCHAR(6), wsl.[Opacity]), N'1')) + N'); '
+              + N'padding: 5px 5px 5px 5px;'
+												 FROM [Workshop] ws
+              LEFT JOIN [Style] wss ON ws.[Style] = wss.[Name]
+              LEFT JOIN [Level] wsl ON ws.[Level] = wsl.[Name]
+													WHERE a.[Description] IS NULL 
+													 AND ws.[EventId] = edt.[EventId]
+														AND ws.[Date] = edt.[Date]
+														AND ws.[Time] = edt.[Time]
+														AND ws.[Room] = s.[Room]
+             HAVING COUNT(*) = 1
+            ) scss ([CSS])
 										WHERE s.[EventId] = ed.[EventId]
 											AND s.[Date] = ed.[Date]
 										ORDER BY s.[Sort]
@@ -441,8 +464,8 @@ BEGIN
 END
 GO
 
-EXEC [apiWorkshopsImportFile] N'C:\Users\pierre.WHITESPACE\Documents\UKDC15\UKDC15\xml\timetable1.xml'
---EXEC [apiWorkshopsImportFile] N'C:\Users\Pierre\Documents\GitHub\UKDC15\UKDC15\xml\timetable1.xml'
+--EXEC [apiWorkshopsImportFile] N'C:\Users\pierre.WHITESPACE\Documents\UKDC15\UKDC15\xml\timetable1.xml'
+EXEC [apiWorkshopsImportFile] N'C:\Users\Pierre\Documents\GitHub\UKDC15\UKDC15\xml\timetable1.xml'
 GO
 
 DECLARE @EventId INT; SET @EventId = 1
